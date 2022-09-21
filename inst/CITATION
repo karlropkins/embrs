@@ -1,0 +1,19 @@
+citHeader("To cite 'embrs' package in publications use:")
+
+citEntry(entry="Manual",
+         title = "embrs: Emission Model Builder & Reporter Syntax",
+         author = personList(as.person("Karl Ropkins"),
+                             as.person("Sergio Ibarra-Espinosa")),
+         year = "2022",
+         note = paste("R package version ",
+                    packageDescription("embrs",
+                                 fields = c("Version"))[1], sep=""),
+         textVersion = paste("Karl Ropkins and Sergio Ibarra-Espinosa (2022) ",
+                    "embrs: Emission Model Builder & Reporter Syntax, ",
+                    "R package version ",
+                    packageDescription("embrs",
+                         fields = c("Version"))[1],".", sep=""))
+
+citFooter("Please cite both 'embrs' and R ",
+          "when using 'embrs'.",
+          "For R citation, see ", sQuote("citation()"))
