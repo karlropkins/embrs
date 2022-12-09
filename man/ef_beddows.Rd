@@ -18,12 +18,17 @@ ef_beddows_road_pm(wt, output = "df")
 ef_beddows_resusp_pm(wt, output = "df")
 }
 \arguments{
-\item{wt}{vehicle weight (in kg)}
+\item{wt}{Vehicle weight (in kg).}
 
-\item{output}{ignore for now...}
+\item{output}{ignore for now... (built the tables in the embrs paper but
+most likely revising for reporter element of package...)}
+}
+\value{
+These functions data.frame of Urban, Rural and Motorway emission
+factors for brake, tyre, road and resuspension PM2.5 and PM10.
 }
 \description{
-functions to estimated vehicle weight-based non-exhaust
+Functions to estimated vehicle weight-based non-exhaust
 PM2.5 and PM10 emission factors based on methods of Beddows.
 }
 \note{
