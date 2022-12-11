@@ -2,13 +2,16 @@
 % Please edit documentation in R/em_beddows.R
 \name{ef_beddows}
 \alias{ef_beddows}
-\alias{ef_beddows_brake_pm}
+\alias{ef_beddows_brake_pm2.5}
 \alias{ef_pm_brake_beddows}
 \alias{ef_beddows_tyre_pm}
 \alias{ef_beddows_road_pm}
 \alias{ef_beddows_resusp_pm}
+\alias{ef_beddows_brake_pm}
 \title{Beddows Non-Exhaust Emissions Factors}
 \usage{
+ef_beddows_brake_pm2.5(veh.wt, route.def, ...)
+
 ef_beddows_brake_pm(wt, output = "df")
 
 ef_beddows_tyre_pm(wt, output = "df")

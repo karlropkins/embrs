@@ -18,6 +18,80 @@
 #splatted function
 #' @rdname ef_beddows
 #' @export
+ef_beddows_brake_pm2.5 <-
+  function(veh.wt, route.def,...){
+    out <- ef_beddows_brake_pm(veh.wt)
+    #error out if any route.def not in function output
+####################################
+#replace this with vein equivalent
+#then drop ef_beddows_brake_pm
+####################################
+    out <- out[tolower(out$ref)=="pm2.5",]
+    out <- out[tolower(out$route) %in% route.def,]
+    out <- out[c("ans", "ans.low", "ans.hi")]
+#hi and low need fixing at source
+#for all these functions
+    #build output as data frame
+    #route, em.source, em.type, ans, ans.low, ans.hi
+    ans <- data.frame(route=route.def, em.source="brake", em.type="pm2.5", out)
+    ans
+  }
+
+ef_beddows_tyre_pm2.5 <-
+  function(veh.wt, route.def,...){
+    out <- ef_beddows_tyre_pm(veh.wt)
+    #error out if any route.def not in function output
+####################################
+#replace this with vein equivalent
+#then drop ef_beddows_brake_pm
+####################################
+    out <- out[tolower(out$ref)=="pm2.5",]
+    out <- out[tolower(out$route) %in% route.def,]
+    out <- out[c("ans", "ans.low", "ans.hi")]
+    #build output as data frame
+    #route, em.source, em.type, ans, ans.low, ans.hi
+    ans <- data.frame(route=route.def, em.source="tyre", em.type="pm2.5", out)
+    ans
+  }
+
+ef_beddows_road_pm2.5 <-
+  function(veh.wt, route.def,...){
+    out <- ef_beddows_road_pm(veh.wt)
+    #error out if any route.def not in function output
+    ####################################
+    #replace this with vein equivalent
+    #then drop ef_beddows_brake_pm
+    ####################################
+    out <- out[tolower(out$ref)=="pm2.5",]
+    out <- out[tolower(out$route) %in% route.def,]
+    out <- out[c("ans", "ans.low", "ans.hi")]
+    #build output as data frame
+    #route, em.source, em.type, ans, ans.low, ans.hi
+    ans <- data.frame(route=route.def, em.source="road", em.type="pm2.5", out)
+    ans
+  }
+
+ef_beddows_resusp_pm2.5 <-
+  function(veh.wt, route.def,...){
+    out <- ef_beddows_resusp_pm(veh.wt)
+    #error out if any route.def not in function output
+    ####################################
+    #replace this with vein equivalent
+    #then drop ef_beddows_brake_pm
+    ####################################
+    out <- out[tolower(out$ref)=="pm2.5",]
+    out <- out[tolower(out$route) %in% route.def,]
+    out <- out[c("ans", "ans.low", "ans.hi")]
+    #build output as data frame
+    #route, em.source, em.type, ans, ans.low, ans.hi
+    ans <- data.frame(route=route.def, em.source="resusp", em.type="pm2.5", out)
+    ans
+  }
+
+
+#splatted function
+#' @rdname ef_beddows
+#' @export
 ef_beddows_brake_pm <-
 function(wt, output="df"){
     ref <- c(rep("pm2.5", 3), rep("pm10", 3))
