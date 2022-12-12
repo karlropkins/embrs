@@ -1,33 +1,42 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # embrs
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-> **embrs** is in development
+> __embrs__ is in development
 
-**embrs** was initially written as part of work on a scoping exercise to
-provide early estimates of the environmental impacts of the diesel to
-electric bus.
+__embrs__ was initially written as part of work on a scoping exercise to provide 
+early estimates of the environmental impacts of the diesel to electric bus. 
 
 ## Installation
 
-You can install the development version of embrs from
-[GitHub](https://github.com/) with:
+You can install the development version of embrs from [GitHub](https://github.com/) with:
 
-``` r
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("karlropkins/embrs")
 ```
 
 ## Example
 
-**embrs** uses vehicle and route objects to build small-scale emission
-inventories:
+__embrs__ uses vehicle and route objects to build small-scale emission inventories:
 
-``` r
+```{r example}
 library(embrs)
 # some buses
 # a ICE diesel bus weighing 15925 kg
@@ -46,8 +55,6 @@ routes <- route_naei_urban() + route_naei_rural() + route_naei_motorway()
 inventory <- fleet * routes
 plot(inventory)
 ```
-
-<img src="man/figures/README-example-1.png" width="100%" />
 
 ## Contributing
 
