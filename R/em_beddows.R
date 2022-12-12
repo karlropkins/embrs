@@ -7,7 +7,11 @@
 #' ef_beddows_resusp_pm
 #' @description Functions to estimated vehicle weight-based non-exhaust
 #' PM2.5 and PM10 emission factors based on methods of Beddows.
-#' @param wt Vehicle weight (in kg).
+#' @param veh.wt Vehicle weight (in kg).
+#' @param brk.regen vehicle regenerative braking, default \code{FALSE} means
+#' not installed/used or a numeric (0-1) for efficiency if installed/used,
+#' e.g. 0.25 = 25\% efficient (equivalent to a 75\%) of a conventional
+#' non-regenerative brakes.
 #' @param output ignore for now... (built the tables in the embrs paper but
 #' most likely revising for reporter element of package...)
 #' @returns These functions data.frame of Urban, Rural and Motorway emission
@@ -19,7 +23,7 @@
 #' @rdname ef_beddows
 #' @export
 ef_beddows_brake_pm2.5 <-
-  function(veh.wt, route.def,...){
+  function(veh.wt, route.def, brk.regen, ...){
     out <- ef_beddows_brake_pm(veh.wt)
     #error out if any route.def not in function output
 ####################################
@@ -29,6 +33,9 @@ ef_beddows_brake_pm2.5 <-
     out <- out[tolower(out$ref)=="pm2.5",]
     out <- out[tolower(out$route) %in% route.def,]
     out <- out[c("ans", "ans.low", "ans.hi")]
+    if(brk.regen){
+      out <- out * (1-brk.regen)
+    }
 #hi and low need fixing at source
 #for all these functions
     #build output as data frame

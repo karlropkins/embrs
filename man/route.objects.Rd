@@ -2,29 +2,58 @@
 % Please edit documentation in R/route.objects.R
 \name{route.objects}
 \alias{route.objects}
+\alias{route_workhorse}
 \alias{route_naei_rural}
 \alias{route_naei_urban}
 \alias{route_naei_motorway}
-\alias{route_naei_rum}
+\alias{route_naei_urm}
 \title{route.objects}
 \usage{
-route_naei_rural(name = NULL, ...)
+route_workhorse(
+  name = NULL,
+  route.def = NULL,
+  route.source = NULL,
+  route.dist = 1,
+  ...
+)
 
-route_naei_urban(name = NULL, ...)
+route_naei_rural(
+  name = NULL,
+  route.def = "rural",
+  route.source = "uk naei",
+  ...
+)
 
-route_naei_motorway(name = NULL, ...)
+route_naei_urban(
+  name = NULL,
+  route.def = "urban",
+  route.source = "uk naei",
+  ...
+)
 
-route_naei_rum()
+route_naei_motorway(
+  name = NULL,
+  route.def = "motorway",
+  route.source = "uk naei",
+  ...
+)
+
+route_naei_urm(...)
 }
 \arguments{
-\item{...}{other arguments, currently ignored}
+\item{name}{(character) optional object name, by default the route source and type.}
+
+\item{route.def}{(character) required route description.}
+
+\item{route.source}{(character) require source of route model.}
+
+\item{route.dist}{(numeric) the route distance in km, by default 1.}
+
+\item{...}{other arguments, currently ignored.}
 }
 \description{
 Route objects for use in embrs models.
 }
 \note{
-These may be moving to vein at some point...
-}
-\references{
-add embrs and naei references...
+trying to streamline these, so likely to be be subject to change
 }

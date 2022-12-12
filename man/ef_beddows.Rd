@@ -10,7 +10,7 @@
 \alias{ef_beddows_brake_pm}
 \title{Beddows Non-Exhaust Emissions Factors}
 \usage{
-ef_beddows_brake_pm2.5(veh.wt, route.def, ...)
+ef_beddows_brake_pm2.5(veh.wt, route.def, brk.regen, ...)
 
 ef_beddows_brake_pm(wt, output = "df")
 
@@ -21,7 +21,12 @@ ef_beddows_road_pm(wt, output = "df")
 ef_beddows_resusp_pm(wt, output = "df")
 }
 \arguments{
-\item{wt}{Vehicle weight (in kg).}
+\item{veh.wt}{Vehicle weight (in kg).}
+
+\item{brk.regen}{vehicle regenerative braking, default \code{FALSE} means
+not installed/used or a numeric (0-1) for efficiency if installed/used,
+e.g. 0.25 = 25\\% efficient (equivalent to a 75\\%) of a conventional
+non-regenerative brakes.}
 
 \item{output}{ignore for now... (built the tables in the embrs paper but
 most likely revising for reporter element of package...)}

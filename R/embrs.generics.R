@@ -11,6 +11,8 @@
 #' @note These may be moving to vein at some point...
 #' @references add embrs and Beddows references...
 
+#######################################
+#copy stop() style from +.embrs and apply to others
 
 
 #' @rdname embrs.generics
@@ -19,11 +21,15 @@
 `+.embrs` <-
   function(x, y, ...){
     if(class(y)[1] != "embrs"){
-      stop("can't touch this")
+      stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+           " to a [embrs] object!",
+           call. = FALSE)
     }
     if("fleet" %in% class(x)){
       if(!"fleet" %in% class(y)){
-        stop("sorry can't add this to a fleet")
+        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+             " to a [embrs_fleet] object!",
+             call. = FALSE)
       }
       #print(class(x))
       #print(class(y))
@@ -37,7 +43,9 @@
     }
     if("routes" %in% class(x)){
       if(!"routes" %in% class(y)){
-        stop("sorry can't add this to a route")
+        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+             " to a [embrs_routes] object!",
+             call. = FALSE)
       }
       #like
       temp <- make.unique(c(names(x$routes), names(y$routes)))
@@ -45,9 +53,23 @@
       names(x$routes) <- temp
       return(x)
     }
-    stop("bad embrs object?")
+    if("model" %in% class(x)){
+      if(!"model" %in% class(y)){
+        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+             " to a [embrs_model] object!",
+             call. = FALSE)
+      }
+      #like
+      temp <- make.unique(c(names(x$model), names(y$model)))
+      x$model[(length(x$model)+1):(length(x$model)+length(y$model))] <- y$model
+      names(x$model) <- temp
+      return(x)
+    }
 
+    stop("[embrs]> sorry, unexpected [embrs] combination! maybe bad object?",
+         call. = FALSE)
   }
+
 
 #' @rdname embrs.generics
 #' @method * embrs
@@ -99,7 +121,14 @@ print.embrs <-
 
 #' @rdname embrs.generics
 #' @method plot embrs
+#' @import ggplot2
 #' @export
+
+#could add ggtext to imports for the formatting
+#could add options to set x and y labels, etc.
+#
+
+
 plot.embrs <-
   function(x, ...){
     #quick test
@@ -107,11 +136,30 @@ plot.embrs <-
       stop("partially built model? check docs")
     }
     .da <- build_inventory(x)
-    ggplot2::ggplot(data=.da) +
-      ggplot2::geom_col(ggplot2::aes(x=vehicle, y=ans,
+    #############################
+    #these force it to plot in order of
+    #occurrence in the build_inventory data.frame
+    #############################
+    #might want to be able to turn off
+    ###############################
+    .da$vehicle <- factor(.da$vehicle, levels = unique(.da$vehicle))
+    .da$route <- factor(.da$route, levels = unique(.da$route))
+    .da$em.source <- factor(.da$em.source, levels = rev(unique(.da$em.source)))
+    #rev() last because first a bottom of stack seems more sensible...
+    ggplot(data=.da) +
+      geom_col(aes(x=vehicle, y=ans,
                                       fill=em.source)) +
-      ggplot2::facet_grid(~route, scales="free_y")
+      labs(y = "Total Emissions [mg/km]", x="") +
+      ###############################
+      #ylab will need better handling if distance enabled
+      #maybe use plot.type argument and have different
+      #types of plot
+      #################################
+      facet_grid(~route, scales="free_y") +
+      #scales not needed??
+      theme_bw()
   }
+
 
 ##from paper
 ##ggplot(aes(ordered(veh), ans, fill=type)) +

@@ -3,9 +3,12 @@
 \name{bus.objets}
 \alias{bus.objets}
 \alias{bus_ice}
+\alias{bus_bev}
 \title{bus objects}
 \usage{
 bus_ice(veh.wt, n = 1, name = NULL, ...)
+
+bus_bev(veh.wt, n = 1, name = NULL, ...)
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
