@@ -51,7 +51,7 @@ inventory <- fleet * routes
 plot(inventory)
 ```
 
-<img src="man/figures/index-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" width="100%" />
 
 ## Contributing
 
