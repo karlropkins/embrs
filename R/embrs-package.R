@@ -1,10 +1,10 @@
 ##################################################
-#' What the Package Does (One Line, Title Case)
+#' Emission Model Builder & Reporter Syntax
 ##################################################
 #'
-#' What the package does (one paragraph).
+#' (in development) __embrs__ package.
 #'
-#' This package was splat packed.
+#' This package was splat packed using grey.area.
 #'
 #' @section package functions:
 #' [to be added]

@@ -92,7 +92,7 @@
       }
       for(i in 1:length(fleet$fleet)){
         fleet$fleet[[i]]$routes <- routes$routes
-        class(fleet$fleet) <- "embrs_model"
+        class(fleet$fleet[[i]]) <- "embrs_model"
       }
       names(fleet) <- "model"
       class(fleet) <- c("embrs", "model")
@@ -111,11 +111,17 @@
 #' @export
 print.embrs <-
   function(x, ...){
-    cat("embrs: ", class(x)[2], "(length = ", length(x[[1]]), ")\n", sep="")
-    ##for(i in 1:length(x)){
-    ##  cat("       ", x[[i]]$n, " x ", x[[1]]$veh.type, "\n", sep="")
-    ##}
-    invisible(x)
+    cat("embrs: ", class(x)[2], "(count = ", length(x[[1]]), ")\n", sep="")
+    for(i in 1:length(x[[1]])){
+      cat("  > ", gsub("embrs_", "", class(x[[1]][[i]])), " ",
+          names(x[[1]][i]), "\n", sep="")
+      if(class(x)[2]=="model"){
+        for(j in 1:length(x[[1]][[i]]$routes)){
+          cat("    > ", gsub("embrs_", "", class(x[[1]][[i]]$routes[[j]])), " ",
+              names(x[[1]][[i]]$routes[j]), "\n", sep="")
+        }
+      }
+    }
   }
 
 
@@ -180,11 +186,26 @@ plot.embrs <-
 print.embrs_vehicle <-
   function(x, ...){
     cat("embrs: ", class(x), " [", x$args$name, "]\n", sep="")
-    invisible(x)
+    #invisible(x)
   }
 
+#' @rdname embrs.generics
+#' @method print embrs_route
+#' @export
+print.embrs_route <-
+  function(x, ...){
+    cat("embrs: ", class(x), " [", x$args$name, "]\n", sep="")
+    #invisible(x)
+  }
 
-
+#' @rdname embrs.generics
+#' @method print embrs_model
+#' @export
+print.embrs_model <-
+  function(x, ...){
+    cat("embrs: ", class(x), " [", x$args$name, "]\n", sep="")
+    #invisible(x)
+  }
 
 
 

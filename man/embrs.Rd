@@ -3,9 +3,9 @@
 \docType{package}
 \name{embrs}
 \alias{embrs}
-\title{What the Package Does (One Line, Title Case)}
+\title{Emission Model Builder & Reporter Syntax}
 \description{
-What the package does (one paragraph).
+(in development) \strong{embrs} package.
 }
 \details{
 This package was splat packed.

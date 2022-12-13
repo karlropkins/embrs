@@ -1,5 +1,5 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- index.md is generated from README.Rmd. Please edit that file -->
 
 # embrs
 
@@ -12,9 +12,9 @@
 provide early estimates of the environmental impacts of the diesel to
 electric bus.
 
-## Project Webpage
+## code sources
 
-**embrs** projects pages: <https://karlropkins.github.io/embrs/>
+**embrs** code sources: <https://github.com/karlropkins/embrs>
 
 ## Installation
 
@@ -51,7 +51,7 @@ inventory <- fleet * routes
 plot(inventory)
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/index-example-1.png" width="100%" />
 
 ## Contributing
 

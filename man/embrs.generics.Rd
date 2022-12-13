@@ -8,6 +8,8 @@
 \alias{print.embrs}
 \alias{plot.embrs}
 \alias{print.embrs_vehicle}
+\alias{print.embrs_route}
+\alias{print.embrs_model}
 \title{embrs generics}
 \usage{
 \method{+}{embrs}(x, y, ...)
@@ -19,6 +21,10 @@
 \method{plot}{embrs}(x, ...)
 
 \method{print}{embrs_vehicle}(x, ...)
+
+\method{print}{embrs_route}(x, ...)
+
+\method{print}{embrs_model}(x, ...)
 }
 \arguments{
 \item{x, y}{function arguments}
