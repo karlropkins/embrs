@@ -19,6 +19,11 @@
 #' @note These may be moving to vein at some point...
 #' @references add Beddows and Harrison ref...
 
+########################
+#how to do a percent in roxygen documentation?
+#
+
+
 #splatted function
 #' @rdname ef_beddows
 #' @export

@@ -16,8 +16,8 @@
 ## #' @references [to do] add embrs and naei references...
 
 #############################
-#testing route_workhorse???
-#and route functions via that...
+#testing route_workhorse
+#and route functions built using that...
 #############################
 
 route_workhorse <-

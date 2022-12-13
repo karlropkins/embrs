@@ -3,3 +3,6 @@
 ^README\.md$
 ^LICENSE\.md$
 ^README\.Rmd$
+^\.github$
+^docs$
+^pkgdown$

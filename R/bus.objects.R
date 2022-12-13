@@ -16,7 +16,6 @@
 ###############################
 #if workhorses work for routes
 #think about same here????
-#
 
 #splatted function
 #' @rdname bus.objects
