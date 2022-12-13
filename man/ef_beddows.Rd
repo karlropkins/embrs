@@ -3,30 +3,26 @@
 \name{ef_beddows}
 \alias{ef_beddows}
 \alias{ef_beddows_brake_pm2.5}
-\alias{ef_pm_brake_beddows}
-\alias{ef_beddows_tyre_pm}
-\alias{ef_beddows_road_pm}
-\alias{ef_beddows_resusp_pm}
-\alias{ef_beddows_brake_pm}
+\alias{ef_beddows_tyre_pm2.5}
+\alias{ef_beddows_road_pm2.5}
+\alias{ef_beddows_resusp_pm2.5}
 \title{Beddows Non-Exhaust Emissions Factors}
 \usage{
 ef_beddows_brake_pm2.5(veh.wt, route.def, brk.regen, ...)
 
-ef_beddows_brake_pm(wt, output = "df")
+ef_beddows_tyre_pm2.5(veh.wt, route.def, ...)
 
-ef_beddows_tyre_pm(wt, output = "df")
+ef_beddows_road_pm2.5(veh.wt, route.def, ...)
 
-ef_beddows_road_pm(wt, output = "df")
-
-ef_beddows_resusp_pm(wt, output = "df")
+ef_beddows_resusp_pm2.5(veh.wt, route.def, ...)
 }
 \arguments{
 \item{veh.wt}{Vehicle weight (in kg).}
 
 \item{brk.regen}{vehicle regenerative braking, default \code{FALSE} means
 not installed/used or a numeric (0-1) for efficiency if installed/used,
-e.g. 0.25 = 25\\% efficient (equivalent to a 75\\%) of a conventional
-non-regenerative brakes.}
+e.g. 0.25 = 25\% efficient (equivalent to a 75\% of a conventional
+non-regenerative brake contribution).}
 
 \item{output}{ignore for now... (built the tables in the embrs paper but
 most likely revising for reporter element of package...)}
@@ -43,5 +39,10 @@ PM2.5 and PM10 emission factors based on methods of Beddows.
 These may be moving to vein at some point...
 }
 \references{
-add Beddows and Harrison ref...
+These functions are based on methods developed and reported by:
+
+Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+non-exhaust particles from road vehicles: Dependence upon vehicle mass and
+implications for battery electric vehicles. Atmospheric Environment, 244,
+p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}
 }

@@ -12,7 +12,7 @@
 #' @param route.dist (numeric) the route distance in km, by default 1.
 #' @param ... other arguments, currently ignored.
 ## #' @returns These functions make vehicle and fleet class embrs objects.
-#' @note trying to streamline these, so likely to be be subject to change
+#' @note trying to streamline these, so likely to be subject to change
 ## #' @references [to do] add embrs and naei references...
 
 #############################

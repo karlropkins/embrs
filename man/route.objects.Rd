@@ -55,5 +55,5 @@ route_naei_urm(...)
 Route objects for use in embrs models.
 }
 \note{
-trying to streamline these, so likely to be be subject to change
+trying to streamline these, so likely to be subject to change
 }

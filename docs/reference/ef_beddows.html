@@ -51,13 +51,11 @@ PM2.5 and PM10 emission factors based on methods of Beddows.</p>
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">ef_beddows_brake_pm2.5</span><span class="op">(</span><span class="va">veh.wt</span>, <span class="va">route.def</span>, <span class="va">brk.regen</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ef_beddows_brake_pm</span><span class="op">(</span><span class="va">wt</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></span>
+<span><span class="fu">ef_beddows_tyre_pm2.5</span><span class="op">(</span><span class="va">veh.wt</span>, <span class="va">route.def</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ef_beddows_tyre_pm</span><span class="op">(</span><span class="va">wt</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></span>
+<span><span class="fu">ef_beddows_road_pm2.5</span><span class="op">(</span><span class="va">veh.wt</span>, <span class="va">route.def</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ef_beddows_road_pm</span><span class="op">(</span><span class="va">wt</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">ef_beddows_resusp_pm</span><span class="op">(</span><span class="va">wt</span>, output <span class="op">=</span> <span class="st">"df"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ef_beddows_resusp_pm2.5</span><span class="op">(</span><span class="va">veh.wt</span>, <span class="va">route.def</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -69,8 +67,8 @@ PM2.5 and PM10 emission factors based on methods of Beddows.</p>
 <dt>brk.regen</dt>
 <dd><p>vehicle regenerative braking, default <code>FALSE</code> means
 not installed/used or a numeric (0-1) for efficiency if installed/used,
-e.g. 0.25 = 25\<!-- % efficient (equivalent to a 75\\%) of a conventional -->
-non-regenerative brakes.</p></dd>
+e.g. 0.25 = 25% efficient (equivalent to a 75% of a conventional
+non-regenerative brake contribution).</p></dd>
 
 
 <dt>output</dt>
@@ -91,7 +89,11 @@ factors for brake, tyre, road and resuspension PM2.5 and PM10.</p>
     </div>
     <div id="references">
     <h2>References</h2>
-    <p>add Beddows and Harrison ref...</p>
+    <p>These functions are based on methods developed and reported by:</p>
+<p>Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+non-exhaust particles from road vehicles: Dependence upon vehicle mass and
+implications for battery electric vehicles. Atmospheric Environment, 244,
+p.117886. <a href="https://doi.org/10.1016/j.atmosenv.2020.117886" class="external-link">https://doi.org/10.1016/j.atmosenv.2020.117886</a></p>
     </div>
 
   </div>

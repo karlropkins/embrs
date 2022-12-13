@@ -3,25 +3,34 @@
 ############################################
 
 #' @name ef_beddows
-#' @aliases ef_pm_brake_beddows ef_beddows_tyre_pm ef_beddows_road_pm
-#' ef_beddows_resusp_pm
+#' @aliases ef_beddows_brake_pm2.5 ef_beddows_tyre_pm2.5 ef_beddows_road_pm2.5
+#' ef_beddows_resusp_pm2.5
 #' @description Functions to estimated vehicle weight-based non-exhaust
 #' PM2.5 and PM10 emission factors based on methods of Beddows.
 #' @param veh.wt Vehicle weight (in kg).
 #' @param brk.regen vehicle regenerative braking, default \code{FALSE} means
 #' not installed/used or a numeric (0-1) for efficiency if installed/used,
-#' e.g. 0.25 = 25\% efficient (equivalent to a 75\%) of a conventional
-#' non-regenerative brakes.
+#' e.g. 0.25 = 25% efficient (equivalent to a 75% of a conventional
+#' non-regenerative brake contribution).
 #' @param output ignore for now... (built the tables in the embrs paper but
 #' most likely revising for reporter element of package...)
 #' @returns These functions data.frame of Urban, Rural and Motorway emission
 #' factors for brake, tyre, road and resuspension PM2.5 and PM10.
 #' @note These may be moving to vein at some point...
-#' @references add Beddows and Harrison ref...
+#' @references These functions are based on methods developed and reported by:
+#'
+#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+#' non-exhaust particles from road vehicles: Dependence upon vehicle mass and
+#' implications for battery electric vehicles. Atmospheric Environment, 244,
+#' p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}
 
 ########################
-#how to do a percent in roxygen documentation?
-#
+#how to do subscript in this markdown pm10 and pm2.5 in @returns
+#i think dois need special handling??
+
+########################
+#could make one ef_beddows_nepm function
+#with extra args em.type and source
 
 
 #splatted function
@@ -49,6 +58,8 @@ ef_beddows_brake_pm2.5 <-
     ans
   }
 
+#' @rdname ef_beddows
+#' @export
 ef_beddows_tyre_pm2.5 <-
   function(veh.wt, route.def,...){
     out <- ef_beddows_tyre_pm(veh.wt)
@@ -66,6 +77,8 @@ ef_beddows_tyre_pm2.5 <-
     ans
   }
 
+#' @rdname ef_beddows
+#' @export
 ef_beddows_road_pm2.5 <-
   function(veh.wt, route.def,...){
     out <- ef_beddows_road_pm(veh.wt)
@@ -83,6 +96,8 @@ ef_beddows_road_pm2.5 <-
     ans
   }
 
+#' @rdname ef_beddows
+#' @export
 ef_beddows_resusp_pm2.5 <-
   function(veh.wt, route.def,...){
     out <- ef_beddows_resusp_pm(veh.wt)
@@ -101,9 +116,10 @@ ef_beddows_resusp_pm2.5 <-
   }
 
 
+#############################
+#no longer exported
+
 #splatted function
-#' @rdname ef_beddows
-#' @export
 ef_beddows_brake_pm <-
 function(wt, output="df"){
     ref <- c(rep("pm2.5", 3), rep("pm10", 3))
@@ -131,8 +147,6 @@ function(wt, output="df"){
     return(out)
 }
 
-#' @rdname ef_beddows
-#' @export
 ef_beddows_tyre_pm <-
 function(wt, output="df"){
     ref <- c(rep("pm2.5", 3), rep("pm10", 3))
@@ -161,8 +175,6 @@ function(wt, output="df"){
 }
 
 
-#' @rdname ef_beddows
-#' @export
 ef_beddows_road_pm <-
   function(wt, output="df"){
     ref <- c(rep("pm2.5", 3), rep("pm10", 3))
@@ -190,8 +202,6 @@ ef_beddows_road_pm <-
     return(out)
   }
 
-#' @rdname ef_beddows
-#' @export
 ef_beddows_resusp_pm <-
   function(wt, output="df"){
     ref <- c(rep("pm2.5", 3), rep("pm10", 3))
