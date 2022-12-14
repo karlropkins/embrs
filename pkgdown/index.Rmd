@@ -63,7 +63,7 @@ plot(inventory)
 
 ## Contributing
 
-Contributions are very welcome.
+Contributions are very welcome. Please see both [contribution guidance](https://karlropkins.github.io/embrs/CONTRIBUTING.html) and [code of conduct](https://karlropkins.github.io/embrs/CODE_OF_CONDUCT.html) if interested in contributing.
 
 ## License
 
