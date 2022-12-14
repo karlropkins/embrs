@@ -8,7 +8,7 @@
 (in development) \strong{embrs} package.
 }
 \details{
-This package was splat packed.
+This package was splat packed using grey.area.
 }
 \section{package functions}{
 
