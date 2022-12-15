@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://karlropkins.github.io/embrs/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://karlropkins.github.io/embrs/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://karlropkins.github.io/embrs/CODE_OF_CONDUCT.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://karlropkins.github.io/embrs/CONTRIBUTING.html</loc>
   </url>
   <url>
-    <loc>/news/index.html</loc>
+    <loc>https://karlropkins.github.io/embrs/index.html</loc>
   </url>
   <url>
-    <loc>/reference/bus.objects.html</loc>
+    <loc>https://karlropkins.github.io/embrs/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/reference/ef_beddows.html</loc>
+    <loc>https://karlropkins.github.io/embrs/news/index.html</loc>
   </url>
   <url>
-    <loc>/reference/embrs.generics.html</loc>
+    <loc>https://karlropkins.github.io/embrs/reference/bus.objects.html</loc>
   </url>
   <url>
-    <loc>/reference/embrs.html</loc>
+    <loc>https://karlropkins.github.io/embrs/reference/ef_beddows.html</loc>
   </url>
   <url>
-    <loc>/reference/embrs.main.html</loc>
+    <loc>https://karlropkins.github.io/embrs/reference/embrs.generics.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://karlropkins.github.io/embrs/reference/embrs.html</loc>
   </url>
   <url>
-    <loc>/reference/route.objects.html</loc>
+    <loc>https://karlropkins.github.io/embrs/reference/embrs.main.html</loc>
+  </url>
+  <url>
+    <loc>https://karlropkins.github.io/embrs/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://karlropkins.github.io/embrs/reference/route.objects.html</loc>
   </url>
 </urlset>
