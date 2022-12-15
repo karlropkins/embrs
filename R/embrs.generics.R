@@ -97,7 +97,6 @@
       names(fleet) <- "model"
       class(fleet) <- c("embrs", "model")
       return(fleet)
-
     } else {
       stop("sorry can't multiply these")
     }
@@ -161,7 +160,7 @@ plot.embrs <-
       #maybe use plot.type argument and have different
       #types of plot
       #################################
-      facet_grid(~route, scales="free_y") +
+      facet_grid(em.type~route, scales="free_y") +
       #scales not needed??
       theme_bw()
   }

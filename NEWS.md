@@ -14,4 +14,6 @@
 * [0.0.3]
     * website update, updated description (web links) [2022-12-13]
     * website update, added coc and contribution [2022-12-13]
-    * website update, (coc links and minor fixes) [2022-12-14]
+    * website update, coc links (and minor fixes) [2022-12-14]
+    * website update, news update [2022-12-14]
+    

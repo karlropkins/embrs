@@ -40,7 +40,17 @@ function(veh.wt, n=1, name = NULL, ...){
       ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
       ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
       ef.road.pm2.5 = ef_beddows_road_pm2.5,
-      ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5 #,
+      ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5, #,
+
+      ############################
+      ef.brake.pm10 = ef_beddows_brake_pm10,
+      ef.tyre.pm10 = ef_beddows_tyre_pm10,
+      ef.road.pm10 = ef_beddows_road_pm10,
+      ef.resusp.pm10 = ef_beddows_resusp_pm10
+      #compare new and old ef_beddows functions
+      #using below and new functions
+
+
       #ef.brake.pm10 = ef_beddows_brake_pm10,
       #ef.tyre.pm10 = ef_beddows_tyre_pm10,
       #ef.road.pm10 = ef_beddows_road_pm10,
@@ -56,7 +66,8 @@ function(veh.wt, n=1, name = NULL, ...){
     paste(obj$args$eng.fuel,  obj$args$eng.type, obj$args$veh.type, sep=".")
   } else { as.character(name) }
   obj$args$name <- name
-  out <- modifyList(obj, .obj)
+  obj$args <- modifyList(obj$args, .obj)
+  out <- obj
   class(out) <- "embrs_vehicle"
   out <- list(out)
   names(out)[1] <- out[[1]]$args$name
@@ -76,7 +87,7 @@ bus_bev <-
     if(missing(veh.wt)){
       stop("need veh.wt")
     }
-    .obj <- list(args=list(...))
+    .obj <- list(...)
     obj <- list(
       args = list(
         n = n,
@@ -90,11 +101,11 @@ bus_bev <-
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
         ef.road.pm2.5 = ef_beddows_road_pm2.5,
-        ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5 #,
-        #ef.brake.pm10 = ef_beddows_brake_pm10,
-        #ef.tyre.pm10 = ef_beddows_tyre_pm10,
-        #ef.road.pm10 = ef_beddows_road_pm10,
-        #ef.resusp.pm10 = ef_beddows_resusp_pm10
+        ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
+        ef.brake.pm10 = ef_beddows_brake_pm10,
+        ef.tyre.pm10 = ef_beddows_tyre_pm10,
+        ef.road.pm10 = ef_beddows_road_pm10,
+        ef.resusp.pm10 = ef_beddows_resusp_pm10
       )
       #could make the funs a self-built list
 
@@ -106,7 +117,8 @@ bus_bev <-
       paste(obj$args$eng.fuel,  obj$args$eng.type, obj$args$veh.type, sep=".")
     } else { as.character(name) }
     obj$args$name <- name
-    out <- modifyList(obj, .obj)
+    obj$args <- modifyList(obj$args, .obj)
+    out <- obj
     class(out) <- "embrs_vehicle"
     out <- list(out)
     names(out)[1] <- out[[1]]$args$name
