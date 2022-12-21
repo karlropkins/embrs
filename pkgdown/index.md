@@ -63,4 +63,4 @@ interested in contributing.
 
 ## License
 
-GPL-3.0
+[GPL-3](https://karlropkins.github.io/embrs/LICENSE.html)

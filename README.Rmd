@@ -67,4 +67,4 @@ Contributions are very welcome. Please see both [contribution guidance](https://
 
 ## License
 
-GPL-3.0
+[GPL-3](https://karlropkins.github.io/embrs/LICENSE.html)

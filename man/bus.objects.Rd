@@ -4,11 +4,14 @@
 \alias{bus.objets}
 \alias{bus_ice}
 \alias{bus_bev}
+\alias{vehicle_workhorse}
 \title{bus objects}
 \usage{
 bus_ice(veh.wt, n = 1, name = NULL, ...)
 
 bus_bev(veh.wt, n = 1, name = NULL, ...)
+
+vehicle_workhorse(name = NULL, x = NULL, ...)
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
@@ -18,6 +21,9 @@ bus_bev(veh.wt, n = 1, name = NULL, ...)
 \item{name}{(character) name of the vehicle object.}
 
 \item{...}{other arguments, currently ignored}
+
+\item{x}{(for workhorse only) a list of args to using when building
+an \strong{embrs} object.}
 }
 \description{
 Bus objects for use in \strong{embrs} models.
