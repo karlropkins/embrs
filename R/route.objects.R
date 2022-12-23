@@ -9,9 +9,9 @@
 #' @param name (character) optional object name, by default the route source and type.
 #' @param route.def (character) required route description.
 #' @param route.source (character) require source of route model.
-#' @param route.dist (numeric) the route distance in km, by default 1.
+#' @param veh.spd (numeric or function) the vehicle speed in km/hr.
 #' @param ... other arguments, currently ignored.
-## #' @returns These functions make vehicle and fleet class embrs objects.
+## #' @returns These functions make route class embrs objects.
 #' @note trying to streamline these, so likely to be subject to change
 ## #' @references [to do] add embrs and naei references...
 
@@ -46,24 +46,27 @@ route_workhorse <-
 #' @rdname route.objects
 #' @export
 route_naei_rural <- function(name=NULL, route.def="rural", route.source="uk naei",
-                       ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source, ...)
+                             veh.spd=naei_route2spd, ...){
+  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+                  veh.spd=veh.spd, ...)
 }
 
 #splatted function
 #' @rdname route.objects
 #' @export
 route_naei_urban <- function(name=NULL, route.def="urban", route.source="uk naei",
-                             ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source, ...)
+                             veh.spd=naei_route2spd, ...){
+  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+                  veh.spd=veh.spd,...)
 }
 
 #splatted function
 #' @rdname route.objects
 #' @export
 route_naei_motorway <- function(name=NULL, route.def="motorway", route.source="uk naei",
-                             ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source, ...)
+                                veh.spd=naei_route2spd, ...){
+  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+                  veh.spd=veh.spd, ...)
 }
 
 
@@ -78,4 +81,5 @@ route_naei_urm <-
 ###############
 #this can't handle name nicely...
 #move name up into formals???
+
 

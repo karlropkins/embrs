@@ -16,8 +16,20 @@
 #' @references add embrs and Beddows references...
 
 ###############################
-#if workhorses work for routes
-#think about same here????
+#test vehicle_workshore
+
+#next jobs
+#use vein bus EMEP/EEA method to add
+#ef.exh.pm function ef_emep_exh_pm (pm=pm10=pm2.5)
+#dplyr::filter(vein:::sysdata$eea, Category == "BUS" & Pollutant=="PM" & Fuel=="D" & RoadSlope==0 & EuroStandard=="VI" & Load ==0.5, Segment=="Urban Buses Midi <=15 t")
+#vein::ef_hdv_speed(v = "Ubus", eu="V", p= "PM", t="Midi", g="<=15")(30)
+#vein::ef_hdv_speed(v = "Ubus", eu="VI", p= "PM", t="Midi", g="<=15")(30)
+#last errors!!!
+
+#speed lookup table
+#naei_route2spd (ricardo method)
+#have this as excel
+
 
 #splatted function
 #' @rdname bus.objects
@@ -38,10 +50,12 @@ bus_ice <-
         brk.regen = FALSE
       ),
       funs = list(
+        ef.exh.pm2.5 = ef_emep_exh_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
         ef.road.pm2.5 = ef_beddows_road_pm2.5,
         ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
+        ef.exh.pm10 = ef_emep_exh_pm10,
         ef.brake.pm10 = ef_beddows_brake_pm10,
         ef.tyre.pm10 = ef_beddows_tyre_pm10,
         ef.road.pm10 = ef_beddows_road_pm10,

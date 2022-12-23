@@ -19,5 +19,6 @@
     * generalised ef_beddows... functions and extended to pm10 [2022-12-14] 
 * [0.0.4]
     * added vehicle/fleet object workforce function [2022-12-21]
-    
+    * added naei_route2spd lookup table [2022-12-23]
+    * started exhaust emission functions as ef_emep... [2022-12-23]
 

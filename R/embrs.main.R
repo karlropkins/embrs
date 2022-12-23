@@ -42,6 +42,15 @@ build_inventory <-
         ans <- lapply(names(routes), function(.rou){
           route <- routes[[.rou]]
           #route
+          #run any route$args that are functions
+          for(i in 1:length(route$args)){
+            if(is.function(route$args[[i]])){
+              #this is messy because it sends a function to itself
+              route$args[[i]] <- do.call(route$args[[i]],
+                                         modifyList(vehicle$args, route$args))
+            }
+          }
+          #run through ef funs
           ans <- lapply(names(vehicle$funs), function(.fun){
             do.call(vehicle$funs[[.fun]], modifyList(vehicle$args, route$args))
           })
