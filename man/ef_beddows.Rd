@@ -3,7 +3,6 @@
 \name{ef_beddows}
 \alias{ef_beddows}
 \alias{ef_beddows_nee_pm}
-\alias{ef_beddows_brake_nee_pm}
 \alias{ef_beddows_brake_pm2.5}
 \alias{ef_beddows_tyre_pm2.5}
 \alias{ef_beddows_road_pm2.5}

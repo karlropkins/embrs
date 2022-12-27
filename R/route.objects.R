@@ -8,7 +8,9 @@
 #' @description Route objects for use in embrs models.
 #' @param name (character) optional object name, by default the route source and type.
 #' @param route.def (character) required route description.
-#' @param route.source (character) require source of route model.
+#' @param route.source (character) required source of route model.
+#' @param route.dist (numeric) route or journey distance in km, default 1.
+#' @param route.slope (numeric) route or journey slope, default 0.
 #' @param veh.spd (numeric or function) the vehicle speed in km/hr.
 #' @param ... other arguments, currently ignored.
 ## #' @returns These functions make route class embrs objects.
@@ -20,9 +22,12 @@
 #and route functions built using that...
 #############################
 
-route_workhorse <-
+#splatted function
+#' @rdname route.objects
+#' @export
+embrs_route <-
   function(name = NULL, route.def = NULL, route.source = NULL,
-           route.dist = 1, ...){
+           route.dist = 1, route.slope = 0, ...){
     if(is.null(route.def) || is.null(route.source)){
       stop("route_... functions needs route.def and route.source [see help]")
     }
@@ -30,6 +35,7 @@ route_workhorse <-
                          route.def=route.def,
                          route.source=route.source,
                          route.dist=route.dist,
+                         route.slope=route.slope,
                          ...))
     if(is.null(obj$args$name)){
       obj$args$name <- paste(obj$args$route.source,  obj$args$route.def, sep=".")
@@ -47,7 +53,7 @@ route_workhorse <-
 #' @export
 route_naei_rural <- function(name=NULL, route.def="rural", route.source="uk naei",
                              veh.spd=naei_route2spd, ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
                   veh.spd=veh.spd, ...)
 }
 
@@ -56,7 +62,7 @@ route_naei_rural <- function(name=NULL, route.def="rural", route.source="uk naei
 #' @export
 route_naei_urban <- function(name=NULL, route.def="urban", route.source="uk naei",
                              veh.spd=naei_route2spd, ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
                   veh.spd=veh.spd,...)
 }
 
@@ -65,7 +71,7 @@ route_naei_urban <- function(name=NULL, route.def="urban", route.source="uk naei
 #' @export
 route_naei_motorway <- function(name=NULL, route.def="motorway", route.source="uk naei",
                                 veh.spd=naei_route2spd, ...){
-  route_workhorse(name=name, route.def=route.def, route.source = route.source,
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
                   veh.spd=veh.spd, ...)
 }
 
@@ -83,3 +89,51 @@ route_naei_urm <-
 #move name up into formals???
 
 
+#splatted function
+#' @rdname route.objects
+#' @export
+route_ukbc_outerlondon <- function(name=NULL, route.def="outer london", route.source="ukbc",
+                             veh.spd=ukbc_route2spd,
+                             brk_b=ukbc_route2brk_b,
+                             tyr_t=ukbc_route2tyr_t,
+                             ...){
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
+              veh.spd=veh.spd, brk_b=brk_b, tyr_t=tyr_t, ...)
+}
+
+#splatted function
+#' @rdname route.objects
+#' @export
+route_ukbc_innerlondon <- function(name=NULL, route.def="inner london", route.source="ukbc",
+                                   veh.spd=ukbc_route2spd,
+                                   brk_b=ukbc_route2brk_b,
+                                   tyr_t=ukbc_route2tyr_t,
+                                   ...){
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
+              veh.spd=veh.spd, brk_b=brk_b, tyr_t=tyr_t, ...)
+}
+
+#splatted function
+#' @rdname route.objects
+#' @export
+route_ukbc_rural <- function(name=NULL, route.def="rural", route.source="ukbc",
+                                   veh.spd=ukbc_route2spd,
+                             brk_b=ukbc_route2brk_b,
+                             tyr_t=ukbc_route2tyr_t,
+                             ...){
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
+              veh.spd=veh.spd, brk_b=brk_b, tyr_t=tyr_t, ...)
+}
+
+
+#splatted function
+#' @rdname route.objects
+#' @export
+route_ukbc_oir <-
+  function(...){
+    route_ukbc_outerlondon(...) + route_ukbc_innerlondon(...) + route_ukbc_rural(...)
+  }
+
+######################
+#see route_naei_urm
+#  about naming

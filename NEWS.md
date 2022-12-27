@@ -21,4 +21,6 @@
     * added vehicle/fleet object workforce function [2022-12-21]
     * added naei_route2spd lookup table [2022-12-23]
     * started exhaust emission functions as ef_emep... [2022-12-23]
+    * started embrs emission functions as ef_embrs... [2022-12-27]
+    
 

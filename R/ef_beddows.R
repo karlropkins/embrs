@@ -3,7 +3,7 @@
 ############################################
 
 #' @name ef_beddows
-#' @aliases ef_beddows_brake_nee_pm
+#' @aliases ef_beddows_nee_pm
 #' ef_beddows_brake_pm2.5 ef_beddows_tyre_pm2.5 ef_beddows_road_pm2.5
 #' ef_beddows_resusp_pm2.5
 #' ef_beddows_brake_pm10 ef_beddows_tyre_pm10 ef_beddows_road_pm10

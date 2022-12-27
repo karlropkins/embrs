@@ -13,7 +13,16 @@
 #############################
 #could see us associating variables with inventories
 #e.g. veh.wt or modifying variable
-#which might mean possibly a workshore here?
+
+##############################
+#issues
+############################
+#inventory picking up messy row names
+#with ef_embrs related builds
+#(but numbers/df shapes look sensible)
+
+
+
 
 #' @rdname embrs.main
 #' @export

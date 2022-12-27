@@ -21,10 +21,16 @@
 #' https://uk-air.defra.gov.uk/assets/documents/reports/cat07/1804121004_Road_transport_emissions_methodology_report_2018_v1.1.pdf
 #'
 
+#naei_route2spd (ricardo method)
+#have this as excel in working folder
+
+
 ########################
 #this needs a lot of tidying
 #unexported lookup
 #embrs_spd_ref and exported naei_route2spd
+
+
 
 embrs_spd_ref <- function(...){
   ref <- data.frame(
@@ -120,9 +126,9 @@ embrs_spd_ref <- function(...){
 }
 
 
-#splatted function
-#' @rdname misc.mod
-#' @export
+
+
+
 
 naei_route2spd <- function(veh.type = NULL, route.def = NULL,
                            route.source = NULL, ...){
@@ -141,9 +147,10 @@ naei_route2spd <- function(veh.type = NULL, route.def = NULL,
 
   #################
   #this currently is all or nothing!
-     ref <- ref[ref$veh.type == tolower(gsub(" ", "", veh.type)),]
-     ref <- ref[ref$route.type == tolower(gsub(" ", "", route.def)),]
-     ref <- ref[ref$route.type.2 == tolower(gsub(" ", "", route.source)),]
+  #think about changing to col.name %in% formal
+     ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
+     ref <- ref[ref$route.type %in% tolower(gsub(" ", "", route.def)),]
+     ref <- ref[ref$route.type.2 %in% tolower(gsub(" ", "", route.source)),]
      if(nrow(ref)==0){
        stop("no match!")
      }
@@ -154,6 +161,145 @@ naei_route2spd <- function(veh.type = NULL, route.def = NULL,
 }
 
 
+#not exporting at the moment
+
+embrs_ukbc_lookup <- function(...){
+  ref <- data.frame(
+             veh.type = "bus",
+             veh.spd_km.h = c(16.9, 10.0, 31.3,
+                     32, 62, 82),
+             route.source = c(rep("ukbc", 3), rep("uk naei", 3)),
+             route.def = c("Outer London", "Inner London", "Rural",
+                     "Urban", "Rural", "Motorway"),
+
+             #from new cycle from tim barlow and nemo??
+             #acc = c(0.442, 0.4181, 0.2877),
+             #prop.acc = c(0.4188, 0.3574, 0.4038),
+             #dec = c(-0.619, -0.647, -0.5912),
+             #prop.dec =c(0.2384, 0.2154, 0.2201)
+
+             dec = c(-0.619, -0.647, -0.5912,
+                     -0.468739424707642,
+                     -0.514481209154443, -0.466105499442562),
+             dec.pc = c(23.84, 21.54, 22.01,
+                        33.3898305084746,
+                        29.8901098901099, 30.6501547987616),
+
+             acc = c(0.442, 0.4181, 0.2877,
+                     0.52993295019581,
+                     0.508129084971385, 0.387746415773711),
+             acc.pc = c(41.88, 35.74, 40.38,
+                        29.4915254237288,
+                        29.8901098901099, 38.390092879257)
+             )
+             ref$embrs.brk_b <- (-ref$dec * (ref$dec.pc/100))/ref$veh.spd
+             ref$embrs.tyr_t <- ((-ref$dec * (ref$dec.pc/100))+
+                               (ref$acc * (ref$acc.pc/100)))/ref$veh.spd
+
+  ref
+}
 
 
+## should be able to rationalise these functions
 
+
+ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
+                           route.source = NULL, ...){
+
+  if(any(is.null(veh.type), is.null(route.def),
+         is.null(route.source))){
+    stop("need them all!")
+  }
+  ############################
+  #this needs a lot of tidying
+  ############################
+  ref <- embrs_ukbc_lookup()
+  #return(ref)
+  ref$route.def <- tolower(gsub(" ", "", ref$route.def))
+  ref$route.source <- tolower(gsub(" ", "", ref$route.source))
+  ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
+
+  #return(ref)
+
+  #################
+  #this currently is all or nothing!
+  #think about changing to col.name %in% formal
+  ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
+  ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
+  ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
+  if(nrow(ref)==0){
+    stop("no match!")
+  }
+  #other options to return NULL or NA???
+  #or data frame???
+  ref$veh.spd_km.h
+
+}
+
+
+ukbc_route2brk_b <- function(veh.type = NULL, route.def = NULL,
+                           route.source = NULL, ...){
+
+  if(any(is.null(veh.type), is.null(route.def),
+         is.null(route.source))){
+    stop("need them all!")
+  }
+  ############################
+  #this needs a lot of tidying
+  ############################
+  ref <- embrs_ukbc_lookup()
+  #return(ref)
+  ref$route.def <- tolower(gsub(" ", "", ref$route.def))
+  ref$route.source <- tolower(gsub(" ", "", ref$route.source))
+  ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
+
+  #return(ref)
+
+  #################
+  #this currently is all or nothing!
+  #think about changing to col.name %in% formal
+  ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
+  ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
+  ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
+  if(nrow(ref)==0){
+    stop("no match!")
+  }
+  #other options to return NULL or NA???
+  #or data frame???
+  ref$embrs.brk_b
+
+}
+
+
+ukbc_route2tyr_t <- function(veh.type = NULL, route.def = NULL,
+                             route.source = NULL, ...){
+
+  if(any(is.null(veh.type), is.null(route.def),
+         is.null(route.source))){
+    stop("need them all!")
+  }
+  ############################
+  #this needs a lot of tidying
+  ############################
+  ref <- embrs_ukbc_lookup()
+  #return(ref)
+  ref$route.def <- tolower(gsub(" ", "", ref$route.def))
+  ref$route.source <- tolower(gsub(" ", "", ref$route.source))
+  ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
+
+  #return(ref)
+
+  #################
+  #this currently is all or nothing!
+  #think about changing to col.name %in% formal
+  ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
+  ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
+  ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
+  if(nrow(ref)==0){
+    stop("no match!")
+  }
+  #other options to return NULL or NA???
+  #or data frame???
+  ref$embrs.tyr_t
+
+}

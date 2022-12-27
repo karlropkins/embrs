@@ -21,7 +21,8 @@ knitr::opts_chunk$set(
 > __embrs__ is in development
 
 __embrs__ was initially written as part of work on a scoping exercise to provide 
-early estimates of the environmental impacts of the diesel to electric bus. 
+early estimates of the environmental impacts of the diesel to electric bus 
+transition. 
 
 ## Project Webpage
 
