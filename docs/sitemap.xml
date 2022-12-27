@@ -28,6 +28,12 @@
     <loc>https://karlropkins.github.io/embrs/reference/ef_beddows.html</loc>
   </url>
   <url>
+    <loc>https://karlropkins.github.io/embrs/reference/ef_embrs.html</loc>
+  </url>
+  <url>
+    <loc>https://karlropkins.github.io/embrs/reference/ef_emep.html</loc>
+  </url>
+  <url>
     <loc>https://karlropkins.github.io/embrs/reference/embrs.generics.html</loc>
   </url>
   <url>
@@ -38,6 +44,9 @@
   </url>
   <url>
     <loc>https://karlropkins.github.io/embrs/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://karlropkins.github.io/embrs/reference/misc.mod.html</loc>
   </url>
   <url>
     <loc>https://karlropkins.github.io/embrs/reference/route.objects.html</loc>
