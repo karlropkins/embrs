@@ -24,4 +24,6 @@
     * started embrs emission functions as ef_embrs... [2022-12-27]
 * [0.0.5]
     * standardised errors messages (still needs work) [2022-12-30]
+    * added draft favicon [2022-12-30]
+    
 
