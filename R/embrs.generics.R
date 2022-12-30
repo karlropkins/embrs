@@ -77,7 +77,7 @@
 `*.embrs` <-
   function(x, y, ...){
     if(class(y)[1] != "embrs"){
-      stop("can't touch this")
+
     }
     temp <- c(class(x)[2], class(y)[2])
     if("fleet" %in% temp & "routes" %in% temp){
@@ -98,7 +98,8 @@
       class(fleet) <- c("embrs", "model")
       return(fleet)
     } else {
-      stop("sorry can't multiply these")
+      stop("[embrs]> sorry can't multiply these",
+           call. = FALSE)
     }
   }
 
@@ -219,7 +220,8 @@ as.embrs_fleet <-
 
 as.embrs_fleet.default <-
   function(x, ...){
-    stop("no method")
+    stop("[embrs] sorry. no embrs method defined",
+         call. = FALSE)
   }
 
 as.embrs_fleet.embrs_vehicle <-

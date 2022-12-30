@@ -51,7 +51,7 @@ ef_beddows_nee_pm <- function(veh.wt, em.type = c("pm2.5", "pm10"),
                               route.source = "uk naei",
                               verbose = FALSE, ...){
   if(tolower(route.source) != "uk naei"){
-    stop("[embrs]: ef_beddows...() only intended for use with naei route definitions.",
+    stop("[embrs] ef_beddows...() only intended for use with naei route definitions.",
             call.=FALSE)
   }
   type <- rep(c(rep("pm2.5", 3), rep("pm10", 3)),4)

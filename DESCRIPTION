@@ -1,6 +1,6 @@
 Package: embrs
 Title: Emission Model Builder & Reporter Syntax
-Version: 0.0.4
+Version: 0.0.5
 Date: 2022-12-27
 Description: [To be written - currently home for code for BUS paper].
 Authors@R: c(person(given = "Karl", family = "Ropkins", role = c("aut", "cre"), email

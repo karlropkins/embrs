@@ -102,7 +102,8 @@ bus_ice_beddows <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(
@@ -138,7 +139,8 @@ bus_bev_beddows <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(
@@ -175,7 +177,8 @@ bus_ice_embrs1 <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(
@@ -208,7 +211,8 @@ bus_bev_embrs1 <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(
@@ -243,7 +247,8 @@ bus_ice_embrs2 <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(
@@ -276,7 +281,8 @@ bus_bev_embrs2 <-
   function(veh.wt, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
-      stop("need veh.wt")
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
     }
     obj <- list(
       args = list(

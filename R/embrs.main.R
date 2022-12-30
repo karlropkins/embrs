@@ -30,10 +30,12 @@ build_inventory <-
   function(x, ...){
     #need a nice check for is this an embrs object
     if(class(x)[1] != "embrs" & length(class(x)) != "2"){
-      stop("this function is intented for use with embrs objects")
+      stop("[embrs] this function is only intented for use with embrs objects",
+           call. = FALSE)
     }
     if(class(x)[2] != "model"){
-      stop("this is a partially built embrs model, see docs")
+      stop("[embrs] this is a partially built embrs model, see docs",
+           call. = FALSE)
     }
     x
     ##########################

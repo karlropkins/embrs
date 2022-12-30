@@ -29,7 +29,8 @@ embrs_route <-
   function(name = NULL, route.def = NULL, route.source = NULL,
            route.dist = 1, route.slope = 0, ...){
     if(is.null(route.def) || is.null(route.source)){
-      stop("route_... functions needs route.def and route.source [see help]")
+      stop("[embrs] route_...() needs route.def and route.source [see help]",
+           call. = FALSE)
     }
     obj <- list(args=list(name=name,
                          route.def=route.def,

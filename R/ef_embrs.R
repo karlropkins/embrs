@@ -58,7 +58,7 @@ ef_embrs1_nee_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                               verbose = FALSE, ...){
 
   if(is.null(veh.spd)){
-    stop("[embrs]: ef_embrs1...() needs vehicle speed in km/hr veh.spd.",
+    stop("[embrs] ef_embrs1...() needs veh.spd, vehicle speed in km/hr",
          call.=FALSE)
   }
   ans <- ef_beddows_nee_pm(veh.wt=veh.wt, em.type=em.type,
@@ -221,11 +221,11 @@ ef_embrs2_brake_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                              route.source = "uk naei",
                              verbose = FALSE, ...){
   if(is.null(veh.spd)){
-    stop("[embrs]: ef_embrs2_brake...() needs vehicle speed in km/hr veh.spd.",
+    stop("[embrs] ef_embrs2_brake...() needs veh.spd, vehicle speed in km/hr",
          call.=FALSE)
   }
   if(is.null(brk_b)){
-    stop("[embrs]: ef_embrs2_brake...() needs brake constant b.",
+    stop("[embrs] ef_embrs2_brake...() needs brk_b",
          call.=FALSE)
   }
 
@@ -330,11 +330,11 @@ ef_embrs2_tyre_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                                route.source = "uk naei",
                                verbose = FALSE, ...){
   if(is.null(veh.spd)){
-    stop("[embrs]: ef_embrs2_tyre...() needs vehicle speed in km/hr veh.spd.",
+    stop("[embrs] ef_embrs2_tyre...() needs veh.spd, vehicle speed in km/hr",
          call.=FALSE)
   }
   if(is.null(tyr_t)){
-    stop("[embrs]: ef_embrs2_tyre...() needs tyre constant t.",
+    stop("[embrs]: ef_embrs2_tyre...() needs tyr_t, tyre constant",
          call.=FALSE)
   }
 

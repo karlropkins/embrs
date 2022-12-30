@@ -135,7 +135,8 @@ naei_route2spd <- function(veh.type = NULL, route.def = NULL,
 
   if(any(is.null(veh.type), is.null(route.def),
          is.null(route.source))){
-    stop("need them all!")
+    stop("[embrs] naei_route2spd() needs veh.type, route.def snf route.source!",
+         call. = FALSE)
   }
   ############################
   #this needs a lot of tidying
@@ -152,7 +153,8 @@ naei_route2spd <- function(veh.type = NULL, route.def = NULL,
      ref <- ref[ref$route.type %in% tolower(gsub(" ", "", route.def)),]
      ref <- ref[ref$route.type.2 %in% tolower(gsub(" ", "", route.source)),]
      if(nrow(ref)==0){
-       stop("no match!")
+       stop("[embrs] naei_route2spd() no default veh.std for this combination!",
+            call. = FALSE)
      }
      #other options to return NULL or NA???
      #or data frame???
@@ -208,7 +210,8 @@ ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
 
   if(any(is.null(veh.type), is.null(route.def),
          is.null(route.source))){
-    stop("need them all!")
+    stop("[embrs] ukbc_route2spd() needs veh.type, route.def and route.source!",
+         call. = FALSE)
   }
   ############################
   #this needs a lot of tidying
@@ -228,7 +231,8 @@ ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
   ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
   ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
   if(nrow(ref)==0){
-    stop("no match!")
+    stop("[embrs] ukbc_route2spd() no default veh.std for this combination!",
+         call. = FALSE)
   }
   #other options to return NULL or NA???
   #or data frame???
@@ -242,7 +246,8 @@ ukbc_route2brk_b <- function(veh.type = NULL, route.def = NULL,
 
   if(any(is.null(veh.type), is.null(route.def),
          is.null(route.source))){
-    stop("need them all!")
+    stop("[embrs] ukbc_route2brk_b() needs veh.type, route.def and route.source!",
+         call. = FALSE)
   }
   ############################
   #this needs a lot of tidying
@@ -262,7 +267,8 @@ ukbc_route2brk_b <- function(veh.type = NULL, route.def = NULL,
   ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
   ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
   if(nrow(ref)==0){
-    stop("no match!")
+    stop("[embrs] ukbc_route2brk_b() no default brk_b for this combination!",
+         call. = FALSE)
   }
   #other options to return NULL or NA???
   #or data frame???
@@ -276,7 +282,8 @@ ukbc_route2tyr_t <- function(veh.type = NULL, route.def = NULL,
 
   if(any(is.null(veh.type), is.null(route.def),
          is.null(route.source))){
-    stop("need them all!")
+    stop("[embrs] ukbc_route2tyr_t() needs veh.type, route.def and route.source!",
+         call. = FALSE)
   }
   ############################
   #this needs a lot of tidying
@@ -296,7 +303,8 @@ ukbc_route2tyr_t <- function(veh.type = NULL, route.def = NULL,
   ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
   ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
   if(nrow(ref)==0){
-    stop("no match!")
+    stop("[embrs] ukbc_route2tyr_t() no default tyr_t for this combination!",
+         call. = FALSE)
   }
   #other options to return NULL or NA???
   #or data frame???
