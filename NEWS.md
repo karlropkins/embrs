@@ -19,12 +19,12 @@
     * object handling revision [2022-12-13]
     * website skeleton build [2022-12-12]
 * [0.0.1] 
-    * revised embrs object classes (ops handling) [2022-12-11]
     * first draft embrs object docs [2022-12-12]
+    * revised embrs object classes (ops handling) [2022-12-11]
+    * first draft embrs object classes [2022-12-09]
     * built basic package using grey.area [2022-09-21]
     * added ef_beddows functions (basic methods from beddows paper) [2022-09-21]
     * added ef_embrs functions (basic methods from bus paper) [2022-09-21]
-    * first draft embrs object classes [2022-12-09]
 
     
 
