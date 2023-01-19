@@ -12,7 +12,7 @@
 provide early estimates of the environmental impacts of the diesel to
 electric bus transition published as
 <a href="https://doi.org/10.3390/su15021522" target="_blank">Tivey et al
-2023</a>.
+2023</a>
 
 ## Project Webpage
 
