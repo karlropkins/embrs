@@ -11,7 +11,7 @@
 **embrs** was initially written as part of work on a scoping exercise to
 provide early estimates of the environmental impacts of the diesel to
 electric bus transition published as [Tivey et al
-2023](https://doi.org/10.3390/su15021522/?target=_blank)
+2023](https://doi.org/10.3390/su15021522)
 
 ## Project Webpage
 
@@ -20,7 +20,7 @@ electric bus transition published as [Tivey et al
 ## Installation
 
 You can install the development version of embrs from
-<a href="https://github.com/" target="_blank">Github</a> with:
+[Github](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
