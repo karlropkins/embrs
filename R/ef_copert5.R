@@ -5,23 +5,26 @@
 #' @name ef_copert5
 #' @aliases ef_copert5_exhaust_pm ef_copert5_exhaust_pm2.5
 #' ef_copert5_exhaust_pm10
-#' @description Functions to estimate vehicle speed-based exhaust
-#' PM2.5 and PM10 emission factors based on COPERT5.0 speed curves.
-#' @param veh.spd average vehicle speed, in km/h
-#' @param veh.type vehicle type, currently only coded for urban buses
+#' @description Functions to calculate vehicle speed-based hot exhaust
+#' PM2.5 and PM10 emission factors based on COPERT5.0 methods.
+#' @param veh.spd average vehicle speed, in km/h.
+#' @param veh.type vehicle type, currently only coded for urban buses, see Note.
 #' @param veh.wt vehicle weight, in km.
 #' @param em.type type of emission, currently PM, PM2.5 or PM10, see Note.
-#' @param route.def route description
-#' @param fuel.type fuel used by the vehicle, diesel, etc
-#' @param fuel.corr (logical) apply fuel correction, see Note
-#' @param em.source emission source: currently, exhaust only
+#' @param route.def route description, optional for ef_copert5 functions.
+#' @param fuel.type fuel used by the vehicle, diesel, etc.
+#' @param fuel.corr (logical) apply fuel correction, see Note.
+#' @param em.source emission source: currently, exhaust only.
 #' @param euro.class EURO classification: PRE, I, II, III, IV, V+ERG,
-#' V+SCR or VI only
-#' @param eng.load engine load, as proportion: 0. 0.5 or 1 only
+#' V+SCR or VI only.
+#' @param eng.load engine load, as proportion: 0. 0.5 or 1 only.
 #' @param route.slope route slope, as proportion: -0.06, -0.04, -0.02, 0,
-#' 0.02, 0.04 or 0.06 only
+#' 0.02, 0.04 or 0.06 only.
 #' @param ... other arguments, currently ignored
-#' @note Strictly, COPERT PM exhaust emission factors are PM, but because
+#' @note The embrs::ef_copert5 functions are currently only coded for urban
+#' buses, \code{veh.type="bus"}.
+#'
+#' Strictly, COPERT PM exhaust emission factors are PM, but because
 #' vehicle exhaust PM is fine it is typically assumed that:
 #'
 #' PM10 = PM2.5 = PM for exhaust emissions from most conventional diesel and
@@ -31,7 +34,7 @@
 #' associated with improvements in fuel quality,
 #'
 #' @source
-#' Average speed curve are based on COPERT 5 methods as documented in
+#' Average speed curves are based on COPERT 5 methods as documented in:
 #'
 #' Dan Wakeling (Ricardo Energy & Environment).
 #' Road vehicle emission factors for PM based on COPERT v5.0 (2017):

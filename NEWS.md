@@ -1,8 +1,9 @@
 # Version 0.0 - Release Notes
 
 * [0.0.5]
+    * archive and web update (news, readme, index) [2023-01-19] 
     * added ef_copert5 functions (still needs work; likely to replace 
-      ef_emep) [2023-01-18]
+      ef_emep) [2023-01-19]
 * [0.0.5]
     * standardised errors messages (still needs work) [2022-12-30]
     * added draft favicon [2022-12-30]

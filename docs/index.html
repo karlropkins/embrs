@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">embrs</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -77,7 +77,7 @@
 <blockquote>
 <p><strong>embrs</strong> is in development</p>
 </blockquote>
-<p><strong>embrs</strong> was initially written as part of work on a scoping exercise to provide early estimates of the environmental impacts of the diesel to electric bus transition.</p>
+<p><strong>embrs</strong> was initially written as part of work on a scoping exercise to provide early estimates of the environmental impacts of the diesel to electric bus transition published as <a href="https://doi.org/10.3390/su15021522" class="external-link uri">https://doi.org/10.3390/su15021522</a>.</p>
 <div class="section level2">
 <h2 id="code-sources">code sources<a class="anchor" aria-label="anchor" href="#code-sources"></a>
 </h2>
@@ -98,8 +98,8 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/karlropkins/embrs" class="external-link">embrs</a></span><span class="op">)</span></span>
 <span><span class="co"># some buses</span></span>
-<span><span class="co"># a ICE diesel bus weighing 15925 kg</span></span>
-<span><span class="va">bus.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/bus.objects.html">bus_ice</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"E6DV"</span>, veh.wt<span class="op">=</span><span class="fl">15925</span><span class="op">)</span> </span>
+<span><span class="co"># a EURO VI (ICE) diesel bus weighing 15925 kg</span></span>
+<span><span class="va">bus.1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/bus.objects.html">bus_ice</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"E6DV"</span>, veh.wt<span class="op">=</span><span class="fl">15925</span>, euro.class<span class="op">=</span><span class="st">"VI"</span><span class="op">)</span> </span>
 <span><span class="co"># a battery electric bus weighing 17725 kg (and conventional brakes) </span></span>
 <span><span class="va">bus.2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/bus.objects.html">bus_bev</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"BEV"</span>, veh.wt<span class="op">=</span><span class="fl">17725</span><span class="op">)</span> </span>
 <span><span class="co"># like bus.2 but with regenerative brakes operating at 25% efficiency</span></span>
@@ -138,7 +138,7 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small>GPL (&gt;= 3)</small></li>
+<li><small>NA</small></li>
 </ul>
 </div>
 

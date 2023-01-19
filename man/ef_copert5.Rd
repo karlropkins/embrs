@@ -10,7 +10,7 @@
 \alias{ef_copert5_exh_pm10}
 \title{ef_copert5}
 \source{
-Average speed curve are based on COPERT 5 methods as documented in
+Average speed curves are based on COPERT 5 methods as documented in:
 
 Dan Wakeling (Ricardo Energy & Environment).
 Road vehicle emission factors for PM based on COPERT v5.0 (2017):
@@ -43,37 +43,40 @@ ef_copert5_exh_pm2.5(...)
 ef_copert5_exh_pm10(...)
 }
 \arguments{
-\item{veh.spd}{average vehicle speed, in km/h}
+\item{veh.spd}{average vehicle speed, in km/h.}
 
-\item{veh.type}{vehicle type, currently only coded for urban buses}
+\item{veh.type}{vehicle type, currently only coded for urban buses, see Note.}
 
 \item{veh.wt}{vehicle weight, in km.}
 
 \item{em.type}{type of emission, currently PM, PM2.5 or PM10, see Note.}
 
-\item{route.def}{route description}
+\item{route.def}{route description, optional for ef_copert5 functions.}
 
-\item{fuel.type}{fuel used by the vehicle, diesel, etc}
+\item{fuel.type}{fuel used by the vehicle, diesel, etc.}
 
-\item{fuel.corr}{(logical) apply fuel correction, see Note}
+\item{fuel.corr}{(logical) apply fuel correction, see Note.}
 
-\item{em.source}{emission source: currently, exhaust only}
+\item{em.source}{emission source: currently, exhaust only.}
 
 \item{euro.class}{EURO classification: PRE, I, II, III, IV, V+ERG,
-V+SCR or VI only}
+V+SCR or VI only.}
 
-\item{eng.load}{engine load, as proportion: 0. 0.5 or 1 only}
+\item{eng.load}{engine load, as proportion: 0. 0.5 or 1 only.}
 
 \item{route.slope}{route slope, as proportion: -0.06, -0.04, -0.02, 0,
-0.02, 0.04 or 0.06 only}
+0.02, 0.04 or 0.06 only.}
 
 \item{...}{other arguments, currently ignored}
 }
 \description{
-Functions to estimate vehicle speed-based exhaust
-PM2.5 and PM10 emission factors based on COPERT5.0 speed curves.
+Functions to calculate vehicle speed-based hot exhaust
+PM2.5 and PM10 emission factors based on COPERT5.0 methods.
 }
 \note{
+The embrs::ef_copert5 functions are currently only coded for urban
+buses, \code{veh.type="bus"}.
+
 Strictly, COPERT PM exhaust emission factors are PM, but because
 vehicle exhaust PM is fine it is typically assumed that:
 

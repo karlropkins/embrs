@@ -10,7 +10,8 @@
 
 **embrs** was initially written as part of work on a scoping exercise to
 provide early estimates of the environmental impacts of the diesel to
-electric bus transition.
+electric bus transition published as
+<https://doi.org/10.3390/su15021522>.
 
 ## code sources
 
@@ -34,8 +35,8 @@ inventories:
 ``` r
 library(embrs)
 # some buses
-# a ICE diesel bus weighing 15925 kg
-bus.1 <- bus_ice(name="E6DV", veh.wt=15925) 
+# a EURO VI (ICE) diesel bus weighing 15925 kg
+bus.1 <- bus_ice(name="E6DV", veh.wt=15925, euro.class="VI") 
 # a battery electric bus weighing 17725 kg (and conventional brakes) 
 bus.2 <- bus_bev(name="BEV", veh.wt=17725) 
 # like bus.2 but with regenerative brakes operating at 25% efficiency

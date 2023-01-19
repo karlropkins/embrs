@@ -27,7 +27,7 @@
 #' @note These may be moving to vein at some point...
 #' @references These functions are based on methods developed and reported by:
 #'
-#' [handbook]
+#' [EMEP handbook]
 
 
 
