@@ -10,9 +10,8 @@
 
 **embrs** was initially written as part of work on a scoping exercise to
 provide early estimates of the environmental impacts of the diesel to
-electric bus transition published as
-<a href="https://doi.org/10.3390/su15021522" target="blank">Tivey et al
-2023</a>
+electric bus transition published as [Tivey et al
+2023](https://doi.org/10.3390/su15021522/?target=_blank)
 
 ## Project Webpage
 
