@@ -66,7 +66,7 @@ factors for non-exhaust PM2.5 and PM10. \code{ef_beddows_nee_pm} is the main
 function, and others are wrappers for single soucre and type emissions factors.
 }
 \description{
-Functions to estimated vehicle weight-based non-exhaust
+Functions to estimate vehicle weight-based non-exhaust
 PM2.5 and PM10 emission factors based on methods of Beddows.
 }
 \note{

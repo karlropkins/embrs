@@ -8,7 +8,7 @@
 #' ef_beddows_resusp_pm2.5
 #' ef_beddows_brake_pm10 ef_beddows_tyre_pm10 ef_beddows_road_pm10
 #' ef_beddows_resusp_pm10
-#' @description Functions to estimated vehicle weight-based non-exhaust
+#' @description Functions to estimate vehicle weight-based non-exhaust
 #' PM2.5 and PM10 emission factors based on methods of Beddows.
 #' @param veh.wt (numeric, required) vehicle weight (in kg).
 #' @param em.type (character) type of emissions to predict, by default PM2.5

@@ -19,15 +19,15 @@ bus_bev(...)
 
 bus_ice(...)
 
-bus_ice_beddows(veh.wt, n = 1, name = NULL, ...)
+bus_ice_beddows(veh.wt, euro.class = NULL, n = 1, name = NULL, ...)
 
 bus_bev_beddows(veh.wt, n = 1, name = NULL, ...)
 
-bus_ice_embrs1(veh.wt, n = 1, name = NULL, ...)
+bus_ice_embrs1(veh.wt, euro.class = NULL, n = 1, name = NULL, ...)
 
 bus_bev_embrs1(veh.wt, n = 1, name = NULL, ...)
 
-bus_ice_embrs2(veh.wt, n = 1, name = NULL, ...)
+bus_ice_embrs2(veh.wt, euro.class = NULL, n = 1, name = NULL, ...)
 
 bus_bev_embrs2(veh.wt, n = 1, name = NULL, ...)
 }
@@ -40,6 +40,9 @@ using when building an \strong{embrs} vehicle/fleet object.}
 \item{...}{other arguments, currently ignored}
 
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
+
+\item{euro.class}{(required character) vehicle EURO classification,
+can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.}
 
 \item{n}{(numeric) number of vehicles, defualt 1.}
 }
