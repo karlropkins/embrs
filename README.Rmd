@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 
 __embrs__ was initially written as part of work on a scoping exercise to provide 
 early estimates of the environmental impacts of the diesel to electric bus 
-transition published as https://doi.org/10.3390/su15021522. 
+transition published as <a href="https://doi.org/10.3390/su15021522" target="_blank">Tivey et al 2023</a>. 
 
 ## Project Webpage
 
@@ -31,7 +31,7 @@ __embrs__ projects pages: https://karlropkins.github.io/embrs/
 
 ## Installation
 
-You can install the development version of embrs from [GitHub](https://github.com/) with:
+You can install the development version of embrs from <a href="https://github.com/" target="_blank">Github</a> with:
 
 ```{r, eval=FALSE}
 # install.packages("devtools")

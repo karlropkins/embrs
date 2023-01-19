@@ -60,11 +60,12 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
   ###################
   #to do
   #####################
-  #formula from data source
   #fuel
-  #euro.class to output??
-  #correction factors???
+  #   currently ignored because diesel is only option for urban bus
+  #correction factors
+  #   coded (again urban bus only) but like something better
   ######################
+
   if(is.null(veh.wt)){
     stop("ef...(): embrs needs veh.wt (vehicle weight in kg), see help",
          call. = FALSE
@@ -93,9 +94,12 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
   }
 
   ###################
-  #currently bus only
-  # could add coach and truck
-  # from same lookup
+  #currently urban bus only
+  # could very quickly do coach and truck
+  # from same lookup but they would need
+  # only veh.type section because options
+  # (e.g. veh.wt ranges are different)
+  # so would need to modify the else below...
   ####################
 
   if(veh.type == c("bus")){
@@ -168,6 +172,7 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     out <- out * 1000
     #might want to output
     #euro class, eng.load and route.slope?
+    #     maybe standard and verbose options for output???
     return(data.frame(em.type, em.source, euro.class, route.def, veh.spd = veh.spd,
         veh.wt, ans = out))
 
