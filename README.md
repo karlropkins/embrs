@@ -15,7 +15,7 @@ electric bus transition published as [Tivey et al
 
 ## Project Webpage
 
-**embrs** projects pages: <https://karlropkins.github.io/embrs/>
+**embrs** [projects pages](https://karlropkins.github.io/embrs/)
 
 ## Installation
 
@@ -35,7 +35,7 @@ inventories:
 ``` r
 library(embrs)
 # some buses
-# a EURO V ICE diesel bus weighing 15925 kg
+# a EURO VI ICE diesel bus weighing 15925 kg
 bus.1 <- bus_ice(name="E6DV", veh.wt=15925, euro.class="VI") 
 # a battery electric bus weighing 17725 kg (and conventional brakes) 
 bus.2 <- bus_bev(name="BEV", veh.wt=17725) 
