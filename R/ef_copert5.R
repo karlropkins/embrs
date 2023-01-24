@@ -114,12 +114,22 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     ####################
     #load can only be 0, 0.5 or 1
     #road.gradients can only be -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06
+    eng.load <- embrs_copert5_prep(eng.load, c(0, 0.5, 1), "eng.load")
+    route.slope <- embrs_copert5_prep(route.slope, c(-0.06, -0.04, -0.02,
+                                               0, 0.02, 0.04, 0.06),
+                                   "route.slope")
+
     ###################
     ref <- subset(ref, load==eng.load & road.gradient==route.slope)
     ##################
     #bus euro can only be PRE, I, II, III, IV, V+EGR, V+SCR, VI
     ##################
+    euro.class <- embrs_copert5_prep(euro.class, c("PRE", "I", "II", "III",
+                                                   "IV", "V+EGR", "V+SCR",
+                                                   "VI"),
+                                      "euro.class")
     ref <- subset(ref, euro.standard==euro.class)
+
     if(veh.wt <= 15000){
       ref <- subset(ref, size=="urban bus midi <=15 t")
     }
@@ -207,3 +217,48 @@ ef_copert5_exh_pm10 <- function(...){
   out
 }
 
+
+
+#unexported code
+
+embrs_copert5_prep <- function(x, opts, x.name){
+  #x - user input
+  #opts - known cases
+  #x.name
+  if(is.character(x)){
+    if(x %in% opts){
+      return(x)
+    } else {
+      stop(paste("[embrs] ef_copert5...() unknown ", x.name,
+                 " Needs to be one of: ",
+                 paste(opts, collapse = ", ") , sep=""),
+           call.= FALSE)
+    }
+  }
+  if(is.numeric(x)){
+    if(x > max(opts, na.rm=TRUE) | x < min(opts, na.rm=TRUE)){
+      stop(paste("[embrs] ef_copert5...() ", x.name,
+                 " outside modelled range\n",
+                 " set-points: ",
+                 paste(opts, collapse = ", ") , sep=""),
+           call.= FALSE)
+    } else {
+      if(x %in% opts){
+        return(x)
+      } else {
+        new.x <- opts[which.min(abs(x-opts))[1]]
+        warning(paste("[embrs] ef_copert5...() ", x.name,
+                      " not a known set-point\n",
+                      " (known set-points: ", paste(opts, collapse = ", "),
+                      ")\n",
+                      " reseting ", x, " to ", new.x, sep=""),
+             call.= FALSE)
+        return(new.x)
+      }
+    }
+  }
+  #if unknown
+  stop(paste("[embrs] ef_copert5...() does not know ", x.name,
+       " option, ", x, ", see help?", sep=""),
+      call.= FALSE)
+}
