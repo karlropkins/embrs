@@ -1,6 +1,10 @@
 # Version 0.0 - Release Notes
 
-* [0.0.5]
+* [0.0.7]
+    * now imports vein [2023-02-07] 
+    * added ef_eea2019 like ef_copert5 but using vein::ef_eea() [2023-02-07]
+    * (ef_copert5 to remove?)
+* [0.0.6]
     * ef_copert5 update (force setting to set-points) [2023-01-24]
     * archive and web update (news, readme, index) [2023-01-19] 
     * added ef_copert5 functions (still needs work; likely to replace 

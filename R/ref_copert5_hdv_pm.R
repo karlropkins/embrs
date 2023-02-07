@@ -2,6 +2,13 @@
 #' @title ref_copert5_hdv_pm
 ############################################
 #'
+
+############################################
+# to think about...
+# do we want to keep these as internal docs???
+# if it goes to vein they'll disappear...
+############################################
+
 #' @name ref_copert5_hdv_pm
 #' @description look-up table for COPERT5 PM emission function
 #' average speed curves for heavy duty vehicles.

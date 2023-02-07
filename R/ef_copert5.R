@@ -50,149 +50,149 @@
 #splatted function
 #' @export
 ef_copert5_exh_pm <-
-function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
-                                  em.type = "pm", route.def = NULL,
-                                  fuel.type = NULL, fuel.corr = TRUE,
-                                  em.source = "exhaust", euro.class = NULL,
-                                  eng.load = NULL, route.slope = NULL, ...)
-{
-
-  ###################
-  #to do
-  #####################
-  #fuel
-  #   currently ignored because diesel is only option for urban bus
-  #correction factors
-  #   coded (again urban bus only) but like something better
-  ######################
-
-  if(is.null(veh.wt)){
-    stop("ef...(): embrs needs veh.wt (vehicle weight in kg), see help",
-         call. = FALSE
-    )
-  }
-  if(is.null(veh.spd)){
-    stop("ef_copert5_exhaust...(): needs veh.spd (vehicle speed in km/hr), see help",
-         call. = FALSE
-    )
-  }
-  if(is.null(route.def)){
-    route.def <- "[unnamed]"
-  }
-  if(is.null(euro.class)){
-    stop("ef_copert5...(): needs euro.class, see help",
-         call. = FALSE
-    )
-  }
-  if(is.null(route.slope)) {
-    route.slope <- 0
-    #copert default
-  }
-  if(is.null(eng.load)) {
-    eng.load <- 0.5
-    #copert default
-  }
-
-  ###################
-  #currently urban bus only
-  # could very quickly do coach and truck
-  # from same lookup but they would need
-  # only veh.type section because options
-  # (e.g. veh.wt ranges are different)
-  # so would need to modify the else below...
-  ####################
-
-  if(veh.type == c("bus")){
-
-    ######################
-    #replacing previous ref
-    #with larger data sent
-    # document source
-    #######################
-    ref <- subset(ref_copert5_hdv_pm, vehicle.type=="bus")
-
-    ####################
-    #load can only be 0, 0.5 or 1
-    #road.gradients can only be -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06
-    eng.load <- embrs_copert5_prep(eng.load, c(0, 0.5, 1), "eng.load")
-    route.slope <- embrs_copert5_prep(route.slope, c(-0.06, -0.04, -0.02,
-                                               0, 0.02, 0.04, 0.06),
-                                   "route.slope")
+  function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
+           em.type = "pm", route.def = NULL,
+           fuel.type = NULL, fuel.corr = TRUE,
+           em.source = "exhaust", euro.class = NULL,
+           eng.load = NULL, route.slope = NULL, ...)
+  {
 
     ###################
-    ref <- subset(ref, load==eng.load & road.gradient==route.slope)
-    ##################
-    #bus euro can only be PRE, I, II, III, IV, V+EGR, V+SCR, VI
-    ##################
-    euro.class <- embrs_copert5_prep(euro.class, c("PRE", "I", "II", "III",
-                                                   "IV", "V+EGR", "V+SCR",
-                                                   "VI"),
-                                      "euro.class")
-    ref <- subset(ref, euro.standard==euro.class)
+    #to do
+    #####################
+    #fuel
+    #   currently ignored because diesel is only option for urban bus
+    #correction factors
+    #   coded (again urban bus only) but like something better
+    ######################
 
-    if(veh.wt <= 15000){
-      ref <- subset(ref, size=="urban bus midi <=15 t")
-    }
-    if(veh.wt > 15000 & veh.wt <= 18000){
-      ref <- subset(ref, size=="urban bus standard 15 - 18 t")
-    }
-    if(veh.wt >18000){
-      ref <- subset(ref, size=="urban bus articulated >18 t")
-    }
-    if(nrow(ref)!=1){
-      stop("ef_copert5...(): missing or wrong bus settings, check help",
+    if(is.null(veh.wt)){
+      stop("ef...(): embrs needs veh.wt (vehicle weight in kg), see help",
            call. = FALSE
       )
     }
-    if(veh.spd>ref$max.speed.km.h.){
-      warning("ef_copert5...(): veh.spd out of range, resetting",
+    if(is.null(veh.spd)){
+      stop("ef_copert5_exhaust...(): needs veh.spd (vehicle speed in km/hr), see help",
            call. = FALSE
       )
-      veh.spd <- ref$max.speed.km.h.
     }
-    if(veh.spd<ref$min.speed.km.h.){
-      warning("ef_copert5...(): veh.spd out of range, resetting",
+    if(is.null(route.def)){
+      route.def <- "[unnamed]"
+    }
+    if(is.null(euro.class)){
+      stop("ef_copert5...(): needs euro.class, see help",
            call. = FALSE
       )
-      veh.spd <- ref$min.speed.km.h.
+    }
+    if(is.null(route.slope)) {
+      route.slope <- 0
+      #copert default
+    }
+    if(is.null(eng.load)) {
+      eng.load <- 0.5
+      #copert default
     }
 
-    #replacing equation with ref$fun
-    #out <- (ref$a + (ref$b * veh.spd) + (ref$c * (veh.spd^2)) + ref$d/veh.spd)/(ref$e +
-    #    (ref$f * veh.spd) + (ref$g * (veh.spd^2)))
+    ###################
+    #currently urban bus only
+    # could very quickly do coach and truck
+    # from same lookup but they would need
+    # only veh.type section because options
+    # (e.g. veh.wt ranges are different)
+    # so would need to modify the else below...
+    ####################
 
-    out <- eval(parse(text=ref$fun))
+    if(veh.type == c("bus")){
 
-    ########################
-    #fuel scaling -
-    #(will be better way to do this)
-    #pre 0.94; I 0.94; II 0.94; III 0.96; IV 1.00; V (erg/scr) 1.00; 1.00
-    ########################
-    if(fuel.corr){
-      sc <- 1
-      if(euro.class %in% c("PRE", "I", "II")) {
-        sc <- 0.94
+      ######################
+      #replacing previous ref
+      #with larger data sent
+      # document source
+      #######################
+      ref <- subset(ref_copert5_hdv_pm, vehicle.type=="bus")
+
+      ####################
+      #load can only be 0, 0.5 or 1
+      #road.gradients can only be -0.06, -0.04, -0.02, 0, 0.02, 0.04, 0.06
+      eng.load <- embrs_copert5_prep(eng.load, c(0, 0.5, 1), "eng.load")
+      route.slope <- embrs_copert5_prep(route.slope, c(-0.06, -0.04, -0.02,
+                                                       0, 0.02, 0.04, 0.06),
+                                        "route.slope")
+
+      ###################
+      ref <- subset(ref, load==eng.load & road.gradient==route.slope)
+      ##################
+      #bus euro can only be PRE, I, II, III, IV, V+EGR, V+SCR, VI
+      ##################
+      euro.class <- embrs_copert5_prep(euro.class, c("PRE", "I", "II", "III",
+                                                     "IV", "V+EGR", "V+SCR",
+                                                     "VI"),
+                                       "euro.class")
+      ref <- subset(ref, euro.standard==euro.class)
+
+      if(veh.wt <= 15000){
+        ref <- subset(ref, size=="urban bus midi <=15 t")
       }
-      if(euro.class %in% c("III")) {
-        sc <- 0.96
+      if(veh.wt > 15000 & veh.wt <= 18000){
+        ref <- subset(ref, size=="urban bus standard 15 - 18 t")
       }
-      out <- out * sc
-    }
-    #units g/km to mg/km
-    out <- out * 1000
-    #might want to output
-    #euro class, eng.load and route.slope?
-    #     maybe standard and verbose options for output???
-    return(data.frame(em.type, em.source, euro.class, route.def, veh.spd = veh.spd,
-        veh.wt, ans = out))
+      if(veh.wt >18000){
+        ref <- subset(ref, size=="urban bus articulated >18 t")
+      }
+      if(nrow(ref)!=1){
+        stop("ef_copert5...(): missing or wrong bus settings, check help",
+             call. = FALSE
+        )
+      }
+      if(veh.spd>ref$max.speed.km.h.){
+        warning("ef_copert5...(): veh.spd out of range, resetting",
+                call. = FALSE
+        )
+        veh.spd <- ref$max.speed.km.h.
+      }
+      if(veh.spd<ref$min.speed.km.h.){
+        warning("ef_copert5...(): veh.spd out of range, resetting",
+                call. = FALSE
+        )
+        veh.spd <- ref$min.speed.km.h.
+      }
 
-  } else {
-    stop("ef_copert5...(): embrs version, currently only setup for urban buses",
-         call. = FALSE
-    )
+      #replacing equation with ref$fun
+      #out <- (ref$a + (ref$b * veh.spd) + (ref$c * (veh.spd^2)) + ref$d/veh.spd)/(ref$e +
+      #    (ref$f * veh.spd) + (ref$g * (veh.spd^2)))
+
+      out <- eval(parse(text=ref$fun))
+
+      ########################
+      #fuel scaling -
+      #(will be better way to do this)
+      #pre 0.94; I 0.94; II 0.94; III 0.96; IV 1.00; V (erg/scr) 1.00; 1.00
+      ########################
+      if(fuel.corr){
+        sc <- 1
+        if(euro.class %in% c("PRE", "I", "II")) {
+          sc <- 0.94
+        }
+        if(euro.class %in% c("III")) {
+          sc <- 0.96
+        }
+        out <- out * sc
+      }
+      #units g/km to mg/km
+      out <- out * 1000
+      #might want to output
+      #euro class, eng.load and route.slope?
+      #     maybe standard and verbose options for output???
+      return(data.frame(em.type, em.source, euro.class, route.def, veh.spd = veh.spd,
+                        veh.wt, ans = out))
+
+    } else {
+      stop("ef_copert5...(): embrs version, currently only setup for urban buses",
+           call. = FALSE
+      )
+    }
+
   }
-
-}
 
 
 #splatted function
@@ -252,13 +252,13 @@ embrs_copert5_prep <- function(x, opts, x.name){
                       " (known set-points: ", paste(opts, collapse = ", "),
                       ")\n",
                       " reseting ", x, " to ", new.x, sep=""),
-             call.= FALSE)
+                call.= FALSE)
         return(new.x)
       }
     }
   }
   #if unknown
   stop(paste("[embrs] ef_copert5...() does not know ", x.name,
-       " option, ", x, ", see help?", sep=""),
-      call.= FALSE)
+             " option, ", x, ", see help?", sep=""),
+       call.= FALSE)
 }
