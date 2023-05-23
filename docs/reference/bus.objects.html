@@ -57,7 +57,7 @@
 <span></span>
 <span><span class="fu">bus_ice</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">bus_dice</span><span class="op">(</span><span class="va">veh.wt</span>, euro.class <span class="op">=</span> <span class="cn">NULL</span>, eng.fuel <span class="op">=</span> <span class="cn">NULL</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">bus_dice</span><span class="op">(</span><span class="va">veh.wt</span>, eng.fuel <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">bus_ice_beddows</span><span class="op">(</span></span>
 <span>  <span class="va">veh.wt</span>,</span>
@@ -70,11 +70,25 @@
 <span></span>
 <span><span class="fu">bus_bev_beddows</span><span class="op">(</span><span class="va">veh.wt</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">bus_ice_embrs1</span><span class="op">(</span><span class="va">veh.wt</span>, euro.class <span class="op">=</span> <span class="cn">NULL</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">bus_ice_embrs1</span><span class="op">(</span></span>
+<span>  <span class="va">veh.wt</span>,</span>
+<span>  euro.class <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  eng.fuel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">bus_bev_embrs1</span><span class="op">(</span><span class="va">veh.wt</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">bus_ice_embrs2</span><span class="op">(</span><span class="va">veh.wt</span>, euro.class <span class="op">=</span> <span class="cn">NULL</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">bus_ice_embrs2</span><span class="op">(</span></span>
+<span>  <span class="va">veh.wt</span>,</span>
+<span>  euro.class <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  eng.fuel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">bus_bev_embrs2</span><span class="op">(</span><span class="va">veh.wt</span>, n <span class="op">=</span> <span class="fl">1</span>, name <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -96,6 +110,11 @@ using when building an <strong>embrs</strong> vehicle/fleet object.</p></dd>
 
 <dt>veh.wt</dt>
 <dd><p>(required numeric) weight of vehicle in kg.</p></dd>
+
+
+<dt>eng.fuel</dt>
+<dd><p>(required character) the fuel used by the bus, currently
+only diesel.</p></dd>
 
 
 <dt>euro.class</dt>
