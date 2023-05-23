@@ -7,10 +7,10 @@
 #' bus_ice_embrs1 bus_bev_embrs1 bus_ice_embrs1 bus_bev_embrs1
 #' @description Bus objects for use in __embrs__ models.
 #' @param veh.wt (required numeric) weight of vehicle in kg.
-#' @param euro.class (required character) vehicle EURO classification,
-#' can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.
 #' @param eng.fuel (required character) the fuel used by the bus, currently
 #' only diesel.
+#' @param euro.class (required character) vehicle EURO classification,
+#' can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.
 #' @param n (numeric) number of vehicles, defualt 1.
 #' @param name (character) name of the vehicle object.
 #' @param ... other arguments, currently ignored
@@ -95,21 +95,16 @@ bus_ice <- function(...) bus_ice_beddows(...)
 #' @rdname bus.objects
 #' @export
 bus_dice <-
-  function(veh.wt, euro.class = NULL, eng.fuel = NULL, n=1, name = NULL, ...){
+  function(veh.wt, eng.fuel = NULL, ...){
     #basic build for diesel bus model
     if(missing(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
            call.=FALSE)
     }
-    if(missing(euro.class)){
-      stop("[embrs] bus_dice...() needs euro.class, see help?",
-           call.=FALSE)
-    }
     if(missing(eng.fuel)){
       eng.fuel <- "diesel"
     }
-    bus_ice_beddows(veh.wt = veh.wt, euro.class = euro.class,
-                    eng.fuel = eng.fuel, n=n, name = name, ...)
+    bus_ice_beddows(veh.wt = veh.wt, eng.fuel = eng.fuel, ...)
 }
 
 #################################
@@ -207,7 +202,7 @@ bus_bev_beddows <-
 #' @rdname bus.objects
 #' @export
 bus_ice_embrs1 <-
-  function(veh.wt, euro.class = NULL, n=1, name = NULL, ...){
+  function(veh.wt, euro.class = NULL, eng.fuel = NULL, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
@@ -217,6 +212,11 @@ bus_ice_embrs1 <-
       stop("[embrs] bus_ice...() needs euro.class, see help?",
            call.=FALSE)
     }
+    if(missing(eng.fuel)){
+      stop("[embrs] bus_ice...() needs eng.fuel, see help?",
+           call.=FALSE)
+    }
+
     obj <- list(
       args = list(
         n = n,
@@ -282,7 +282,7 @@ bus_bev_embrs1 <-
 #' @rdname bus.objects
 #' @export
 bus_ice_embrs2 <-
-  function(veh.wt, euro.class = NULL, n=1, name = NULL, ...){
+  function(veh.wt, euro.class = NULL, eng.fuel = NULL, n=1, name = NULL, ...){
     #basic build for battery electric bus model
     if(missing(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
@@ -292,6 +292,11 @@ bus_ice_embrs2 <-
       stop("[embrs] bus_ice...() needs euro.class, see help?",
            call.=FALSE)
     }
+    if(missing(eng.fuel)){
+      stop("[embrs] bus_ice...() needs eng.fuel, see help?",
+           call.=FALSE)
+    }
+
     obj <- list(
       args = list(
         n = n,
