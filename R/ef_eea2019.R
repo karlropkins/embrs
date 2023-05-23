@@ -11,7 +11,7 @@
 #' @param veh.type vehicle type, currently only coded for urban buses, see Note.
 #' @param veh.wt vehicle weight, in km.
 #' @param em.type type of emission, currently PM, PM2.5 or PM10, see Note.
-#' @param route.def route description, optional for ef_copert5 functions.
+#' @param route.def route description, optional for ef_eea2019 functions.
 #' @param fuel.type fuel used by the vehicle, diesel, etc.
 #' @param fuel.corr (logical) apply fuel correction, see Note.
 #' @param em.source emission source: currently, exhaust only.
@@ -43,7 +43,7 @@
 #' emission inventory guidebook.
 #' https://www.eea.europa.eu/publications/emep-eea-guidebook-2019
 #'
-#' As implemented in R package vein:
+#' And as implemented in R package vein:
 #'
 #' Ibarra-Espinosa, S., Ynoue, R., O'Sullivan, S., Pebesma, E., Andrade, M. D. F.,
 #' and Osses, M.: VEIN v0.2.2: an R package for bottom-up vehicular emissions
@@ -60,7 +60,23 @@
 #'
 
 
-#this NEEDS vein
+#this NEEDS R:vein
+#now added as imports
+
+#standardise error messaging in function
+#see note or format in prep function
+
+#note
+###############################
+#this code is still very messy...
+#
+
+#need to think about
+##############################
+#fuel
+#exh.tech
+#handling when veh.type missing
+#
 
 #splatted function
 #' @rdname ef_eea2019
@@ -68,7 +84,8 @@
 ef_eea2019_exh_pm <-
 function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
                                   em.type = "pm", route.def = NULL,
-                                  fuel.type = NULL, fuel.corr = TRUE,
+                                  fuel.type = NULL,
+                                  fuel.corr = TRUE,
                                   em.source = "exhaust", euro.class = NULL,
                                   exh.tech = NULL, eng.load = NULL,
                                   route.slope = NULL, ...)
@@ -76,11 +93,9 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
 
   ###################
   #to do
-  #####################
+  ###################
   #fuel
-  #   currently ignored because diesel is only option for urban bus
-  #correction factors
-  #   coded (again urban bus only) but like something better
+  #   coded (urban bus only) but like something neater
   ######################
 
   if(is.null(veh.wt)){
@@ -110,18 +125,18 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
 
   if(is.null(route.slope)) {
     route.slope <- 0
-    #copert default
+    #copert/eea default
   }
   if(is.null(eng.load)) {
     eng.load <- 0.5
-    #copert default
+    #copert/eea default
   }
 
   ###################
   #currently urban bus only
   # could very quickly do coach and truck
   # from same lookup but they would need
-  # only veh.type section because options
+  # own veh.type section because options
   # (e.g. veh.wt ranges are different)
   # so would need to modify the else below...
   ####################
@@ -150,6 +165,9 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     #         can be SCR or EGR for euro IV to V
     #         can be DPF+SCR for euro VI
     if(euro.class %in% c("PRE", "I", "II", "III")){
+      if(is.null(exh.tech)){
+        exh.tech <- NA
+      }
       if(!is.na(exh.tech)){
         #should be NA
         warning("ef_eea2019_exhaust...(): for pre EURO IV bus, exh.tech not option, ignoring",
@@ -167,15 +185,21 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
       }
     }
     if(euro.class %in% c("VI")){
+      if(is.null(exh.tech) || is.na(exh.tech)){
+        exh.tech <- "DPF+SCR"
+      }
       if(!exh.tech %in% c("DPF+SCR")){
         #should be DPF+SCR
-        warning("ef_eea2019...(): for EURO VI bus, exh.tech only DPF+SCR, resetting",
+        warning("ef_eea2019...(): for EURO VI bus, exh.tech only DPF+SCR, forcing",
              call. = FALSE
         )
         exh.tech <- "DPF+SCR"
       }
     }
 
+    ##############################
+    #veh.wt to size
+    ##############################
     if(veh.wt <= 15000){
       size <- "Urban Buses Midi <=15 t"
     }
@@ -186,8 +210,28 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
       size <- "Urban Buses Articulated >18 t"
     }
 
+    ##############################
+    #eng.fuel to fuel
+    ##############################
+    if(is.null(fuel.type) && "eng.fuel" %in% names(list(...))){
+      fuel.type <- list(...)$eng.fuel
+    }
+    if(!tolower(fuel.type) %in% c("diesel")){
+      #I think there is only diesel in archive
+      warning("ef_eea2019...(): for bus, only fuel diesel, forcing",
+              call. = FALSE)
+    }
+    #forcing
+    eng.fuel <- "diesel"
+    fuel.type <- "D"
+    #Sergio??
+
+
+    #########################
+    #might want to try wrap this?
+    #########################
     out <- vein::ef_eea(category = "BUS",
-                 fuel = "D",
+                 fuel = fuel.type,
                  segment = size,
                  euro = euro.class,
                  tech = exh.tech,
@@ -208,6 +252,10 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     #(will be better way to do this)
     #pre 0.94; I 0.94; II 0.94; III 0.96; IV 1.00; V (erg/scr) 1.00; 1.00
     ########################
+
+################
+#can we replace with vein function?
+################
     if(fuel.corr){
       sc <- 1
       if(euro.class %in% c("PRE", "I", "II")) {
@@ -223,7 +271,8 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     #might want to output
     #euro class, eng.load and route.slope?
     #     maybe standard and verbose options for output???
-    return(data.frame(em.type, em.source, euro.class, exh.tech, route.def,
+    return(data.frame(em.type, em.source, euro.class, eng.fuel,
+                      exh.tech, route.def,
                       veh.spd = veh.spd, veh.wt, ans = out))
 
   } else {

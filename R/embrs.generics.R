@@ -152,6 +152,20 @@ plot.embrs <-
     .da$route <- factor(.da$route, levels = unique(.da$route))
     .da$em.source <- factor(.da$em.source, levels = rev(unique(.da$em.source)))
     #rev() last because first a bottom of stack seems more sensible...
+    if(length(levels(.da$route)) <= 1){
+      ##############################
+      #including this in case only one or no routes
+      #might drop or remove strip
+      #############################
+      ggplot(data=.da) +
+        geom_col(aes(x=vehicle, y=ans,
+                     fill=em.source)) +
+        labs(y = "Total Emissions [mg/km]", x="") +
+        facet_grid(route~em.type, scales="free_y") +
+        #scales not needed???
+        theme_bw()
+
+    } else {
     ggplot(data=.da) +
       geom_col(aes(x=vehicle, y=ans,
                                       fill=em.source)) +
@@ -162,8 +176,9 @@ plot.embrs <-
       #types of plot
       #################################
       facet_grid(em.type~route, scales="free_y") +
-      #scales not needed??
+      #scales not needed???
       theme_bw()
+    }
   }
 
 

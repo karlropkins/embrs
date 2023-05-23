@@ -1,6 +1,7 @@
 # Version 0.0 - Release Notes
 
 * [0.0.7]
+    * added bus_dice() as diesel bus short [2023-05-23]
     * now imports vein [2023-02-07] 
     * added ef_eea2019 like ef_copert5 but using vein::ef_eea() [2023-02-07]
     * (ef_copert5 to remove?)

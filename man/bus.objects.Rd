@@ -4,6 +4,7 @@
 \alias{bus.objects}
 \alias{embrs_vehicle}
 \alias{bus_ice}
+\alias{bus_dice}
 \alias{bus_bev}
 \alias{bus_ice_beddows}
 \alias{bus_bev_beddows}
@@ -19,7 +20,16 @@ bus_bev(...)
 
 bus_ice(...)
 
-bus_ice_beddows(veh.wt, euro.class = NULL, n = 1, name = NULL, ...)
+bus_dice(veh.wt, euro.class = NULL, eng.fuel = NULL, n = 1, name = NULL, ...)
+
+bus_ice_beddows(
+  veh.wt,
+  euro.class = NULL,
+  eng.fuel = NULL,
+  n = 1,
+  name = NULL,
+  ...
+)
 
 bus_bev_beddows(veh.wt, n = 1, name = NULL, ...)
 

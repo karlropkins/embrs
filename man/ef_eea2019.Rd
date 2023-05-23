@@ -17,7 +17,7 @@ European Environment Agency, 2019. EMEP/EEA air pollutant
 emission inventory guidebook.
 https://www.eea.europa.eu/publications/emep-eea-guidebook-2019
 
-As implemented in R package vein:
+And as implemented in R package vein:
 
 Ibarra-Espinosa, S., Ynoue, R., O'Sullivan, S., Pebesma, E., Andrade, M. D. F.,
 and Osses, M.: VEIN v0.2.2: an R package for bottom-up vehicular emissions
@@ -62,7 +62,7 @@ ef_eea2019_exh_pm10(...)
 
 \item{em.type}{type of emission, currently PM, PM2.5 or PM10, see Note.}
 
-\item{route.def}{route description, optional for ef_copert5 functions.}
+\item{route.def}{route description, optional for ef_eea2019 functions.}
 
 \item{fuel.type}{fuel used by the vehicle, diesel, etc.}
 

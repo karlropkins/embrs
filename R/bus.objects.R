@@ -3,12 +3,14 @@
 ############################################
 
 #' @name bus.objects
-#' @aliases bus_ice bus_bev bus_ice_beddows bus_bev_beddows
+#' @aliases bus_ice bus_dice bus_bev bus_ice_beddows bus_bev_beddows
 #' bus_ice_embrs1 bus_bev_embrs1 bus_ice_embrs1 bus_bev_embrs1
 #' @description Bus objects for use in __embrs__ models.
 #' @param veh.wt (required numeric) weight of vehicle in kg.
 #' @param euro.class (required character) vehicle EURO classification,
 #' can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.
+#' @param eng.fuel (required character) the fuel used by the bus, currently
+#' only diesel.
 #' @param n (numeric) number of vehicles, defualt 1.
 #' @param name (character) name of the vehicle object.
 #' @param ... other arguments, currently ignored
@@ -29,9 +31,6 @@
 #vehicle/fleet objects
 ################################
 
-#splatted function
-#' @rdname bus.objects
-#' @export
 embrs_vehicle <-
   function(name = NULL, x = NULL, ...){
 
@@ -92,6 +91,26 @@ bus_bev <- function(...) bus_bev_beddows(...)
 #' @export
 bus_ice <- function(...) bus_ice_beddows(...)
 
+#splatted function
+#' @rdname bus.objects
+#' @export
+bus_dice <-
+  function(veh.wt, euro.class = NULL, eng.fuel = NULL, n=1, name = NULL, ...){
+    #basic build for diesel bus model
+    if(missing(veh.wt)){
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
+    }
+    if(missing(euro.class)){
+      stop("[embrs] bus_dice...() needs euro.class, see help?",
+           call.=FALSE)
+    }
+    if(missing(eng.fuel)){
+      eng.fuel <- "diesel"
+    }
+    bus_ice_beddows(veh.wt = veh.wt, euro.class = euro.class,
+                    eng.fuel = eng.fuel, n=n, name = name, ...)
+}
 
 #################################
 #beddows buses
@@ -102,7 +121,7 @@ bus_ice <- function(...) bus_ice_beddows(...)
 #' @rdname bus.objects
 #' @export
 bus_ice_beddows <-
-  function(veh.wt, euro.class = NULL, n=1, name = NULL, ...){
+  function(veh.wt, euro.class = NULL, eng.fuel = NULL, n=1, name = NULL, ...){
     #basic build for diesel bus model
     if(missing(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
@@ -112,6 +131,11 @@ bus_ice_beddows <-
       stop("[embrs] bus_ice...() needs euro.class, see help?",
            call.=FALSE)
     }
+    if(missing(eng.fuel)){
+      stop("[embrs] bus_ice...() needs eng.fuel, see help?",
+           call.=FALSE)
+    }
+
 
     obj <- list(
       args = list(
@@ -119,17 +143,17 @@ bus_ice_beddows <-
         veh.type = "bus",
         veh.wt = veh.wt,
         eng.type = "ice",
-        eng.fuel = "diesel",
+        eng.fuel = eng.fuel,
         euro.class = euro.class,
         brk.regen = FALSE
       ),
       funs = list(
-        ef.exh.pm2.5 = ef_copert5_exh_pm2.5,
+        ef.exh.pm2.5 = ef_eea2019_exh_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
         ef.road.pm2.5 = ef_beddows_road_pm2.5,
         ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
-        ef.exh.pm10 = ef_copert5_exh_pm10,
+        ef.exh.pm10 = ef_eea2019_exh_pm10,
         ef.brake.pm10 = ef_beddows_brake_pm10,
         ef.tyre.pm10 = ef_beddows_tyre_pm10,
         ef.road.pm10 = ef_beddows_road_pm10,
@@ -204,12 +228,12 @@ bus_ice_embrs1 <-
         brk.regen = FALSE
       ),
       funs = list(
-        ef.exh.pm2.5 = ef_copert5_exh_pm2.5,
+        ef.exh.pm2.5 = ef_eea2019_exh_pm2.5,
         ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
         ef.road.pm2.5 = ef_embrs1_road_pm2.5,
         ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
-        ef.exh.pm10 = ef_copert5_exh_pm10,
+        ef.exh.pm10 = ef_eea2019_exh_pm10,
         ef.brake.pm10 = ef_embrs1_brake_pm10,
         ef.tyre.pm10 = ef_embrs1_tyre_pm10,
         ef.road.pm10 = ef_embrs1_road_pm10,
@@ -279,12 +303,14 @@ bus_ice_embrs2 <-
         brk.regen = FALSE
       ),
       funs = list(
-        ef.exh.pm2.5 = ef_copert5_exh_pm2.5,
+        #ef.exh.pm2.5 = ef_copert5_exh_pm2.5,
+        ef.exh.pm2.5 = ef_eea2019_exh_pm2.5,
         ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
         ef.road.pm2.5 = ef_embrs1_road_pm2.5,
         ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
-        ef.exh.pm10 = ef_copert5_exh_pm10,
+        #ef.exh.pm10 = ef_copert5_exh_pm10,
+        ef.exh.pm10 = ef_eea2019_exh_pm10,
         ef.brake.pm10 = ef_embrs2_brake_pm10,
         ef.tyre.pm10 = ef_embrs2_tyre_pm10,
         ef.road.pm10 = ef_embrs1_road_pm10,

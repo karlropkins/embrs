@@ -28,7 +28,7 @@
 #' @note These may be moving to vein at some point...
 #' @references These functions are based on methods developed and reported by:
 #'
-#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2.5 emission factors for
 #' non-exhaust particles from road vehicles: Dependence upon vehicle mass and
 #' implications for battery electric vehicles. Atmospheric Environment, 244,
 #' p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}
