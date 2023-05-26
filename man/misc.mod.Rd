@@ -2,21 +2,20 @@
 % Please edit documentation in R/mod_misc.R
 \name{misc.mod}
 \alias{misc.mod}
-\alias{embrs_spd_ref}
 \alias{naei_route2spd}
 \title{misc modifiers}
 \usage{
-embrs_spd_ref(...)
+naei_route2spd(veh.type = NULL, route.def = NULL, route.source = NULL, ...)
 }
 \arguments{
-\item{...}{other arguments, often passed on.}
-
 \item{veh.type}{(character) vehicle type e.g. bus}
+
+\item{route.source}{(character) route source, for NAEI}
+
+\item{...}{other arguments, often passed on.}
 
 \item{veh.def}{(character) route definition, for NAEI urban, rural or
 motorway}
-
-\item{route.source}{(character) route source, for NAEI}
 }
 \value{
 These estimated veh speed for the supplied route.

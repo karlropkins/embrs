@@ -105,18 +105,24 @@ non-regenerative brake contribution).}
 
 \item{route.source}{(character) route source(s).}
 
-\item{verbose}{(logical) NOT YET ENABLED...}
+\item{verbose}{(logical) If TRUE, include methods details
+when reporting EF predictions.}
 
 \item{...}{other arguments, often passed on.}
 
-\item{brk_b}{brake work constant proposed \strong{embrs} paper; NEEDS DOCUMENTING.}
+\item{brk_b}{(numeric; ef_embrs2_brake... only) brake work parameter
+proposed in Tivey et al (2023).}
 
-\item{tyr_t}{tyre work constant proposed \strong{embrs} paper; NEEDS DOCUMENTING.}
+\item{tyr_t}{(numeric; ef_embrs2_brake... only) tyre work parameter
+proposed in Tivey et al (2023).}
 }
 \value{
-These functions build data.frames of vehicle weight and spped based
-emission factors for non-exhaust PM2.5 and PM10. \code{ef_embrs_nee_pm} is the main
-function, and others are wrappers for single source and type emissions factors.
+These functions build data.frames of vehicle weight and speed,
+(and brake and tyre work) based emission factors for non-exhaust PM2.5
+and PM10. \code{ef_embrs1_nee_pm} is the main (weight and speed)
+function, other \code{ef_embrs1...} functions are wrappers for this for
+single source and type emissions factors, and \code{ef_embrs2...} functions
+are brake and tyre work based functions proposed in Tivey et al (2023).
 }
 \description{
 Functions to estimated vehicle weight, speed and brake-work-based
@@ -129,12 +135,12 @@ These may be moving to vein at some point...
 \references{
 These functions are based on methods developed and reported by:
 
-Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2.5 emission factors for
 non-exhaust particles from road vehicles: Dependence upon vehicle mass and
 implications for battery electric vehicles. Atmospheric Environment, 244,
 p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}.
 
-And, extrapolated to speed and, break/tyre-wear related emission factors in:
+And, extrapolated to speed, brake and tyre-wear related emission factors in:
 
 Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
 Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on

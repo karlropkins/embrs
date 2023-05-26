@@ -2,67 +2,43 @@
 % Please edit documentation in R/bus.objects.R
 \name{bus.objects}
 \alias{bus.objects}
-\alias{embrs_vehicle}
+\alias{bus_ice_beddows}
 \alias{bus_ice}
 \alias{bus_dice}
-\alias{bus_bev}
-\alias{bus_ice_beddows}
 \alias{bus_bev_beddows}
+\alias{bus_bev}
 \alias{bus_ice_embrs1}
 \alias{bus_bev_embrs1}
 \alias{bus_ice_embrs2}
 \alias{bus_bev_embrs2}
 \title{bus objects}
 \usage{
-embrs_vehicle(name = NULL, x = NULL, ...)
-
-bus_bev(...)
+bus_ice_beddows(
+  veh.wt,
+  eng.fuel = NULL,
+  euro.class = NULL,
+  n = 1,
+  name = NULL,
+  ...
+)
 
 bus_ice(...)
 
-bus_dice(veh.wt, eng.fuel = NULL, ...)
+bus_dice(veh.wt, eng.fuel = "diesel", ...)
 
-bus_ice_beddows(
-  veh.wt,
-  euro.class = NULL,
-  eng.fuel = NULL,
-  n = 1,
-  name = NULL,
-  ...
-)
+bus_ice_embrs1(veh.wt, ...)
+
+bus_ice_embrs2(veh.wt, ...)
 
 bus_bev_beddows(veh.wt, n = 1, name = NULL, ...)
 
-bus_ice_embrs1(
-  veh.wt,
-  euro.class = NULL,
-  eng.fuel = NULL,
-  n = 1,
-  name = NULL,
-  ...
-)
+bus_bev(...)
 
-bus_bev_embrs1(veh.wt, n = 1, name = NULL, ...)
+bus_bev_embrs1(veh.wt, ...)
 
-bus_ice_embrs2(
-  veh.wt,
-  euro.class = NULL,
-  eng.fuel = NULL,
-  n = 1,
-  name = NULL,
-  ...
-)
-
-bus_bev_embrs2(veh.wt, n = 1, name = NULL, ...)
+bus_bev_embrs2(veh.wt, ...)
 }
 \arguments{
-\item{name}{(character) name of the vehicle object.}
-
-\item{x}{(for \code{embrs_vehicle}) a list of args to
-using when building an \strong{embrs} vehicle/fleet object.}
-
-\item{...}{other arguments, currently ignored}
-
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
 
 \item{eng.fuel}{(required character) the fuel used by the bus, currently
@@ -71,7 +47,14 @@ only diesel.}
 \item{euro.class}{(required character) vehicle EURO classification,
 can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.}
 
-\item{n}{(numeric) number of vehicles, defualt 1.}
+\item{n}{(numeric) number of vehicles, default 1.}
+
+\item{name}{(character) name of the vehicle object.}
+
+\item{...}{other arguments, currently ignored}
+}
+\value{
+These functions make vehicle and fleet class \strong{embrs} objects.
 }
 \description{
 Bus objects for use in \strong{embrs} models.
@@ -80,5 +63,17 @@ Bus objects for use in \strong{embrs} models.
 These may be moving to vein at some point...
 }
 \references{
-\link{add embrs and Beddows references...}
+These functions are based on methods developed and reported by:
+
+Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+non-exhaust particles from road vehicles: Dependence upon vehicle mass and
+implications for battery electric vehicles. Atmospheric Environment, 244,
+p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}.
+
+And, extrapolated to speed and, break/tyre-wear related emission factors in:
+
+Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 }

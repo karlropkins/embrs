@@ -2,7 +2,6 @@
 % Please edit documentation in R/route.objects.R
 \name{route.objects}
 \alias{route.objects}
-\alias{embrs_route}
 \alias{route_naei_rural}
 \alias{route_naei_urban}
 \alias{route_naei_motorway}
@@ -13,15 +12,6 @@
 \alias{route_ukbc_oir}
 \title{route.objects}
 \usage{
-embrs_route(
-  name = NULL,
-  route.def = NULL,
-  route.source = NULL,
-  route.dist = 1,
-  route.slope = 0,
-  ...
-)
-
 route_naei_rural(
   name = NULL,
   route.def = "rural",
@@ -87,13 +77,13 @@ route_ukbc_oir(...)
 
 \item{route.source}{(character) required source of route model.}
 
-\item{route.dist}{(numeric) route or journey distance in km, default 1.}
-
-\item{route.slope}{(numeric) route or journey slope, default 0.}
+\item{veh.spd}{(numeric or function) the vehicle speed in km/hr.}
 
 \item{...}{other arguments, currently ignored.}
 
-\item{veh.spd}{(numeric or function) the vehicle speed in km/hr.}
+\item{route.dist}{(numeric) route or journey distance in km, default 1.}
+
+\item{route.slope}{(numeric) route or journey slope, default 0.}
 }
 \description{
 Route objects for use in embrs models.

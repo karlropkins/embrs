@@ -12,7 +12,7 @@
 #' @param veh.wt vehicle weight, in km.
 #' @param em.type type of emission, currently PM, PM2.5 or PM10, see Note.
 #' @param route.def route description, optional for ef_eea2019 functions.
-#' @param fuel.type fuel used by the vehicle, diesel, etc.
+#' @param eng.fuel fuel used by the vehicle, diesel, etc.
 #' @param fuel.corr (logical) apply fuel correction, see Note.
 #' @param em.source emission source: currently, exhaust only.
 #' @param euro.class EURO classification: PRE, I, II, III, IV, V,
@@ -22,6 +22,8 @@
 #' @param eng.load engine load, as proportion: 0. 0.5 or 1 only.
 #' @param route.slope route slope, as proportion: -0.06, -0.04, -0.02, 0,
 #' 0.02, 0.04 or 0.06 only.
+#' @param verbose (logical) If TRUE, include methods details
+#' when reporting EF predictions.
 #' @param ... other arguments, currently ignored
 #' @note The embrs::ef_eea2019 functions are currently only coded for urban
 #' buses, \code{veh.type="bus"}.
@@ -84,11 +86,11 @@
 ef_eea2019_exh_pm <-
 function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
                                   em.type = "pm", route.def = NULL,
-                                  fuel.type = NULL,
+                                  eng.fuel = NULL,
                                   fuel.corr = TRUE,
                                   em.source = "exhaust", euro.class = NULL,
                                   exh.tech = NULL, eng.load = NULL,
-                                  route.slope = NULL, ...)
+                                  route.slope = NULL, verbose = FALSE, ...)
 {
 
   ###################
@@ -97,7 +99,8 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
   #fuel
   #   coded (urban bus only) but like something neater
   ######################
-
+  #
+  ######################
   if(is.null(veh.wt)){
     stop("ef...(): embrs needs veh.wt (vehicle weight in kg), see help",
          call. = FALSE
@@ -108,6 +111,8 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
          call. = FALSE
     )
   }
+
+
   if(is.null(route.def)){
     route.def <- "[unnamed]"
   }
@@ -117,10 +122,11 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     )
   }
   if(is.null(exh.tech)){
-    #works for euro.class pre, I, II and III
+    #works for euro.class pre, I, II and III buses...
     #see later for others
     exh.tech <- NA
   }
+
 
 
   if(is.null(route.slope)) {
@@ -213,12 +219,12 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     ##############################
     #eng.fuel to fuel
     ##############################
-    if(is.null(fuel.type) && "eng.fuel" %in% names(list(...))){
-      fuel.type <- list(...)$eng.fuel
+    if(is.null(eng.fuel) && "fuel.type" %in% names(list(...))){
+      eng.fuel <- list(...)$fuel.type
     }
-    if(!tolower(fuel.type) %in% c("diesel")){
+    if(!tolower(eng.fuel) %in% c("diesel")){
       #I think there is only diesel in archive
-      warning("ef_eea2019...(): for bus, only fuel diesel, forcing",
+      stop("ef_eea2019...(): for bus, only fuel diesel",
               call. = FALSE)
     }
     #forcing
@@ -271,10 +277,22 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
     #might want to output
     #euro class, eng.load and route.slope?
     #     maybe standard and verbose options for output???
-    return(data.frame(em.type, em.source, euro.class, eng.fuel,
+    v.out <- data.frame(em.type, em.source, euro.class, eng.fuel,
                       exh.tech, route.def,
-                      veh.spd = veh.spd, veh.wt, ans = out))
-
+                      veh.spd = veh.spd, veh.wt, ans = out)
+    if(verbose){
+      v.out$method.name <- "European Environment Agency (2019)"
+      v.out$method.descr <- paste("EMEP/EEA air pollutant emission inventory guidebook ",
+                                  "speed based ", v.out$em.type, " ",
+                                  v.out$em.source,  " emissions",
+                                  ", for ", v.out$eng.fuel, ", ", size,
+                                  " segment ", v.out$veh.type,
+                                  sep="")
+      v.out$method.ref <- "https://www.eea.europa.eu/publications/emep-eea-guidebook-2019"
+      return(v.out)
+    } else {
+      return(v.out)
+    }
   } else {
     stop("ef_eea2019...(): embrs version, currently only setup for urban buses",
          call. = FALSE
@@ -287,23 +305,19 @@ function(veh.spd = NULL, veh.type=NULL, veh.wt = NULL,
 #splatted function
 #' @rdname ef_eea2019
 #' @export
-ef_eea2019_exh_pm2.5 <- function(...){
+ef_eea2019_exh_pm2.5 <- function(em.type = "pm2.5", ...){
   #note for this pm10 = pm2.5 = pm
   #so we need to send vein PM and reset it to PM10
-  out <- ef_eea2019_exh_pm(...)
-  out$em.type <- "pm2.5"
-  out
+  ef_eea2019_exh_pm(em.type = "pm2.5", ...)
 }
 
 #splatted function
 #' @rdname ef_eea2019
 #' @export
-ef_eea2019_exh_pm10 <- function(...){
+ef_eea2019_exh_pm10 <- function(em.type = "pm10", ...){
   #note for this pm10=pm2.5=pm
   #so we need to send vein PM and reset it to PM10
-  out <- ef_eea2019_exh_pm(...)
-  out$em.type <- "pm10"
-  out
+  ef_eea2019_exh_pm(em.type = "pm10", ...)
 }
 
 

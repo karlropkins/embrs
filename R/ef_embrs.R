@@ -23,22 +23,28 @@
 #' non-regenerative brake contribution).
 #' @param route.def (character) route definition(s).
 #' @param route.source (character) route source(s).
-#' @param verbose (logical) NOT YET ENABLED...
+#' @param verbose (logical) If TRUE, include methods details
+#' when reporting EF predictions.
 #' @param ... other arguments, often passed on.
-#' @param brk_b brake work constant proposed __embrs__ paper; NEEDS DOCUMENTING.
-#' @param tyr_t tyre work constant proposed __embrs__ paper; NEEDS DOCUMENTING.
-#' @returns These functions build data.frames of vehicle weight and spped based
-#' emission factors for non-exhaust PM2.5 and PM10. \code{ef_embrs_nee_pm} is the main
-#' function, and others are wrappers for single source and type emissions factors.
+#' @param brk_b (numeric; ef_embrs2_brake... only) brake work parameter
+#' proposed in Tivey et al (2023).
+#' @param tyr_t (numeric; ef_embrs2_brake... only) tyre work parameter
+#' proposed in Tivey et al (2023).
+#' @returns These functions build data.frames of vehicle weight and speed,
+#' (and brake and tyre work) based emission factors for non-exhaust PM2.5
+#' and PM10. \code{ef_embrs1_nee_pm} is the main (weight and speed)
+#' function, other \code{ef_embrs1...} functions are wrappers for this for
+#' single source and type emissions factors, and \code{ef_embrs2...} functions
+#' are brake and tyre work based functions proposed in Tivey et al (2023).
 #' @note These may be moving to vein at some point...
 #' @references These functions are based on methods developed and reported by:
 #'
-#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2.5 emission factors for
 #' non-exhaust particles from road vehicles: Dependence upon vehicle mass and
 #' implications for battery electric vehicles. Atmospheric Environment, 244,
 #' p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}.
 #'
-#' And, extrapolated to speed and, break/tyre-wear related emission factors in:
+#' And, extrapolated to speed, brake and tyre-wear related emission factors in:
 #'
 #' Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
 #' Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
@@ -48,10 +54,8 @@
 ########################
 #these are the embrs speed, etc functions from the paper
 
-
 #avg.spd model for nee (embrs model)
 
-#not exported yet
 
 #splatted function
 #' @rdname ef_embrs
@@ -135,7 +139,17 @@ ef_embrs1_nee_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
   #############################
   #look at beddows function here onwards...
   #for verbose handling
-  v.out
+  if(verbose){
+    v.out$method.name <- "Tivey et al (2023)"
+    v.out$method.descr <- paste("Weight and speed based model of vehicle ", v.out$em.type, " ",
+                                v.out$em.source,  " emissions on (UK NAEI classifed)",
+                                ", based on extrapolation of Beddows & Harrison (2021)",
+                                sep="")
+    v.out$method.ref <- "https://doi.org/10.3390/su15021522"
+    v.out
+  } else {
+    v.out
+  }
 }
 
 
@@ -216,6 +230,8 @@ ef_embrs1_resusp_pm10 <-
 #########################
 #ef_embrs2
 #########################
+
+# only brake and tyre models for embrs2
 
 #splatted function
 #' @rdname ef_embrs
@@ -302,8 +318,18 @@ ef_embrs2_brake_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                       brk.regen = as.numeric(brk.regen),
                       #l1, el1, l2, el2,
                       ans, ans.low, ans.hi)
-  v.out
-
+  if(verbose){
+    v.out$method.name <- "Tivey et al (2023)"
+    v.out$method.descr <- paste("Weight and braking function ",
+                                "based model of vehicle ", v.out$em.type, " ",
+                                v.out$em.source,  " emissions",
+                                ", based on extrapolation of Beddows & Harrison (2021)",
+                                sep="")
+    v.out$method.ref <- "https://doi.org/10.3390/su15021522"
+    v.out
+  } else {
+    v.out
+  }
 }
 
 #splatted function
@@ -409,7 +435,18 @@ ef_embrs2_tyre_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                       brk.regen = as.numeric(brk.regen),
                       #l1, el1, l2, el2,
                       ans, ans.low, ans.hi)
-  v.out
+  if(verbose){
+    v.out$method.name <- "Tivey et al (2023)"
+    v.out$method.descr <- paste("Weight and accel/dec function ",
+                                "based model of vehicle ", v.out$em.type, " ",
+                                v.out$em.source,  " emissions",
+                                ", based on extrapolation of Beddows & Harrison (2021)",
+                                sep="")
+    v.out$method.ref <- "https://doi.org/10.3390/su15021522"
+    v.out
+  } else {
+    v.out
+  }
 
 }
 

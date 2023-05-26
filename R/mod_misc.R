@@ -27,10 +27,49 @@
 
 ########################
 #this needs a lot of tidying
-#unexported lookup
-#embrs_spd_ref and exported naei_route2spd
+#unexported lookup embrs_spd_ref
+#and exported naei_route2spd
+
+#currently only works on one combination at a time
+
+#splatted function
+#' @rdname misc.mod
+#' @export
+
+naei_route2spd <- function(veh.type = NULL, route.def = NULL,
+                           route.source = NULL, ...){
+
+  if(any(is.null(veh.type), is.null(route.def),
+         is.null(route.source))){
+    stop("[embrs] naei_route2spd() needs veh.type, route.def and route.source!",
+         call. = FALSE)
+  }
+  ############################
+  #this needs a lot of tidying
+  ############################
+  ref <- embrs_spd_ref()
+  ref$route.type <- tolower(gsub(" ", "", ref$route.type))
+  ref$route.type.2 <- tolower(gsub(" ", "", ref$route.type.2))
+  ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
+
+  #################
+  #this currently is all or nothing!
+  #think about changing to col.name %in% formal
+     ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
+     ref <- ref[ref$route.type %in% tolower(gsub(" ", "", route.def)),]
+     ref <- ref[ref$route.type.2 %in% tolower(gsub(" ", "", route.source)),]
+     if(nrow(ref)==0){
+       stop("[embrs] naei_route2spd() no default veh.spd for this combination!",
+            call. = FALSE)
+     }
+     #other options to return NULL or NA???
+     #or data frame???
+     ref$veh.spd_km.h
+
+}
 
 
+#not exporting at moment
 
 embrs_spd_ref <- function(...){
   ref <- data.frame(
@@ -126,43 +165,6 @@ embrs_spd_ref <- function(...){
 }
 
 
-
-
-
-
-naei_route2spd <- function(veh.type = NULL, route.def = NULL,
-                           route.source = NULL, ...){
-
-  if(any(is.null(veh.type), is.null(route.def),
-         is.null(route.source))){
-    stop("[embrs] naei_route2spd() needs veh.type, route.def snf route.source!",
-         call. = FALSE)
-  }
-  ############################
-  #this needs a lot of tidying
-  ############################
-  ref <- embrs_spd_ref()
-  ref$route.type <- tolower(gsub(" ", "", ref$route.type))
-  ref$route.type.2 <- tolower(gsub(" ", "", ref$route.type.2))
-  ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
-
-  #################
-  #this currently is all or nothing!
-  #think about changing to col.name %in% formal
-     ref <- ref[ref$veh.type %in% tolower(gsub(" ", "", veh.type)),]
-     ref <- ref[ref$route.type %in% tolower(gsub(" ", "", route.def)),]
-     ref <- ref[ref$route.type.2 %in% tolower(gsub(" ", "", route.source)),]
-     if(nrow(ref)==0){
-       stop("[embrs] naei_route2spd() no default veh.std for this combination!",
-            call. = FALSE)
-     }
-     #other options to return NULL or NA???
-     #or data frame???
-     ref$veh.spd_km.h
-
-}
-
-
 #not exporting at the moment
 
 embrs_ukbc_lookup <- function(...){
@@ -231,7 +233,7 @@ ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
   ref <- ref[ref$route.def %in% tolower(gsub(" ", "", route.def)),]
   ref <- ref[ref$route.source %in% tolower(gsub(" ", "", route.source)),]
   if(nrow(ref)==0){
-    stop("[embrs] ukbc_route2spd() no default veh.std for this combination!",
+    stop("[embrs] ukbc_route2spd() no default veh.spd for this combination!",
          call. = FALSE)
   }
   #other options to return NULL or NA???

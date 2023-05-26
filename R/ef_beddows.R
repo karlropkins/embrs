@@ -9,7 +9,7 @@
 #' ef_beddows_brake_pm10 ef_beddows_tyre_pm10 ef_beddows_road_pm10
 #' ef_beddows_resusp_pm10
 #' @description Functions to estimate vehicle weight-based non-exhaust
-#' PM2.5 and PM10 emission factors based on methods of Beddows.
+#' PM2.5 and PM10 emission factors based on methods of Beddows and Harrison.
 #' @param veh.wt (numeric, required) vehicle weight (in kg).
 #' @param em.type (character) type of emissions to predict, by default PM2.5
 #' and PM10.
@@ -21,10 +21,12 @@
 #' non-regenerative brake contribution).
 #' @param route.def (character) route definitions, by default urban, rural and motorway.
 #' @param route.source (character) route sources, must be UK NAEI.
+#' @param verbose (logical) If TRUE, include model parameters and methods details
+#' when reporting EF predictions.
 #' @param ... other arguments, often passed on.
 #' @returns These functions build data.frames of urban, rural and motorway emission
 #' factors for non-exhaust PM2.5 and PM10. \code{ef_beddows_nee_pm} is the main
-#' function, and others are wrappers for single soucre and type emissions factors.
+#' function, and others are wrappers for single source and type emissions factors.
 #' @note These may be moving to vein at some point...
 #' @references These functions are based on methods developed and reported by:
 #'
@@ -50,6 +52,7 @@ ef_beddows_nee_pm <- function(veh.wt, em.type = c("pm2.5", "pm10"),
                               route.def=c("urban", "rural", "motorway"),
                               route.source = "uk naei",
                               verbose = FALSE, ...){
+
   if(tolower(route.source) != "uk naei"){
     stop("[embrs] ef_beddows...() only intended for use with naei route definitions.",
             call.=FALSE)
@@ -86,15 +89,24 @@ ef_beddows_nee_pm <- function(veh.wt, em.type = c("pm2.5", "pm10"),
     ans.low[1:6] <- ans.low[1:6] * temp
     ans.hi[1:6] <- ans.hi[1:6] * temp
   }
+
   v.out <- data.frame(em.type = type, em.source = source, route.def = route,
                       veh.wt, brk.regen, b, eb, c, ec, ans, ans.low, ans.hi)
   v.out <- v.out[v.out$em.type %in% tolower(em.type),]
   v.out <- v.out[v.out$em.source %in% tolower(em.source),]
   v.out <- v.out[v.out$route.def %in% tolower(route.def),]
+  v.out$method.name <- "Beddows & Harrison (2021)"
+  v.out$method.descr <- paste("Weight based model of vehicle ", v.out$em.type,
+                              " ", v.out$em.source,  " emissions on (UK NAEI classifed) ",
+                              v.out$route.def, " routes",
+                              sep="")
+  v.out$method.ref <- "https://doi.org/10.1016/j.atmosenv.2020.117886"
+
   if(verbose) {
     return(v.out)
   } else {
-    return(v.out[!names(v.out) %in% c("b", "eb", "c", "ec")])
+    return(v.out[!names(v.out) %in% c("b", "eb", "c", "ec", "method.name",
+                                      "method.descr", "method.ref")])
   }
 }
 

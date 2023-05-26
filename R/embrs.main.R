@@ -6,6 +6,9 @@
 #' @aliases build_inventory
 #' @description Main functions for embrs emission model anslysis.
 #' @param x (required embrs object) the __embrs__ model to analyse.
+#' @param verbose (logical) If TRUE, include methods details
+#' when reporting EF predictions.
+#' @param ... other arguments, passed on
 #' @returns These functions return different __embrs__ outputs.
 #' @note These may be moving to vein at some point...
 #' @references add embrs and Beddows references...
@@ -27,7 +30,7 @@
 #' @rdname embrs.main
 #' @export
 build_inventory <-
-  function(x, ...){
+  function(x, verbose = FALSE, ...){
     #need a nice check for is this an embrs object
     if(class(x)[1] != "embrs" & length(class(x)) != "2"){
       stop("[embrs] this function is only intented for use with embrs objects",
@@ -63,7 +66,12 @@ build_inventory <-
           }
           #run through ef funs
           ans <- lapply(names(vehicle$funs), function(.fun){
-            do.call(vehicle$funs[[.fun]], modifyList(vehicle$args, route$args))
+            #pass verbose = TRUE to all vehicle emission functions
+            temp <- modifyList(vehicle$args, route$args)
+            if(verbose){
+              temp$verbose = TRUE
+            }
+            do.call(vehicle$funs[[.fun]], temp)
           })
           ans <- dplyr::bind_rows(ans)
           ans <- data.frame(u.route=.rou, ans)
@@ -77,6 +85,8 @@ build_inventory <-
       ans <- data.frame(level=n, ans)
       ans
     })
-    dplyr::bind_rows(ans)
+    v.out <- dplyr::bind_rows(ans)
+    row.names(v.out) <- 1:nrow(v.out)
+    v.out
   }
 

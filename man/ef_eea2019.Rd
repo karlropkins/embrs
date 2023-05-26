@@ -39,19 +39,20 @@ ef_eea2019_exh_pm(
   veh.wt = NULL,
   em.type = "pm",
   route.def = NULL,
-  fuel.type = NULL,
+  eng.fuel = NULL,
   fuel.corr = TRUE,
   em.source = "exhaust",
   euro.class = NULL,
   exh.tech = NULL,
   eng.load = NULL,
   route.slope = NULL,
+  verbose = FALSE,
   ...
 )
 
-ef_eea2019_exh_pm2.5(...)
+ef_eea2019_exh_pm2.5(em.type = "pm2.5", ...)
 
-ef_eea2019_exh_pm10(...)
+ef_eea2019_exh_pm10(em.type = "pm10", ...)
 }
 \arguments{
 \item{veh.spd}{average vehicle speed, in km/h.}
@@ -64,7 +65,7 @@ ef_eea2019_exh_pm10(...)
 
 \item{route.def}{route description, optional for ef_eea2019 functions.}
 
-\item{fuel.type}{fuel used by the vehicle, diesel, etc.}
+\item{eng.fuel}{fuel used by the vehicle, diesel, etc.}
 
 \item{fuel.corr}{(logical) apply fuel correction, see Note.}
 
@@ -80,6 +81,9 @@ for V  SCR or EGR, and for VI DPF+SCR only}
 
 \item{route.slope}{route slope, as proportion: -0.06, -0.04, -0.02, 0,
 0.02, 0.04 or 0.06 only.}
+
+\item{verbose}{(logical) If TRUE, include methods details
+when reporting EF predictions.}
 
 \item{...}{other arguments, currently ignored}
 }

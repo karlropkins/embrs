@@ -5,10 +5,15 @@
 \alias{build_inventory}
 \title{embrs}
 \usage{
-build_inventory(x, ...)
+build_inventory(x, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{(required embrs object) the \strong{embrs} model to analyse.}
+
+\item{verbose}{(logical) If TRUE, include methods details
+when reporting EF predictions.}
+
+\item{...}{other arguments, passed on}
 }
 \value{
 These functions return different \strong{embrs} outputs.

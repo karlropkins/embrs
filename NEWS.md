@@ -1,10 +1,14 @@
 # Version 0.0 - Release Notes
 
 * [0.0.7]
-    * added bus_dice() as diesel bus short [2023-05-23]
-    * now imports vein [2023-02-07] 
+    * added verbose argument to all ef functions and build_inventory; 
+    added method documentation to EF output [2023-05-26]
+    * standardised formal arguments in ef functions [2023-05-26]
+    * removed ef_copert and ef_emep related code; ef_eea2019 functions 
+    now supersede all ef_copert and ef_emep equivalents [2023-05-26]
+    * added bus_dice() as diesel bus shortcut [2023-05-23]
     * added ef_eea2019 like ef_copert5 but using vein::ef_eea() [2023-02-07]
-    * (ef_copert5 to remove?)
+    * now imports vein [2023-02-07] 
 * [0.0.6]
     * ef_copert5 update (force setting to set-points) [2023-01-24]
     * archive and web update (news, readme, index) [2023-01-19] 

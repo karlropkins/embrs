@@ -58,16 +58,19 @@ non-regenerative brake contribution).}
 
 \item{route.source}{(character) route sources, must be UK NAEI.}
 
+\item{verbose}{(logical) If TRUE, include model parameters and methods details
+when reporting EF predictions.}
+
 \item{...}{other arguments, often passed on.}
 }
 \value{
 These functions build data.frames of urban, rural and motorway emission
 factors for non-exhaust PM2.5 and PM10. \code{ef_beddows_nee_pm} is the main
-function, and others are wrappers for single soucre and type emissions factors.
+function, and others are wrappers for single source and type emissions factors.
 }
 \description{
 Functions to estimate vehicle weight-based non-exhaust
-PM2.5 and PM10 emission factors based on methods of Beddows.
+PM2.5 and PM10 emission factors based on methods of Beddows and Harrison.
 }
 \note{
 These may be moving to vein at some point...
