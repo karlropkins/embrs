@@ -60,19 +60,20 @@ PM2.5 and PM10 emission factors based on EEA guidelines 2019 methods.</p>
 <span>  veh.wt <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  em.type <span class="op">=</span> <span class="st">"pm"</span>,</span>
 <span>  route.def <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  fuel.type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  eng.fuel <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fuel.corr <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  em.source <span class="op">=</span> <span class="st">"exhaust"</span>,</span>
 <span>  euro.class <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  exh.tech <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  eng.load <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  route.slope <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ef_eea2019_exh_pm2.5</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu">ef_eea2019_exh_pm2.5</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"pm2.5"</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">ef_eea2019_exh_pm10</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">ef_eea2019_exh_pm10</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"pm10"</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -115,7 +116,7 @@ https://www.gov.uk/government/publications/road-vehicle-emission-factors-2009</p
 <dd><p>route description, optional for ef_eea2019 functions.</p></dd>
 
 
-<dt>fuel.type</dt>
+<dt>eng.fuel</dt>
 <dd><p>fuel used by the vehicle, diesel, etc.</p></dd>
 
 
@@ -144,6 +145,11 @@ for V  SCR or EGR, and for VI DPF+SCR only</p></dd>
 <dt>route.slope</dt>
 <dd><p>route slope, as proportion: -0.06, -0.04, -0.02, 0,
 0.02, 0.04 or 0.06 only.</p></dd>
+
+
+<dt>verbose</dt>
+<dd><p>(logical) If TRUE, include methods details
+when reporting EF predictions.</p></dd>
 
 
 <dt>...</dt>
