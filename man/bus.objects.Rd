@@ -21,6 +21,8 @@ bus_ice(
   ...
 )
 
+bus_bev(veh.wt = NULL, n = 1, name = NULL, ...)
+
 bus_ice_beddows(...)
 
 bus_ice_embrs1(...)

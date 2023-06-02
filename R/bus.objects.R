@@ -125,41 +125,6 @@ bus_ice <-
 #splatted function
 #' @rdname bus.objects
 #' @export
-bus_ice_beddows <- function(...){
-  .bus <- bus_ice(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_beddows_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_beddows_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.road.pm2.5 <- ef_beddows_road_pm2.5
-  .bus[[1]][[1]]$funs$ef.resusp.pm2.5 <- ef_beddows_resusp_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_beddows_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_beddows_tyre_pm10
-  .bus[[1]][[1]]$funs$ef.road.pm10 <- ef_beddows_road_pm10
-  .bus[[1]][[1]]$funs$ef.resusp.pm10 <- ef_beddows_resusp_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
-
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-
-bus_ice_embrs1 <- function(...){
-  bus_ice(...)
-}
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-bus_ice_embrs2 <- function(...){
-  .bus <- bus_ice(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_embrs2_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_embrs2_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_embrs2_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_embrs2_tyre_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
-
-
 
 bus_bev <-
   function(veh.wt = NULL, n = 1, name = NULL, ...){
@@ -205,6 +170,46 @@ bus_bev <-
     #last.warning <- last.warning[!duplicated(last.warning)]
     embrs_vehicle(name=name, x=obj, ...)
   }
+
+
+#splatted function
+#' @rdname bus.objects
+#' @export
+bus_ice_beddows <- function(...){
+  .bus <- bus_ice(...)
+  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_beddows_brake_pm2.5
+  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_beddows_tyre_pm2.5
+  .bus[[1]][[1]]$funs$ef.road.pm2.5 <- ef_beddows_road_pm2.5
+  .bus[[1]][[1]]$funs$ef.resusp.pm2.5 <- ef_beddows_resusp_pm2.5
+  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_beddows_brake_pm10
+  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_beddows_tyre_pm10
+  .bus[[1]][[1]]$funs$ef.road.pm10 <- ef_beddows_road_pm10
+  .bus[[1]][[1]]$funs$ef.resusp.pm10 <- ef_beddows_resusp_pm10
+  embrs_vehicle(x=.bus[[1]][[1]], ...)
+}
+
+
+#splatted function
+#' @rdname bus.objects
+#' @export
+
+bus_ice_embrs1 <- function(...){
+  bus_ice(...)
+}
+
+#splatted function
+#' @rdname bus.objects
+#' @export
+bus_ice_embrs2 <- function(...){
+  .bus <- bus_ice(...)
+  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_embrs2_brake_pm2.5
+  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_embrs2_brake_pm10
+  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_embrs2_tyre_pm2.5
+  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_embrs2_tyre_pm10
+  embrs_vehicle(x=.bus[[1]][[1]], ...)
+}
+
+
 
 #splatted function
 #' @rdname bus.objects
