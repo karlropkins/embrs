@@ -2,19 +2,18 @@
 % Please edit documentation in R/bus.objects.R
 \name{bus.objects}
 \alias{bus.objects}
-\alias{bus_ice_beddows}
 \alias{bus_ice}
-\alias{bus_dice}
-\alias{bus_bev_beddows}
 \alias{bus_bev}
+\alias{bus_ice_beddows}
+\alias{bus_bev_beddows}
 \alias{bus_ice_embrs1}
 \alias{bus_bev_embrs1}
 \alias{bus_ice_embrs2}
 \alias{bus_bev_embrs2}
 \title{bus objects}
 \usage{
-bus_ice_beddows(
-  veh.wt,
+bus_ice(
+  veh.wt = NULL,
   eng.fuel = NULL,
   euro.class = NULL,
   n = 1,
@@ -22,21 +21,17 @@ bus_ice_beddows(
   ...
 )
 
-bus_ice(...)
+bus_ice_beddows(...)
 
-bus_dice(veh.wt, eng.fuel = "diesel", ...)
+bus_ice_embrs1(...)
 
-bus_ice_embrs1(veh.wt, ...)
+bus_ice_embrs2(...)
 
-bus_ice_embrs2(veh.wt, ...)
+bus_bev_beddows(...)
 
-bus_bev_beddows(veh.wt, n = 1, name = NULL, ...)
+bus_bev_embrs1(...)
 
-bus_bev(...)
-
-bus_bev_embrs1(veh.wt, ...)
-
-bus_bev_embrs2(veh.wt, ...)
+bus_bev_embrs2(...)
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
@@ -45,7 +40,7 @@ bus_bev_embrs2(veh.wt, ...)
 only diesel.}
 
 \item{euro.class}{(required character) vehicle EURO classification,
-can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.}
+e.g. PRE, I, II, III, IV, V or VI.}
 
 \item{n}{(numeric) number of vehicles, default 1.}
 
@@ -54,18 +49,20 @@ can only be PRE, I, II, III, IV, V+EGR, V+SCR or VI.}
 \item{...}{other arguments, currently ignored}
 }
 \value{
-These functions make vehicle and fleet class \strong{embrs} objects.
+These functions make bus model for use in \strong{embrs} emissions
+models. The main models bus_ice and bus_bev are internal compression engine
+and battery electric buses, respectively.
 }
 \description{
 Bus objects for use in \strong{embrs} models.
 }
 \note{
-These may be moving to vein at some point...
+Work in progress...
 }
 \references{
 These functions are based on methods developed and reported by:
 
-Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2. 5 emission factors for
+Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2.5 emission factors for
 non-exhaust particles from road vehicles: Dependence upon vehicle mass and
 implications for battery electric vehicles. Atmospheric Environment, 244,
 p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}.

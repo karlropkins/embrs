@@ -1,6 +1,7 @@
 # Version 0.0 - Release Notes
 
 * [0.0.7]
+    * replaced ef_eea2019 with ef_vein_eea [2023-06-02]
     * added verbose argument to all ef functions and build_inventory; 
     added method documentation to EF output [2023-05-26]
     * standardised formal arguments in ef functions [2023-05-26]

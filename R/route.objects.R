@@ -18,6 +18,18 @@
 ## #' @references [to do] add embrs and naei references...
 
 
+########################
+#to think about
+########################
+#think about naming
+#if declared in call not handled nicely when summing...
+#   local fix or
+#   make a names function for embrs objects???
+
+#think about a route_veh_spd() function???
+#   could be basic route object
+
+
 #splatted function
 #' @rdname route.objects
 #' @export
@@ -62,8 +74,8 @@ route_naei_urm <-
 #splatted function
 #' @rdname route.objects
 #' @export
-route_ukbc_outerlondon <- function(name=NULL, route.def="outer london", route.source="ukbc",
-                             veh.spd=ukbc_route2spd,
+route_ukbc_outerlondon <- function(name=NULL, route.def="outer london",
+                             route.source="ukbc", veh.spd=ukbc_route2spd,
                              brk_b=ukbc_route2brk_b,
                              tyr_t=ukbc_route2tyr_t,
                              ...){
@@ -74,8 +86,8 @@ route_ukbc_outerlondon <- function(name=NULL, route.def="outer london", route.so
 #splatted function
 #' @rdname route.objects
 #' @export
-route_ukbc_innerlondon <- function(name=NULL, route.def="inner london", route.source="ukbc",
-                                   veh.spd=ukbc_route2spd,
+route_ukbc_innerlondon <- function(name=NULL, route.def="inner london",
+                                   route.source="ukbc", veh.spd=ukbc_route2spd,
                                    brk_b=ukbc_route2brk_b,
                                    tyr_t=ukbc_route2tyr_t,
                                    ...){
@@ -87,7 +99,7 @@ route_ukbc_innerlondon <- function(name=NULL, route.def="inner london", route.so
 #' @rdname route.objects
 #' @export
 route_ukbc_rural <- function(name=NULL, route.def="rural", route.source="ukbc",
-                                   veh.spd=ukbc_route2spd,
+                             veh.spd=ukbc_route2spd,
                              brk_b=ukbc_route2brk_b,
                              tyr_t=ukbc_route2tyr_t,
                              ...){

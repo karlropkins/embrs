@@ -15,6 +15,12 @@
 
 #doc args
 
+#to think about
+######################
+#embrs_vehicle to handle embrs vehicle fleets and vehicles
+#embrs_vehicle(name="hi", bus_bev(veh.wt=10000)[[1]][[1]], ef.brake.pm10 = NULL)[[1]][[1]]$fun
+
+
 embrs_vehicle <-
   function(name = NULL, x = NULL, ...){
 
@@ -23,10 +29,14 @@ embrs_vehicle <-
     if(is.null(x)){
       stop("nothing to work with!")
     }
+    #could work up to handle x = embrs object?
+    ## print(names(x))
+    ## x = embrs_fleet_vehicle[[1]][[1]]
     obj <- list(args=list(),
                 funs=list()
-    ) # thinking of adding docs as extra case
-    #separate all functions start ef.
+    )
+    #was thinking of adding docs as extra case
+    #BUT ending up doing it via ef_...(verbose=TRUE)
     test <- grep("^ef[.]", tolower(names(.obj)))
     .ef <- if(length(test)>0) {
       .obj[test]
@@ -51,7 +61,11 @@ embrs_vehicle <-
     }
 
     name <- if(is.null(name)){
-      paste(obj$args$eng.fuel,  obj$args$eng.type, obj$args$veh.type, sep=".")
+      if(obj$args$eng.fuel==obj$args$eng.type){
+        paste(obj$args$eng.fuel, obj$args$veh.type, sep=".")
+      } else {
+        paste(obj$args$eng.fuel,  obj$args$eng.type, obj$args$veh.type, sep=".")
+      }
     } else { as.character(name) }
     obj$args$name <- name
 

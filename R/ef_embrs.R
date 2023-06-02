@@ -52,7 +52,8 @@
 #' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
 ########################
-#these are the embrs speed, etc functions from the paper
+#these are the embrs speed, etc functions from the embrs paper
+#I am hoping these can be tidied a bit...
 
 #avg.spd model for nee (embrs model)
 
@@ -142,7 +143,7 @@ ef_embrs1_nee_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
   if(verbose){
     v.out$method.name <- "Tivey et al (2023)"
     v.out$method.descr <- paste("Weight and speed based model of vehicle ", v.out$em.type, " ",
-                                v.out$em.source,  " emissions on (UK NAEI classifed)",
+                                v.out$em.source,  " emissions",
                                 ", based on extrapolation of Beddows & Harrison (2021)",
                                 sep="")
     v.out$method.ref <- "https://doi.org/10.3390/su15021522"
