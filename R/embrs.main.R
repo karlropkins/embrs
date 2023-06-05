@@ -24,7 +24,14 @@
 #with ef_embrs related builds
 #(but numbers/df shapes look sensible)
 
+#temp fix at end of build_inventory
+#BUT rather have this fixed properly
 
+#need to standardise error messaging
+#currently aiming for....
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
 
 
 #' @rdname embrs.main
@@ -86,6 +93,9 @@ build_inventory <-
       ans
     })
     v.out <- dplyr::bind_rows(ans)
+    #############################
+    #temp fix for mess row names
+    #############################
     row.names(v.out) <- 1:nrow(v.out)
     v.out
   }

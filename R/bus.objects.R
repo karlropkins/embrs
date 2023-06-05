@@ -3,19 +3,19 @@
 ############################################
 
 #' @name bus.objects
-#' @aliases bus_ice bus_bev bus_ice_beddows bus_bev_beddows
-#' bus_ice_embrs1 bus_bev_embrs1 bus_ice_embrs1 bus_bev_embrs1
+#' @aliases bus_ice bus_bev
 #' @description Bus objects for use in __embrs__ models.
 #' @param veh.wt (required numeric) weight of vehicle in kg.
-#' @param eng.fuel (required character) the fuel used by the bus, currently
-#' only diesel.
+#' @param eng.fuel (required character) the engine fuel used by the vehicle,
+#' e.g. diesel.
 #' @param euro.class (required character) vehicle EURO classification,
 #' e.g. PRE, I, II, III, IV, V or VI.
-#' @param n (numeric) number of vehicles, default 1.
-#' @param name (character) name of the vehicle object.
-#' @param ... other arguments, currently ignored
+#' @param ... other arguments, passed on to common vehicle build functions.
+#' Arguments depend on the vehicle/engine/fuel combination. See embrs.vehicles
+#' help for further details.
+#' @param veh.type (character) type of vehicle, default bus.
 #' @note Work in progress...
-#' @returns These functions make bus model for use in __embrs__ emissions
+#' @returns These functions make bus models for __embrs__ emissions
 #' models. The main models bus_ice and bus_bev are internal compression engine
 #' and battery electric buses, respectively.
 #' @references These functions are based on methods developed and reported by:
@@ -33,7 +33,12 @@
 #' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
 
-#note embrs_vehicle unexported in embrs.local
+#note these use local builds in embrs.local
+
+#dropped _beddows, _embrs1, etc.
+# now using
+# method = "beddows", "embrs1", etc?
+
 
 ############################
 #to think about
@@ -45,8 +50,7 @@
 #make default embrs1 speed model? means all current routes would work
 
 #add bus_hybrid and bus_bifuel
-#would a model argument be easier
-#base.model = "beddows", "embrs1", etc?
+
 
 
 #think about following
@@ -68,18 +72,21 @@
 
 
 #################################
-#ice buses
+#buses build
 #################################
 
+#################################
+#base models
+#ice, bev
+#################################
 
 #splatted function
 #' @rdname bus.objects
 #' @export
 
 bus_ice <-
-  function(veh.wt = NULL, eng.fuel = NULL, euro.class = NULL, n = 1, name = NULL, ...){
-    #default ice bus build for bus model
-    #(bus_ice_embrs1)
+  function(veh.wt = NULL, eng.fuel = NULL, euro.class = NULL, ...,
+           veh.type = "bus"){
     if(is.null(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
            call.=FALSE)
@@ -88,38 +95,8 @@ bus_ice <-
       stop("[embrs] bus_ice...() needs both eng.fuel and euro.class, see help?",
            call.=FALSE)
     }
-
-    obj <- list(
-      args = list(
-        n = n,
-        veh.type = "bus",
-        veh.wt = veh.wt,
-        eng.type = "ice",
-        eng.fuel = eng.fuel,
-        euro.class = euro.class,
-        brk.regen = FALSE
-      ),
-      funs = list(
-        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
-        ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
-        ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
-        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
-        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
-        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
-        ef.brake.pm10 = ef_embrs1_brake_pm10,
-        ef.tyre.pm10 = ef_embrs1_tyre_pm10,
-        ef.road.pm10 = ef_embrs1_road_pm10,
-        ef.resusp.pm10 = ef_embrs1_resusp_pm10
-      )
-    )
-    ######################
-    #failed!
-    # trying to reduce the number of
-    # warnings when missing args trigger
-    # a warning
-    #############################
-    #last.warning <- last.warning[!duplicated(last.warning)]
-    embrs_vehicle(name=name, x=obj, ...)
+    embrs_ice(veh.wt = veh.wt, eng.fuel = eng.fuel, euro.class = euro.class,
+              ..., veh.type = veh.type)
   }
 
 #splatted function
@@ -127,124 +104,17 @@ bus_ice <-
 #' @export
 
 bus_bev <-
-  function(veh.wt = NULL, n = 1, name = NULL, ...){
-    #default electric bus build for bus model
-    #(bus_ice_embrs1) without the exhaust emissions
-
+  function(veh.wt = NULL, ..., veh.type = "bus"){
     if(is.null(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
            call.=FALSE)
     }
-    ############################
-    #to think about
-    ############################
-    #error if fuel not electric?
-    #euro.class might be trickier?
-
-    obj <- list(
-      args = list(
-        n = n,
-        veh.type = "bus",
-        veh.wt = veh.wt,
-        eng.type = "electric",
-        eng.fuel = "electric",
-        brk.regen = FALSE
-      ),
-      funs = list(
-        ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
-        ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
-        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
-        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
-        ef.brake.pm10 = ef_embrs1_brake_pm10,
-        ef.tyre.pm10 = ef_embrs1_tyre_pm10,
-        ef.road.pm10 = ef_embrs1_road_pm10,
-        ef.resusp.pm10 = ef_embrs1_resusp_pm10
-      )
-    )
-    ######################
-    #failed!
-    # trying to reduce the number of
-    # warnings when missing args trigger
-    # a warning
-    #############################
-    #last.warning <- last.warning[!duplicated(last.warning)]
-    embrs_vehicle(name=name, x=obj, ...)
+    embrs_bev(veh.wt = veh.wt, ..., veh.type = veh.type)
   }
 
 
-#splatted function
-#' @rdname bus.objects
-#' @export
-bus_ice_beddows <- function(...){
-  .bus <- bus_ice(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_beddows_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_beddows_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.road.pm2.5 <- ef_beddows_road_pm2.5
-  .bus[[1]][[1]]$funs$ef.resusp.pm2.5 <- ef_beddows_resusp_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_beddows_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_beddows_tyre_pm10
-  .bus[[1]][[1]]$funs$ef.road.pm10 <- ef_beddows_road_pm10
-  .bus[[1]][[1]]$funs$ef.resusp.pm10 <- ef_beddows_resusp_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
 
 
-#splatted function
-#' @rdname bus.objects
-#' @export
-
-bus_ice_embrs1 <- function(...){
-  bus_ice(...)
-}
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-bus_ice_embrs2 <- function(...){
-  .bus <- bus_ice(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_embrs2_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_embrs2_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_embrs2_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_embrs2_tyre_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
-
-
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-bus_bev_beddows <- function(...){
-  .bus <- bus_bev(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_beddows_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_beddows_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.road.pm2.5 <- ef_beddows_road_pm2.5
-  .bus[[1]][[1]]$funs$ef.resusp.pm2.5 <- ef_beddows_resusp_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_beddows_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_beddows_tyre_pm10
-  .bus[[1]][[1]]$funs$ef.road.pm10 <- ef_beddows_road_pm10
-  .bus[[1]][[1]]$funs$ef.resusp.pm10 <- ef_beddows_resusp_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
-
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-
-bus_bev_embrs1 <- function(...){
-  bus_bev(...)
-}
-
-#splatted function
-#' @rdname bus.objects
-#' @export
-bus_bev_embrs2 <- function(...){
-  .bus <- bus_bev(...)
-  .bus[[1]][[1]]$funs$ef.brake.pm2.5 <- ef_embrs2_brake_pm2.5
-  .bus[[1]][[1]]$funs$ef.brake.pm10 <- ef_embrs2_brake_pm10
-  .bus[[1]][[1]]$funs$ef.tyre.pm2.5 <- ef_embrs2_tyre_pm2.5
-  .bus[[1]][[1]]$funs$ef.tyre.pm10 <- ef_embrs2_tyre_pm10
-  embrs_vehicle(x=.bus[[1]][[1]], ...)
-}
+###########################
+#unexported
 

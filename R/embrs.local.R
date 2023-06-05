@@ -1,3 +1,256 @@
+############################################
+#' @title embrs common vehicle builds
+############################################
+
+#' @name embrs.local
+#' @aliases embrs.vehicles embrs_ice embrs_bev
+#' @description Common builds for __embrs__ vehicle builds.
+#' @param veh.wt (required numeric) weight of vehicle in kg.
+#' @param veh.type (required character) type of vehicle, e.g bus.
+#' @param eng.fuel (required character) the engine fuel used by the vehicle,
+#' currently only diesel.
+#' @param euro.class (required character) vehicle EURO classification,
+#' e.g. PRE, I, II, III, IV, V or VI.
+#' @param n (numeric) number of vehicles, default 1.
+#' @param method (character) vehicle model, currently one of: beddows,
+#' embrs1 (default) or embrs2.
+#' @param name (character) name of the vehicle object.
+#' @param ... other arguments, currently passed on to emission factor models,
+#' e.g. ef_embrs..., ef_beddows... and ef_vein_eea... In some cases, these
+#' may request additional inputs, e.g. when ef_vein_eea has more than one
+#' ef model for a given vehicle/engine/fuel/euro.class combination exhaust
+#' emission model it may also request the exhaust technology (exh.tech),
+#' see ?ef_vein_eea_exhaust.
+#' @note Work in progress; these may change...
+#' @returns These functions make common vehicle objects for use in __embrs__
+#' emissions models. The main models ice_build and bev_build are for internal
+#' compression engine and battery electric vehicles, respectively.
+#' @references These functions are based on methods developed and reported by:
+#'
+#' Beddows, D.C. and Harrison, R.M., 2021. PM10 and PM2.5 emission factors for
+#' non-exhaust particles from road vehicles: Dependence upon vehicle mass and
+#' implications for battery electric vehicles. Atmospheric Environment, 244,
+#' p.117886. \url{https://doi.org/10.1016/j.atmosenv.2020.117886}.
+#'
+#' And, extrapolated to speed (embrs1) and, break/tyre-wear (embrs2)
+#' related emission factors in:
+#'
+#' Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+#' Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+#' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+#' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
+
+
+##############################################
+#doing this so we can start generalising
+##############################################
+#currently intending all vehicle objects to
+#be just wrappers for these with veh.type set/forced???
+
+#veh types
+#done: bus
+#doing: coach
+#proposing: truck (hgv), van (n1 to n3), car, motorcycle,
+#but large job to get right...
+
+
+#eng type
+#done: ice, bev,
+#doing:
+#proposing: hybrid, bifuel?
+
+##################
+#to think about
+####################
+
+#gas phase species handling
+
+#moving _beddows(), _embrs1(), _embrs2() into parent function
+#e.g. model = beddows
+#it would reduce the number of functions/vehicle type
+
+#splatted function
+#' @rdname embrs.local
+#' @export
+
+embrs_ice <-
+  function(veh.wt = NULL, veh.type = NULL, eng.fuel = NULL, euro.class = NULL,
+           n = 1, method = "embrs1", name = NULL, ...){
+    #default ice vehicle build for general use model
+    #(ice_embrs1)
+
+    #a lot here needs to replicated below in embrs_bev
+    #don't think we can generalise at the moment
+    #because of euro.class
+
+    if(is.null(veh.type) || is.null(veh.wt)){
+      stop("[embrs] all vehicles need both veh.type and veh.wt, see help?",
+           call.=FALSE)
+    }
+    if(is.null(eng.fuel) || is.null(euro.class)){
+      stop("[embrs] all ice vehicles...() need both eng.fuel and euro.class, see help?",
+           call.=FALSE)
+    }
+    if(!tolower(method) %in% c("beddows", "embrs1", "embrs2")){
+      stop("[embrs] unknown vehicle emission model, see help?",
+           call.=FALSE)
+    }
+
+    .veh <- list(
+      args = list(
+        n = n,
+        veh.type = veh.type,
+        veh.wt = veh.wt,
+        eng.type = "ice",
+        eng.fuel = eng.fuel,
+        euro.class = euro.class,
+        brk.regen = FALSE
+      ),
+      #embrs1 method
+      funs = list(
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_embrs1_brake_pm10,
+        ef.tyre.pm10 = ef_embrs1_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    )
+    if(tolower(method)=="beddows"){
+      .veh$funs <- list(
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
+        ef.road.pm2.5 = ef_beddows_road_pm2.5,
+        ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_beddows_brake_pm10,
+        ef.tyre.pm10 = ef_beddows_tyre_pm10,
+        ef.road.pm10 = ef_beddows_road_pm10,
+        ef.resusp.pm10 = ef_beddows_resusp_pm10
+      )
+    }
+    if(tolower(method)=="embrs2"){
+      .veh$funs <- list(
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_embrs2_brake_pm10,
+        ef.tyre.pm10 = ef_embrs2_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    }
+
+    ######################
+    #failed!
+    # trying to reduce the number of
+    # warnings when missing args trigger
+    # a warning
+    #############################
+    #last.warning <- last.warning[!duplicated(last.warning)]
+    embrs_vehicle(name=name, x=.veh, ...)
+  }
+
+
+#splatted function
+#' @rdname embrs.local
+#' @export
+
+embrs_bev <-
+  function(veh.wt = NULL, veh.type= NULL,
+           n = 1, method = "embrs1", name = NULL, ...){
+    #default electric vehicle build
+    #ice without the exhaust emissions
+
+    if(is.null(veh.type) || is.null(veh.wt)){
+      stop("[embrs] all vehicles need both veh.type and veh.wt, see help?",
+           call.=FALSE)
+    }
+    if(!tolower(method) %in% c("beddows", "embrs1", "embrs2")){
+      stop("[embrs] unknown vehicle emission model, see help?",
+           call.=FALSE)
+    }
+    ############################
+    #to think about
+    ############################
+    #error if fuel not electric?
+    #euro.class might be trickier?
+
+    .veh <- list(
+      args = list(
+        n = n,
+        veh.type = "bus",
+        veh.wt = veh.wt,
+        eng.type = "electric",
+        eng.fuel = "electric",
+        brk.regen = FALSE
+      ),
+      #embrs1 method
+      funs = list(
+        ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.brake.pm10 = ef_embrs1_brake_pm10,
+        ef.tyre.pm10 = ef_embrs1_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    )
+    if(tolower(method)=="beddows"){
+      .veh$funs <- list(
+        ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
+        ef.road.pm2.5 = ef_beddows_road_pm2.5,
+        ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
+        ef.brake.pm10 = ef_beddows_brake_pm10,
+        ef.tyre.pm10 = ef_beddows_tyre_pm10,
+        ef.road.pm10 = ef_beddows_road_pm10,
+        ef.resusp.pm10 = ef_beddows_resusp_pm10
+      )
+    }
+    if(tolower(method)=="embrs2"){
+      .veh$funs <- list(
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_embrs2_brake_pm10,
+        ef.tyre.pm10 = ef_embrs2_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    }
+    ######################
+    #failed!
+    # trying to reduce the number of
+    # warnings when missing args trigger
+    # a warning
+    #############################
+    #last.warning <- last.warning[!duplicated(last.warning)]
+    embrs_vehicle(name=name, x=.veh, ...)
+  }
+
+
+
+
+
+
+
+
+
+
+
 ###############################
 #currently unexported functions
 ###############################

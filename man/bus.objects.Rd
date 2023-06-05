@@ -4,54 +4,35 @@
 \alias{bus.objects}
 \alias{bus_ice}
 \alias{bus_bev}
-\alias{bus_ice_beddows}
-\alias{bus_bev_beddows}
-\alias{bus_ice_embrs1}
-\alias{bus_bev_embrs1}
-\alias{bus_ice_embrs2}
-\alias{bus_bev_embrs2}
 \title{bus objects}
 \usage{
 bus_ice(
   veh.wt = NULL,
   eng.fuel = NULL,
   euro.class = NULL,
-  n = 1,
-  name = NULL,
-  ...
+  ...,
+  veh.type = "bus"
 )
 
-bus_bev(veh.wt = NULL, n = 1, name = NULL, ...)
-
-bus_ice_beddows(...)
-
-bus_ice_embrs1(...)
-
-bus_ice_embrs2(...)
-
-bus_bev_beddows(...)
-
-bus_bev_embrs1(...)
-
-bus_bev_embrs2(...)
+bus_bev(veh.wt = NULL, ..., veh.type = "bus")
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
 
-\item{eng.fuel}{(required character) the fuel used by the bus, currently
-only diesel.}
+\item{eng.fuel}{(required character) the engine fuel used by the vehicle,
+e.g. diesel.}
 
 \item{euro.class}{(required character) vehicle EURO classification,
 e.g. PRE, I, II, III, IV, V or VI.}
 
-\item{n}{(numeric) number of vehicles, default 1.}
+\item{...}{other arguments, passed on to common vehicle build functions.
+Arguments depend on the vehicle/engine/fuel combination. See embrs.vehicles
+help for further details.}
 
-\item{name}{(character) name of the vehicle object.}
-
-\item{...}{other arguments, currently ignored}
+\item{veh.type}{(character) type of vehicle, default bus.}
 }
 \value{
-These functions make bus model for use in \strong{embrs} emissions
+These functions make bus models for \strong{embrs} emissions
 models. The main models bus_ice and bus_bev are internal compression engine
 and battery electric buses, respectively.
 }
