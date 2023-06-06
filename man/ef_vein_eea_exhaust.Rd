@@ -4,7 +4,6 @@
 \alias{ef_vein_eea_exhaust}
 \alias{ef_vein_eea_exhaust_pm2.5}
 \alias{ef_vein_eea_exhaust_pm10}
-\alias{ef_vein_eea_exhaust_nox}
 \title{ef_vein_eea_exhaust}
 \source{
 Average speed curves are based on European Environment Agency 2019 EMEP/EEA
@@ -49,8 +48,6 @@ ef_vein_eea_exhaust(
   verbose = FALSE,
   ...
 )
-
-ef_vein_eea_exhaust_nox(em.type = "nox", ...)
 
 ef_vein_eea_exhaust_pm2.5(em.type = "pm2.5", ...)
 

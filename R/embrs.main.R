@@ -76,7 +76,7 @@ build_inventory <-
             #pass verbose = TRUE to all vehicle emission functions
             temp <- modifyList(vehicle$args, route$args)
             if(verbose){
-              temp$verbose = TRUE
+              temp$verbose <- TRUE
             }
             do.call(vehicle$funs[[.fun]], temp)
           })

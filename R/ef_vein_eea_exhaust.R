@@ -518,9 +518,9 @@ ef_vein_eea_exhaust <-
 
   }
 
-#splatted function
-#' @rdname ef_vein_eea_exhaust
-#' @export
+## #splatted function
+## #' @rdname ef_vein_eea_exhaust
+## #' @export
 ef_vein_eea_exhaust_nox <- function(em.type = "nox", ...){
   #testing this
   #so we need to send vein
