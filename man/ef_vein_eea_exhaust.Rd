@@ -4,6 +4,7 @@
 \alias{ef_vein_eea_exhaust}
 \alias{ef_vein_eea_exhaust_pm2.5}
 \alias{ef_vein_eea_exhaust_pm10}
+\alias{ef_vein_eea_exhaust_nox}
 \title{ef_vein_eea_exhaust}
 \source{
 Average speed curves are based on European Environment Agency 2019 EMEP/EEA
@@ -49,6 +50,8 @@ ef_vein_eea_exhaust(
   ...
 )
 
+ef_vein_eea_exhaust_nox(em.type = "nox", ...)
+
 ef_vein_eea_exhaust_pm2.5(em.type = "pm2.5", ...)
 
 ef_vein_eea_exhaust_pm10(em.type = "pm10", ...)
@@ -76,7 +79,7 @@ ignored.}
 
 \item{em.source}{emission source: currently, exhaust only.}
 
-\item{euro.class}{EURO classification: PRE, I, II, III, IV, V,
+\item{euro.class}{EURO classification: PRE, I, II, III, IV,
 V or VI only.}
 
 \item{exh.tech}{exhaust technology: for euro.class IV SCR or EGR,

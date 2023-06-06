@@ -1,5 +1,8 @@
 # Version 0.0 - Release Notes
 
+* [0.0.8]
+    * started restructuring code for non-pm emissions and other vehicle 
+    types [2023-06-60] 
 * [0.0.7]
     * replaced separate beddows, embrs1 and embrs2 vehicle models with one 
     model with extra argument method = "beddows"; in embrs_ice, etc. 

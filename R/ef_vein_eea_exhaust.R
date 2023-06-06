@@ -19,7 +19,7 @@
 #' @param eng.fuel fuel used by the vehicle: diesel, biodiesel, cng, etc.
 #' @param fuel.corr (logical) apply fuel correction, see Note.
 #' @param em.source emission source: currently, exhaust only.
-#' @param euro.class EURO classification: PRE, I, II, III, IV, V,
+#' @param euro.class EURO classification: PRE, I, II, III, IV,
 #' V or VI only.
 #' @param exh.tech exhaust technology: for euro.class IV SCR or EGR,
 #' for V  SCR or EGR, and for VI DPF+SCR only
@@ -68,17 +68,21 @@
 #'
 
 
+###########################
+#notes
+###########################
+
 #this NEEDS R:vein
 #now added as imports
 
 #standardise error messaging in function
-#see note or format in prep function
+#see note or format in embrs.local as used in e.g. embrs_ice
 
 
 #issue
 ########################
 #method is not tracking slope, mode and load when set...
-#
+#     this might be sorted now
 
 #note
 ###############################
@@ -109,6 +113,9 @@
 
 # this needs something separate ice, bifuel and hybrid???
 # euro.class still has work to do
+
+# .eea source needs to be sorted before this goes to CRAN...
+#       if it does???
 
 # think about electric vehicle
 
@@ -274,7 +281,7 @@ ef_vein_eea_exhaust <-
     }
     ref <- unique(.eea$Pollutant)
     if(!.pollutant %in% ref){
-      stop("[embrs>] ef_vein_eea_exhaust(): UNknown emission type (em.type)",
+      stop("[embrs>] ef_vein_eea_exhaust(): Unknown emission type (em.type)",
            "\n\tmaybe one of: ", paste(ref, collapse = ", "),
            call. = FALSE
       )
@@ -489,8 +496,9 @@ ef_vein_eea_exhaust <-
     #units g/km to mg/km
     out <- out * 1000
     #might want to output
-    #euro class, eng.load and route.slope?
-    #     maybe standard and verbose options for output???
+    #should we track eng.load, route.slope? route.mode? etc, if they are being used?
+    #should method description track the eea pollutant not em.type???
+    #       not the same, e.g. (beddows) pm10 = (beddows) pm2.5 = (eea) pm...
     v.out <- data.frame(em.type, em.source, euro.class, eng.fuel,
                         exh.tech = .technology, route.def,
                         veh.spd = veh.spd, veh.wt, ans = out)
@@ -509,6 +517,15 @@ ef_vein_eea_exhaust <-
     }
 
   }
+
+#splatted function
+#' @rdname ef_vein_eea_exhaust
+#' @export
+ef_vein_eea_exhaust_nox <- function(em.type = "nox", ...){
+  #testing this
+  #so we need to send vein
+  ef_vein_eea_exhaust(em.type = "nox", ...)
+}
 
 
 #splatted function
@@ -534,6 +551,8 @@ ef_vein_eea_exhaust_pm10 <- function(em.type = "pm10", ...){
 
 ######################
 #unexported code
+
+#now redundant???
 
 embrs_eea2019_prep <- function(x, opts, x.name){
   #x - user input
@@ -605,8 +624,8 @@ test_vein_eea <- function(category=NULL,
   #drop this?
   .xargs <- list(...)
 
-  #temp <- vein:::sysdata$eea
-  temp <- vein::get_ef_ref("eea")
+  temp <- vein:::sysdata$eea
+  #temp <- vein::get_ef_ref("eea")
 
   if(!is.null(category)){
     ref <- unique(temp$Category)

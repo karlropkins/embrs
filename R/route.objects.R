@@ -119,3 +119,33 @@ route_ukbc_oir <-
 ######################
 #see route_naei_urm
 #  about naming
+
+
+
+################################
+#unexported functions
+###############################
+
+embrs_route <-
+  function(name = NULL, route.def = NULL, route.source = NULL,
+           route.dist = 1, route.slope = 0, ...){
+    if(is.null(route.def) || is.null(route.source)){
+      stop("[embrs] route_...() needs route.def and route.source [see help]",
+           call. = FALSE)
+    }
+    obj <- list(args=list(name=name,
+                          route.def=route.def,
+                          route.source=route.source,
+                          route.dist=route.dist,
+                          route.slope=route.slope,
+                          ...))
+    if(is.null(obj$args$name)){
+      obj$args$name <- paste(obj$args$route.source,  obj$args$route.def, sep=".")
+    }
+    class(obj) <- "embrs_route"
+    out <- list(obj)
+    names(out)[1] <- out[[1]]$args$name
+    out <- list(routes=out)
+    class(out) <- c("embrs", "routes")
+    out
+  }

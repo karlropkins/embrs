@@ -1,9 +1,9 @@
 ############################################
-#' @title embrs common vehicle builds
+#' @title common vehicle objects
 ############################################
 
-#' @name embrs.local
-#' @aliases embrs.vehicles embrs_ice embrs_bev
+#' @name embrs.vehicles
+#' @aliases embrs_ice embrs_bev
 #' @description Common builds for __embrs__ vehicle builds.
 #' @param veh.wt (required numeric) weight of vehicle in kg.
 #' @param veh.type (required character) type of vehicle, e.g bus.
@@ -15,12 +15,11 @@
 #' @param method (character) vehicle model, currently one of: beddows,
 #' embrs1 (default) or embrs2.
 #' @param name (character) name of the vehicle object.
-#' @param ... other arguments, currently passed on to emission factor models,
-#' e.g. ef_embrs..., ef_beddows... and ef_vein_eea... In some cases, these
-#' may request additional inputs, e.g. when ef_vein_eea has more than one
-#' ef model for a given vehicle/engine/fuel/euro.class combination exhaust
-#' emission model it may also request the exhaust technology (exh.tech),
-#' see ?ef_vein_eea_exhaust.
+#' @param ... other arguments, currently passed on to emission factor (ef)
+#' models. In some cases, these may request additional inputs, e.g. when
+#' ef_vein_eea has more than one ef model for a given
+#' vehicle/engine/fuel/euro.class combination exhaust emission model it may
+#' also request the exhaust technology (exh.tech), see ?ef_vein_eea_exhaust.
 #' @note Work in progress; these may change...
 #' @returns These functions make common vehicle objects for use in __embrs__
 #' emissions models. The main models ice_build and bev_build are for internal
@@ -40,34 +39,85 @@
 #' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
 #' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
+########################
+#notes
+#######################
+
+#moved droppped ..._beddows(), ..._embrs1(), ..._embrs2() functions by
+#      moving coding/option into parent function as ...(model = "beddows")
+#      [this reduces the number of vehicle objects four-fold]
+
 
 ##############################################
-#doing this so we can start generalising
+#doing
 ##############################################
+
+#generalising code for roll out by
+#vehicle type, engine type and emissions type
+
 #currently intending all vehicle objects to
 #be just wrappers for these with veh.type set/forced???
+#   BUT might be special cases that kill that idea
+
 
 #veh types
+##############################
 #done: bus
 #doing: coach
 #proposing: truck (hgv), van (n1 to n3), car, motorcycle,
 #but large job to get right...
 
-
 #eng type
+#############################
 #done: ice, bev,
 #doing:
 #proposing: hybrid, bifuel?
+
+#em.type
+#############################
+#done: exh pm (10 & 2.5), brake pm (10 & 2.5), tyre pm (10 & 2.5)
+#      road pm (10 & 2.5), resusp pm (10 & 2.5)
+#doing: nox
+#       wrote ef_vein_eea_exhaust_nox wrapper in ef_vein_eea_exhaust.R.
+#       added ef_vein_eea_exhaust_nox to funs in all three method folders
+#             BUT currently remarked off
+#       also needs handling in build_inventory and plot.embrs
+#proposing: gaseous species, co, hc; others in eea???
+
 
 ##################
 #to think about
 ####################
 
-#gas phase species handling
+#maybe move embrs_route to route.objects?
 
-#moving _beddows(), _embrs1(), _embrs2() into parent function
-#e.g. model = beddows
-#it would reduce the number of functions/vehicle type
+#maybe rename embrs.local embrs.vehicles
+
+#gas phase species handling if we add gaseous species
+#    in plots currently assume pm only...
+#    in embrs_ice, etc, e.g. add all ef_... here
+#        but ignore at build_inventory or select here...
+#    (consider both above together?)
+
+#how to do no2 and no?
+#   eea has nox
+
+#how to do HC
+#   eea has CH4 and NMHC... could add???
+
+#add cng and biodiesel fuels
+#   eea has these for buses
+#      not for coaches
+
+#how to handle euro.class?
+#    1,2,3 etc for cars, I, II, III for larger vehicles
+
+#how to handle fuel correction
+#    currently only coded for diesel bus
+
+#could added method = "eea"
+#    do NEEs as well as exhaust emissions by eea
+#        sergio?
 
 #splatted function
 #' @rdname embrs.local
@@ -81,7 +131,7 @@ embrs_ice <-
 
     #a lot here needs to replicated below in embrs_bev
     #don't think we can generalise at the moment
-    #because of euro.class
+    #because of euro.class + eng.fuel
 
     if(is.null(veh.type) || is.null(veh.wt)){
       stop("[embrs] all vehicles need both veh.type and veh.wt, see help?",
@@ -108,6 +158,7 @@ embrs_ice <-
       ),
       #embrs1 method
       funs = list(
+        ##ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
@@ -122,6 +173,7 @@ embrs_ice <-
     )
     if(tolower(method)=="beddows"){
       .veh$funs <- list(
+        ##ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
@@ -136,6 +188,7 @@ embrs_ice <-
     }
     if(tolower(method)=="embrs2"){
       .veh$funs <- list(
+        ##ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
@@ -344,26 +397,3 @@ embrs_vehicle <-
 
 #doc args
 
-embrs_route <-
-  function(name = NULL, route.def = NULL, route.source = NULL,
-           route.dist = 1, route.slope = 0, ...){
-    if(is.null(route.def) || is.null(route.source)){
-      stop("[embrs] route_...() needs route.def and route.source [see help]",
-           call. = FALSE)
-    }
-    obj <- list(args=list(name=name,
-                          route.def=route.def,
-                          route.source=route.source,
-                          route.dist=route.dist,
-                          route.slope=route.slope,
-                          ...))
-    if(is.null(obj$args$name)){
-      obj$args$name <- paste(obj$args$route.source,  obj$args$route.def, sep=".")
-    }
-    class(obj) <- "embrs_route"
-    out <- list(obj)
-    names(out)[1] <- out[[1]]$args$name
-    out <- list(routes=out)
-    class(out) <- c("embrs", "routes")
-    out
-  }
