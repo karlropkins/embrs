@@ -18,7 +18,7 @@ And as implemented in R package vein:
 Ibarra-Espinosa, S., Ynoue, R., O'Sullivan, S., Pebesma, E., Andrade, M. D. F.,
 and Osses, M.: VEIN v0.2.2: an R package for bottom-up vehicular emissions
 inventories, Geosci. Model Dev., 11, 2209-2229,
-<https://doi.org/10.5194/gmd-11-2209-2018, 2018.>
+\url{https://doi.org/10.5194/gmd-11-2209-2018}, 2018.
 
 Ibarra-Espinosa S (2022). \emph{vein: Vehicular Emissions Inventories}. R package
 version 0.9.9, \url{https://CRAN.R-project.org/package=vein}.

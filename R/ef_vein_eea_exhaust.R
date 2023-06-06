@@ -56,7 +56,7 @@
 #' Ibarra-Espinosa, S., Ynoue, R., O'Sullivan, S., Pebesma, E., Andrade, M. D. F.,
 #' and Osses, M.: VEIN v0.2.2: an R package for bottom-up vehicular emissions
 #' inventories, Geosci. Model Dev., 11, 2209-2229,
-#' <https://doi.org/10.5194/gmd-11-2209-2018, 2018.>
+#' <https://doi.org/10.5194/gmd-11-2209-2018>, 2018.
 #'
 #' Ibarra-Espinosa S (2022). _vein: Vehicular Emissions Inventories_. R package
 #' version 0.9.9, <https://CRAN.R-project.org/package=vein>.
