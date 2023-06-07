@@ -6,12 +6,20 @@
 #' @aliases build_inventory
 #' @description Main functions for embrs emission model anslysis.
 #' @param x (required embrs object) the __embrs__ model to analyse.
+#' @param em.type (character) the emissions types to calculate emission
+#' factors for, options: \code{NULL} to disable and show all calculated
+#' emissions; just.pm' (default) for just PM emissions.
 #' @param verbose (logical) If TRUE, include methods details
 #' when reporting EF predictions.
 #' @param ... other arguments, passed on
 #' @returns These functions return different __embrs__ outputs.
 #' @note These may be moving to vein at some point...
-#' @references add embrs and Beddows references...
+#' @references These functions are based on methods used in Tivey et al (2023):
+#'
+#' Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+#' Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+#' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+#' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
 #############################
 #could see us associating variables with inventories
@@ -37,7 +45,7 @@
 #' @rdname embrs.main
 #' @export
 build_inventory <-
-  function(x, verbose = FALSE, ...){
+  function(x, em.type = NULL, verbose = FALSE, ...){
     #need a nice check for is this an embrs object
     if(class(x)[1] != "embrs" & length(class(x)) != "2"){
       stop("[embrs] this function is only intented for use with embrs objects",
@@ -72,7 +80,25 @@ build_inventory <-
             }
           }
           #run through ef funs
-          ans <- lapply(names(vehicle$funs), function(.fun){
+          ###################################
+          #rather remove unwanted functions here
+          #faster plus can't fall over on any this user does not want run
+          ####################################
+          .funs <- names(vehicle$funs)
+          #######################
+          #temp fix
+          #this will need tidying
+          #########################
+          if(!is.null(em.type)){
+            if(em.type == "just.pm"){
+              .funs <- .funs[grepl("[.]pm", .funs)]
+            }
+          }
+          ###
+          #end temp fix
+          #########################
+
+          ans <- lapply(.funs, function(.fun){
             #pass verbose = TRUE to all vehicle emission functions
             temp <- modifyList(vehicle$args, route$args)
             if(verbose){

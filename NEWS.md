@@ -1,6 +1,9 @@
 # Version 0.0 - Release Notes
 
 * [0.0.8]
+    * added ef_vein_eea_exhaust_nox; added em.type option to build_inventory 
+    and plot; plot defaults to just shows pm emissions rather than all 
+    emissions [2023-06-07]   
     * started restructuring code for non-pm emissions and other vehicle 
     types [2023-06-60] 
 * [0.0.7]

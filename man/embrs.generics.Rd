@@ -18,7 +18,7 @@
 
 \method{print}{embrs}(x, ...)
 
-\method{plot}{embrs}(x, ...)
+\method{plot}{embrs}(x, em.type = "just.pm", ...)
 
 \method{print}{embrs_vehicle}(x, ...)
 
@@ -28,16 +28,21 @@
 }
 \arguments{
 \item{x, y}{function arguments}
+
+\item{em.type}{(for plot only, character) the emissions types to calculate
+emission factors for, special cases: 'just.pm' just PM emissions types;
+\code{NULL} to disable/show all emissions types calculated.}
 }
 \value{
-These functions make vehicle and fleet class embrs objects.
+These functions make vehicle and fleet class \strong{embrs} objects.
 }
 \description{
 Functions to build vehicle, fleet and route objects for use in
 embrs emission models.
 }
 \note{
-These may be moving to vein at some point...
+These functions are in development, so please be aware that options
+outputs may change significantly.
 }
 \references{
 add embrs and Beddows references...

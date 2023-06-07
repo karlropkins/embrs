@@ -3,8 +3,8 @@
 ############################################
 
 #' @name ef_vein_eea_exhaust
-#' @aliases ef_vein_eea_exhaust ef_vein_eea_exhaust_pm2.5
-#' ef_vein_eea_exhaust_pm10
+#' @aliases ef_vein_eea_exhaust ef_vein_eea_exhaust_nox
+#' ef_vein_eea_exhaust_pm2.5 ef_vein_eea_exhaust_pm10
 #' @description Functions to calculate vehicle speed-based hot exhaust
 #' emission factors using on EMEP/EEA guidelines 2019 methods.
 #' @param veh.spd average vehicle speed, in km/h.
@@ -13,7 +13,7 @@
 #' @param veh.segment EEA vehicle sub-classification, specific to vehicle type.
 #' For buses, embrs assigns this using veh.type and veh.wt, so it can often be
 #' ignored.
-#' @param em.type type of emission, currently PM, PM2.5 or PM10, see Note.
+#' @param em.type type of emission, currently NOx, PM (PM2.5 or PM10; see Note).
 #' @param route.def route description, optional for ef_vein_eea() functions.
 #' @param eng.type engine type: ice, etc.
 #' @param eng.fuel fuel used by the vehicle: diesel, biodiesel, cng, etc.
@@ -31,7 +31,7 @@
 #' @param verbose (logical) If TRUE, include methods details
 #' when reporting EF predictions.
 #' @param ... other arguments, currently ignored
-#' @note The embrs::ef_vein_eea functions are currently only coded for
+#' @note The embrs functions are currently only coded for
 #' buses, \code{veh.type="bus"}.
 #'
 #' Strictly, EEA 2019 PM exhaust emission factors are PM, but because
@@ -64,7 +64,7 @@
 #' Fuel corrections are based on:
 #'
 #' TRL Emission Factors - scaling factors for mileage and improvements in fuel quality
-#'  https://www.gov.uk/government/publications/road-vehicle-emission-factors-2009
+#' <https://www.gov.uk/government/publications/road-vehicle-emission-factors-2009>
 #'
 
 
@@ -518,12 +518,11 @@ ef_vein_eea_exhaust <-
 
   }
 
-## #splatted function
-## #' @rdname ef_vein_eea_exhaust
-## #' @export
+#splatted function
+#' @rdname ef_vein_eea_exhaust
+#' @export
 ef_vein_eea_exhaust_nox <- function(em.type = "nox", ...){
   #testing this
-  #so we need to send vein
   ef_vein_eea_exhaust(em.type = "nox", ...)
 }
 

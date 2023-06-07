@@ -2,6 +2,7 @@
 % Please edit documentation in R/ef_vein_eea_exhaust.R
 \name{ef_vein_eea_exhaust}
 \alias{ef_vein_eea_exhaust}
+\alias{ef_vein_eea_exhaust_nox}
 \alias{ef_vein_eea_exhaust_pm2.5}
 \alias{ef_vein_eea_exhaust_pm10}
 \title{ef_vein_eea_exhaust}
@@ -49,6 +50,8 @@ ef_vein_eea_exhaust(
   ...
 )
 
+ef_vein_eea_exhaust_nox(em.type = "nox", ...)
+
 ef_vein_eea_exhaust_pm2.5(em.type = "pm2.5", ...)
 
 ef_vein_eea_exhaust_pm10(em.type = "pm10", ...)
@@ -64,7 +67,7 @@ ef_vein_eea_exhaust_pm10(em.type = "pm10", ...)
 For buses, embrs assigns this using veh.type and veh.wt, so it can often be
 ignored.}
 
-\item{em.type}{type of emission, currently PM, PM2.5 or PM10, see Note.}
+\item{em.type}{type of emission, currently NOx, PM (PM2.5 or PM10; see Note).}
 
 \item{route.def}{route description, optional for ef_vein_eea() functions.}
 
@@ -100,7 +103,7 @@ Functions to calculate vehicle speed-based hot exhaust
 emission factors using on EMEP/EEA guidelines 2019 methods.
 }
 \note{
-The embrs::ef_vein_eea functions are currently only coded for
+The embrs functions are currently only coded for
 buses, \code{veh.type="bus"}.
 
 Strictly, EEA 2019 PM exhaust emission factors are PM, but because

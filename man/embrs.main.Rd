@@ -5,10 +5,14 @@
 \alias{build_inventory}
 \title{embrs}
 \usage{
-build_inventory(x, verbose = FALSE, ...)
+build_inventory(x, em.type = NULL, verbose = FALSE, ...)
 }
 \arguments{
 \item{x}{(required embrs object) the \strong{embrs} model to analyse.}
+
+\item{em.type}{(character) the emissions types to calculate emission
+factors for, options: \code{NULL} to disable and show all calculated
+emissions; just.pm' (default) for just PM emissions.}
 
 \item{verbose}{(logical) If TRUE, include methods details
 when reporting EF predictions.}
@@ -25,5 +29,10 @@ Main functions for embrs emission model anslysis.
 These may be moving to vein at some point...
 }
 \references{
-add embrs and Beddows references...
+These functions are based on methods used in Tivey et al (2023):
+
+Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 }

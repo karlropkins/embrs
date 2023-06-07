@@ -7,8 +7,12 @@
 #' @description Functions to build vehicle, fleet and route objects for use in
 #' embrs emission models.
 #' @param x,y function arguments
-#' @returns These functions make vehicle and fleet class embrs objects.
-#' @note These may be moving to vein at some point...
+#' @param em.type (for plot only, character) the emissions types to calculate
+#' emission factors for, special cases: 'just.pm' just PM emissions types;
+#' \code{NULL} to disable/show all emissions types calculated.
+#' @returns These functions make vehicle and fleet class __embrs__ objects.
+#' @note These functions are in development, so please be aware that options
+#' outputs may change significantly.
 #' @references add embrs and Beddows references...
 
 #######################################
@@ -136,12 +140,12 @@ print.embrs <-
 
 
 plot.embrs <-
-  function(x, ...){
+  function(x, em.type = "just.pm", ...){
     #quick test
     if(class(x)[2]!="model"){
       stop("partially built model? check docs")
     }
-    .da <- build_inventory(x)
+    .da <- build_inventory(x, em.type = em.type, ...)
     #############################
     #these force it to plot in order of
     #occurrence in the build_inventory data.frame
@@ -152,6 +156,11 @@ plot.embrs <-
     .da$route <- factor(.da$route, levels = unique(.da$route))
     .da$em.source <- factor(.da$em.source, levels = rev(unique(.da$em.source)))
     #rev() last because first a bottom of stack seems more sensible...
+
+    .ylab <- "Total Emissions [mg/km]"
+    if(em.type == "just.pm"){
+      .ylab <- "Total Particulate Emissions [mg/km]"
+    }
     if(length(levels(.da$route)) <= 1){
       ##############################
       #including this in case only one or no routes
@@ -160,16 +169,15 @@ plot.embrs <-
       ggplot(data=.da) +
         geom_col(aes(x=vehicle, y=ans,
                      fill=em.source)) +
-        labs(y = "Total Emissions [mg/km]", x="") +
+        labs(y = .ylab, x="") +
         facet_grid(route~em.type, scales="free_y") +
         #scales not needed???
         theme_bw()
 
     } else {
     ggplot(data=.da) +
-      geom_col(aes(x=vehicle, y=ans,
-                                      fill=em.source)) +
-      labs(y = "Total Emissions [mg/km]", x="") +
+      geom_col(aes(x=vehicle, y=ans, fill=em.source)) +
+      labs(y = .ylab, x="") +
       ###############################
       #ylab will need better handling if distance enabled
       #maybe use plot.type argument and have different
