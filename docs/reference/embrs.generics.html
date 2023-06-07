@@ -12,7 +12,7 @@ embrs emission models."><meta property="og:image" content="https://karlropkins.g
     
     <a class="navbar-brand me-2" href="../index.html">embrs</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,7 +64,7 @@ embrs emission models.</p>
 print(x, ...)
 
 # S3 method for embrs
-plot(x, ...)
+plot(x, em.type = "just.pm", ...)
 
 # S3 method for embrs_vehicle
 print(x, ...)
@@ -81,16 +81,23 @@ print(x, ...)</code></pre></div>
     <dl><dt>x, y</dt>
 <dd><p>function arguments</p></dd>
 
+
+<dt>em.type</dt>
+<dd><p>(for plot only, character) the emissions types to calculate
+emission factors for, special cases: 'just.pm' just PM emissions types;
+<code>NULL</code> to disable/show all emissions types calculated.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>These functions make vehicle and fleet class embrs objects.</p>
+<p>These functions make vehicle and fleet class <strong>embrs</strong> objects.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>These may be moving to vein at some point...</p>
+    <p>These functions are in development, so please be aware that options
+outputs may change significantly.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
