@@ -56,13 +56,19 @@
 #think about following
 ################################
 
-#bus_ice as base case
-#bus_ice_embrs1 wrapper
-#bus_beddows and bus_embrs2 modifications...?
+#previous structure
+#    bus_ice as base case
+#    bus_ice_embrs1 wrapper
+#    bus_beddows and bus_embrs2 modifications...?
+#now
+#    bus_ice(..., method)
+#        where method is "beddows", "embrs1", "embrs2"
 
 #pass users args to .bus <- bus_ice(...)
 #.bus <- embrs_vehicle(x=.bus[[1]][[1]], ****) my settings
 #.bus <- embrs_vehicle(x=.bus[[1]][[1]], ...) user settings
+
+#used this with previous stucture...
 
 #export embrs_vehicle???
 
@@ -98,6 +104,28 @@ bus_ice <-
     embrs_ice(veh.wt = veh.wt, eng.fuel = eng.fuel, euro.class = euro.class,
               ..., veh.type = veh.type)
   }
+
+
+
+## #splatted function
+## #' @rdname bus.objects
+## #' @export
+
+bus_hybrid <-
+  function(veh.wt = NULL, eng.fuel = NULL, euro.class = NULL, ...,
+           veh.type = "bus"){
+    if(is.null(veh.wt)){
+      stop("[embrs] bus...() needs veh.wt, see help?",
+           call.=FALSE)
+    }
+    if(is.null(eng.fuel) || is.null(euro.class)){
+      stop("[embrs] bus_hybrid...() needs both eng.fuel and euro.class, see help?",
+           call.=FALSE)
+    }
+    embrs_hybrid(veh.wt = veh.wt, eng.fuel = eng.fuel, euro.class = euro.class,
+              ..., veh.type = veh.type)
+  }
+
 
 #splatted function
 #' @rdname bus.objects

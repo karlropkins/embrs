@@ -2,13 +2,13 @@
 
 * [0.0.8]
     * added ef_vein_eea_exhaust_nox; added em.type option to build_inventory 
-    and plot; plot defaults to just shows pm emissions rather than all 
+    and plot; plot defaults to just showing pm emissions rather than all 
     emissions [2023-06-07]   
     * started restructuring code for non-pm emissions and other vehicle 
     types [2023-06-60] 
 * [0.0.7]
     * replaced separate beddows, embrs1 and embrs2 vehicle models with one 
-    model with extra argument method = "beddows"; in embrs_ice, etc. 
+    model with extra argument method = "beddows", "embrs1" or "embrs1" 
     [2023-06-05] 
     * replaced ef_eea2019 with ef_vein_eea [2023-06-02]
     * added verbose argument to all ef functions and build_inventory; 

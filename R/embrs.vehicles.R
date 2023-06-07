@@ -64,24 +64,50 @@
 ##############################
 #done: bus
 #doing: coach
-#proposing: truck (hgv), van (n1 to n3), car, motorcycle,
+#      added option to veh.type handling in ef_vein_eea_exhaust
+#            check remarks there about testing subseting
+#            (not all options/combinations allowed)
+#      THIS NEEDS handling for
+#             look-ups for naei spd and ukbc parameters (maybe as bus?)
+#             fuel correction (maybe as bus?)
+#                  handling of both keeps documenting
+#
+#proposing: truck (hgv), van (n1 to n3), car (various sizes),
+#       motorcycle (various types),
 #but large job to get right...
 
 #eng type
 #############################
 #done: ice, bev,
-#doing:
-#proposing: hybrid, bifuel?
+#doing/testing: hybrid
+#         unexported object added embrs_hybrid below
+#             will need exporting and documenting when ready to go...
+#         unexported object bus_hybrid added to bus.objects
+#             will have to do same for all vehicle types
+#             will need to export and document when ready to go...
+#         added hybrid as eng.type option in ef_vein_eea_exhaust
+#             will also need considering for any other ef..exhaust functions
+
+#   STOP/check in sergio:
+#         hybrid looks like big bus
+
+#proposing: bifuel?
 
 #em.type
 #############################
 #done: exh pm (10 & 2.5), brake pm (10 & 2.5), tyre pm (10 & 2.5)
 #      road pm (10 & 2.5), resusp pm (10 & 2.5)
-#doing: nox
+#doing/testing: nox
 #       wrote ef_vein_eea_exhaust_nox wrapper in ef_vein_eea_exhaust.R.
-#       added ef_vein_eea_exhaust_nox to funs in all three method folders
-#             BUT currently remarked off
-#       also needs handling in build_inventory and plot.embrs
+#              wrote, exported and documented
+#       added ef_vein_eea_exhaust_nox to funs in all three method options
+#              in embrs_ice
+#              [will also need it in any embrs_[eng.type] model with exhaust
+#              emissions]
+#
+#       NB: handling in build_inventory and plot.embrs using additional
+#             argument em.type, allows calculate/plot all or just.pm emissions
+#
 #proposing: gaseous species, co, hc; others in eea???
 
 
@@ -120,7 +146,7 @@
 #        sergio?
 
 #splatted function
-#' @rdname embrs.local
+#' @rdname embrs.vehicles
 #' @export
 
 embrs_ice <-
@@ -211,6 +237,103 @@ embrs_ice <-
     #last.warning <- last.warning[!duplicated(last.warning)]
     embrs_vehicle(name=name, x=.veh, ...)
   }
+
+
+## #splatted function
+## #' @rdname embrs.vehicles
+## #' @export
+
+#not exporting or documenting this yet...
+
+embrs_hybrid <-
+  function(veh.wt = NULL, veh.type = NULL, eng.fuel = NULL, euro.class = NULL,
+           n = 1, method = "embrs1", name = NULL, ...){
+    #default ice vehicle build for general use model
+    #(ice_embrs1)
+
+    #a lot here needs to replicated from in embrs_ice
+    #don't think we can generalise at the moment
+    #because might be differences later
+
+    if(is.null(veh.type) || is.null(veh.wt)){
+      stop("[embrs] all vehicles need both veh.type and veh.wt, see help?",
+           call.=FALSE)
+    }
+    if(is.null(eng.fuel) || is.null(euro.class)){
+      stop("[embrs] all ice vehicles...() need both eng.fuel and euro.class, see help?",
+           call.=FALSE)
+    }
+    ###############################
+    #could add extra checks here
+    #etc does this look like a hybrid
+    #     e.g. is fuel a mix??
+    #     e.g. diesel+electric has +
+    ################################
+
+    if(!tolower(method) %in% c("beddows", "embrs1", "embrs2")){
+      stop("[embrs] unknown vehicle emission model, see help?",
+           call.=FALSE)
+    }
+
+    .veh <- list(
+      args = list(
+        n = n,
+        veh.type = veh.type,
+        veh.wt = veh.wt,
+        eng.type = "hybrid",
+        eng.fuel = eng.fuel,
+        euro.class = euro.class,
+        brk.regen = FALSE
+      ),
+      #embrs1 method
+      funs = list(
+        ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_embrs1_brake_pm10,
+        ef.tyre.pm10 = ef_embrs1_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    )
+    if(tolower(method)=="beddows"){
+      .veh$funs <- list(
+        ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
+        ef.road.pm2.5 = ef_beddows_road_pm2.5,
+        ef.resusp.pm2.5 = ef_beddows_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_beddows_brake_pm10,
+        ef.tyre.pm10 = ef_beddows_tyre_pm10,
+        ef.road.pm10 = ef_beddows_road_pm10,
+        ef.resusp.pm10 = ef_beddows_resusp_pm10
+      )
+    }
+    if(tolower(method)=="embrs2"){
+      .veh$funs <- list(
+        ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
+        ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
+        ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
+        ef.road.pm2.5 = ef_embrs1_road_pm2.5,
+        ef.resusp.pm2.5 = ef_embrs1_resusp_pm2.5,
+        ef.exh.pm10 = ef_vein_eea_exhaust_pm10,
+        ef.brake.pm10 = ef_embrs2_brake_pm10,
+        ef.tyre.pm10 = ef_embrs2_tyre_pm10,
+        ef.road.pm10 = ef_embrs1_road_pm10,
+        ef.resusp.pm10 = ef_embrs1_resusp_pm10
+      )
+    }
+
+    embrs_vehicle(name=name, x=.veh, ...)
+  }
+
 
 
 #splatted function

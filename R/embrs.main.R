@@ -41,6 +41,9 @@
 #stop("[embrs] bus...() needs veh.wt, see help?",
 #     call.=FALSE)
 
+#need to think about veh.spd
+#if supplied to the vehicle, version in route supersedes
+#    does this need a warning or handling??
 
 #' @rdname embrs.main
 #' @export
@@ -91,6 +94,10 @@ build_inventory <-
           #########################
           if(!is.null(em.type)){
             if(em.type == "just.pm"){
+              #######################
+              #watch this
+              #works as longer as ".pm" is unique to pm ef function naming
+              #      in the embrs_vehicle objects
               .funs <- .funs[grepl("[.]pm", .funs)]
             }
           }

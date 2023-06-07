@@ -76,7 +76,7 @@
 #now added as imports
 
 #standardise error messaging in function
-#see note or format in embrs.local as used in e.g. embrs_ice
+#see note or format in embrs.vehicles (as embrs.local) as used in e.g. embrs_ice
 
 
 #issue
@@ -87,12 +87,16 @@
 #note
 ###############################
 #this code is still very messy...
-#
+#     but DON'T start simplifying until we have multiple
+#     vehicle, engine technologies, fuels and emissions
+#     types up and running...
 
 #need to think about
 ##############################
 #fuel
 #exh.tech
+
+
 
 
 
@@ -149,7 +153,7 @@ ef_vein_eea_exhaust <-
     #might also need euro.class??
     if(is.null(veh.spd) || is.null(veh.type) || is.null(eng.fuel) ||
        is.null(em.type)|| is.null(euro.class)){
-      stop(paste("[embrs>] ef_vein_eea_exhaust(): EEA needs at least:\n",
+      stop(paste("[embrs] ef_vein_eea_exhaust(): EEA needs at least:\n",
                  "\t veh.spd, veh.type, eng.fuel, em.type, euro.class",
                  sep=""),
            call. = FALSE
@@ -178,7 +182,7 @@ ef_vein_eea_exhaust <-
         .eea <- .eea[grepl("coach", tolower(.eea$Segment)),]
       }
     } else {
-      stop("[embrs>] ef_vein_eea_exhaust(): unknown vehicle type (veh.type);",
+      stop("[embrs] ef_vein_eea_exhaust(): unknown vehicle type (veh.type);",
            "\n\tmaybe one of: bus, coach",
            call. = FALSE
       )
@@ -188,14 +192,32 @@ ef_vein_eea_exhaust <-
     #.fuel
     #so far only allowing diesel, biodiesel and cng
     #so this will not work with an electric vehicle
-    if(!is.null(eng.type) && eng.type %in% c("ice")){
+    #nb, used:
+    ## test <- data.table::setDT(vein:::sysdata[["eea"]])
+    ## unique(test[test$Category=="BUS",]$Fuel)
+    ## # all that are hybrid
+    ## unique(test[test$Category=="BUS" & grepl("hybrid", tolower(test$Segment)),]$Fuel)
+    ## # all that are not hybrid (standard ice)
+    ## unique(test[test$Category=="BUS" & !grepl("hybrid", tolower(test$Segment)),]$Fuel)
+    ## unique(test[test$Category=="BUS" & grepl("hybrid", tolower(test$Segment)) & test$Fuel=="D HY D",]$Pollutant)
+    ## [1] "CO"   "NOx"  "NMHC" "PM"   "EC"   "CH4"  "NH3"  "N2O"
+    ## unique(test[test$Category=="BUS" & grepl("hybrid", tolower(test$Segment)) & test$Fuel=="D HY ELEC",]$Pollutant)
+    ## [1] "EC"
+    ## #so currently ignoring D HY ELEC...
+
+    if(!is.null(eng.type) && eng.type %in% c("ice", "hybrid")){
       if(eng.type == "ice"){
         d1 <- c("diesel", "biodiesel", "cng")
         d2 <- c("D", "BIO D", "CNG")
       }
+      if(eng.type == "hybrid"){
+        d1 <- c("diesel+electric")
+        d2 <- c("D HY D")
+      }
+
     } else {
-      stop("[embrs>] ef_vein_eea_exhaust(): Unknown engine type (eng.type);",
-           "\n\tmaybe one of: ice",
+      stop("[embrs] ef_vein_eea_exhaust(): Unknown engine type (eng.type);",
+           "\n\tmaybe one of: ice, hybrid",
            call. = FALSE
       )
     }
@@ -209,7 +231,7 @@ ef_vein_eea_exhaust <-
     ref <- unique(.eea$Fuel)
     ref2 <- d1[d2 %in% ref]
     if(!.fuel %in% ref){
-      stop("in embrs:ef_vein_eea_exhaust()",
+      stop("[embrs] ef_vein_eea_exhaust()",
            "\n    Unknown vehicle, engine and fuel combination ",
            "\n    ", veh.type, "; ", eng.type, "; ", eng.fuel,
            "\n    maybe try one of: ", paste(ref2, collapse = ", "),
@@ -227,7 +249,12 @@ ef_vein_eea_exhaust <-
       .segment <- veh.segment
     } else {
       if(is.null(veh.wt)){
-        stop("[embrs] ef_vein_eea_exhaust...(): Need one of veh.wt or veh.segment",
+        ############################
+        #strictly we only need weight
+        #if segment is not set
+        #   or if only one segment
+        ############################
+        stop("[embrs] ef_vein_eea_exhaust(): Need one of veh.wt or veh.segment",
              call. = FALSE
         )
       } else {
@@ -261,7 +288,7 @@ ef_vein_eea_exhaust <-
     }
     ref <- unique(.eea$Segment)
     if(!.segment %in% ref){
-      stop("[embrs>] ef_vein_eea_exhaust(): Unknown vehicle segment (veh.segment)",
+      stop("[embrs] ef_vein_eea_exhaust(): Unknown vehicle segment (veh.segment)",
            "\n\tmaybe one of: ", paste(ref, collapse = ", "),
            call. = FALSE
       )
@@ -281,7 +308,7 @@ ef_vein_eea_exhaust <-
     }
     ref <- unique(.eea$Pollutant)
     if(!.pollutant %in% ref){
-      stop("[embrs>] ef_vein_eea_exhaust(): Unknown emission type (em.type)",
+      stop("[embrs] ef_vein_eea_exhaust(): Unknown emission type (em.type)",
            "\n\tmaybe one of: ", paste(ref, collapse = ", "),
            call. = FALSE
       )
@@ -305,7 +332,7 @@ ef_vein_eea_exhaust <-
     ref <- ref[ref %in% d2]
     if(!.eurostandard %in% ref){
       print(.eurostandard)
-      stop("[embrs>] ef_vein_eea_exhaust(): UNknown EURO classification (euro.class)",
+      stop("[embrs] ef_vein_eea_exhaust(): UNknown EURO classification (euro.class)",
            "\n\tmaybe one of: ", paste(ref, collapse = ", "),
            call. = FALSE
       )
@@ -318,7 +345,7 @@ ef_vein_eea_exhaust <-
       if(length(unique(.eea$Technology))==1){
         .technology <- unique(.eea$Technology)
       } else {
-        stop("[embrs>] ef_vein_eea_exhaust(): Unknown exhaust technology (exh.tech)",
+        stop("[embrs] ef_vein_eea_exhaust(): Unknown exhaust technology (exh.tech)",
              "\n\tmaybe one of: ", paste(unique(.eea$Technology), collapse = ", "),
              call. = FALSE
         )
@@ -328,7 +355,7 @@ ef_vein_eea_exhaust <-
       if(tolower(exh.tech) %in% tolower(ref)){
         .technology <- ref[tolower(exh.tech) == tolower(ref)]
       } else {
-        stop("[embrs>] ef_vein_eea_exhaust(): Unknown exhaust technology (exh.tech)",
+        stop("[embrs] ef_vein_eea_exhaust(): Unknown exhaust technology (exh.tech)",
              "\n\tmaybe one of: ", paste(unique(.eea$Technology), collapse = ", "),
              call. = FALSE
         )
@@ -354,7 +381,7 @@ ef_vein_eea_exhaust <-
     if(route.mode %in% ref){
       .mode <- route.mode
     } else {
-      stop("[embrs>] ef_vein_eea_exhaust(): Unknown route mode (route.mode)",
+      stop("[embrs] ef_vein_eea_exhaust(): Unknown route mode (route.mode)",
            "\n\tmaybe one of: ", paste(unique(.eea$Mode), collapse = ", "),
            call. = FALSE
       )
@@ -383,7 +410,7 @@ ef_vein_eea_exhaust <-
       if(any(is.na(ref))){
         .roadslope <- NA
       } else {
-        stop("[embrs>] ef_vein_eea_exhaust(): Unknown route slope (route.slope)",
+        stop("[embrs] ef_vein_eea_exhaust(): Unknown route slope (route.slope)",
              "\n\tmaybe one of: ", paste(unique(.eea$RoadSlope), collapse = ", "),
              call. = FALSE
         )
@@ -414,7 +441,7 @@ ef_vein_eea_exhaust <-
       if(any(is.na(ref))){
         .load <- NA
       } else {
-        stop("[embrs>] ef_vein_eea_exhaust(): Unknown engine load (eng.load)",
+        stop("[embrs] ef_vein_eea_exhaust(): Unknown engine load (eng.load)",
              "\n\tmaybe one of: ", paste(unique(.eea$Load), collapse = ", "),
              call. = FALSE
         )
@@ -518,7 +545,14 @@ ef_vein_eea_exhaust <-
 
   }
 
-#splatted function
+
+
+###################################
+#ef_vein_eea_exhaust warppers
+###################################
+
+
+# eea hot exhaust nox
 #' @rdname ef_vein_eea_exhaust
 #' @export
 ef_vein_eea_exhaust_nox <- function(em.type = "nox", ...){
@@ -527,7 +561,7 @@ ef_vein_eea_exhaust_nox <- function(em.type = "nox", ...){
 }
 
 
-#splatted function
+# eea hot exhaust pm2.5
 #' @rdname ef_vein_eea_exhaust
 #' @export
 ef_vein_eea_exhaust_pm2.5 <- function(em.type = "pm2.5", ...){
@@ -536,7 +570,8 @@ ef_vein_eea_exhaust_pm2.5 <- function(em.type = "pm2.5", ...){
   ef_vein_eea_exhaust(em.type = "pm2.5", ...)
 }
 
-#splatted function
+
+# eea hot exhaust pm10
 #' @rdname ef_vein_eea_exhaust
 #' @export
 ef_vein_eea_exhaust_pm10 <- function(em.type = "pm10", ...){

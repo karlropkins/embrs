@@ -116,6 +116,7 @@ route_ukbc_oir <-
     route_ukbc_outerlondon(...) + route_ukbc_innerlondon(...) + route_ukbc_rural(...)
   }
 
+
 ######################
 #see route_naei_urm
 #  about naming
@@ -125,6 +126,9 @@ route_ukbc_oir <-
 ################################
 #unexported functions
 ###############################
+
+#embrs_route
+#workhorse for route objects
 
 embrs_route <-
   function(name = NULL, route.def = NULL, route.source = NULL,
