@@ -203,7 +203,7 @@ ef_vein_eea_exhaust <-
     ## [1] "CO"   "NOx"  "NMHC" "PM"   "EC"   "CH4"  "NH3"  "N2O"
     ## unique(test[test$Category=="BUS" & grepl("hybrid", tolower(test$Segment)) & test$Fuel=="D HY ELEC",]$Pollutant)
     ## [1] "EC"
-    ## #so currently ignoring D HY ELEC...
+    ## #so currently ignoring hybrid option D HY ELEC... because only EC...
 
     if(!is.null(eng.type) && eng.type %in% c("ice", "hybrid")){
       if(eng.type == "ice"){

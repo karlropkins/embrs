@@ -4,7 +4,7 @@
 
 #' @name embrs.vehicles
 #' @aliases embrs_ice embrs_bev
-#' @description Common builds for __embrs__ vehicle builds.
+#' @description Common builds for __embrs__ vehicle objects.
 #' @param veh.wt (required numeric) weight of vehicle in kg.
 #' @param veh.type (required character) type of vehicle, e.g bus.
 #' @param eng.fuel (required character) the engine fuel used by the vehicle,
@@ -88,8 +88,10 @@
 #         added hybrid as eng.type option in ef_vein_eea_exhaust
 #             will also need considering for any other ef..exhaust functions
 
-#   STOP/check in sergio:
+#   STOP:
 #         hybrid looks like big bus
+#             check with Sergio
+#             see if in example report from early bus work
 
 #proposing: bifuel?
 
