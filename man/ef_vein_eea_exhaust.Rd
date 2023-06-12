@@ -27,7 +27,7 @@ version 0.9.9, \url{https://CRAN.R-project.org/package=vein}.
 Fuel corrections are based on:
 
 TRL Emission Factors - scaling factors for mileage and improvements in fuel quality
-https://www.gov.uk/government/publications/road-vehicle-emission-factors-2009
+\url{https://www.gov.uk/government/publications/road-vehicle-emission-factors-2009}
 }
 \usage{
 ef_vein_eea_exhaust(

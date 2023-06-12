@@ -16,15 +16,6 @@ embrs_ice(
   name = NULL,
   ...
 )
-
-embrs_bev(
-  veh.wt = NULL,
-  veh.type = NULL,
-  n = 1,
-  method = "embrs1",
-  name = NULL,
-  ...
-)
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}
@@ -56,7 +47,7 @@ emissions models. The main models ice_build and bev_build are for internal
 compression engine and battery electric vehicles, respectively.
 }
 \description{
-Common builds for \strong{embrs} vehicle builds.
+Common builds for \strong{embrs} vehicle objects.
 }
 \note{
 Work in progress; these may change...
