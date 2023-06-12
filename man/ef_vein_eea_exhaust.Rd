@@ -4,6 +4,8 @@
 \alias{ef_vein_eea_exhaust}
 \alias{ef_vein_eea_exhaust_co}
 \alias{ef_vein_eea_exhaust_nox}
+\alias{ef_vein_eea_exhaust_ch4}
+\alias{ef_vein_eea_exhaust_nmhc}
 \alias{ef_vein_eea_exhaust_pm2.5}
 \alias{ef_vein_eea_exhaust_pm10}
 \title{ef_vein_eea_exhaust}
@@ -51,6 +53,10 @@ ef_vein_eea_exhaust(
   ...
 )
 
+ef_vein_eea_exhaust_ch4(em.type = "ch4", ...)
+
+ef_vein_eea_exhaust_nmhc(em.type = "nmhc", ...)
+
 ef_vein_eea_exhaust_co(em.type = "co", ...)
 
 ef_vein_eea_exhaust_nox(em.type = "nox", ...)
@@ -70,7 +76,8 @@ ef_vein_eea_exhaust_pm10(em.type = "pm10", ...)
 For buses, embrs assigns this using veh.type and veh.wt, so it can often be
 ignored.}
 
-\item{em.type}{type of emission, currently CO, NOx, PM (PM2.5 or PM10; see Note).}
+\item{em.type}{type of emission, currently CO, NOx, CH4, NMHC and
+PM (PM2.5 or PM10; see Note).}
 
 \item{route.def}{route description, optional for ef_vein_eea() functions.}
 

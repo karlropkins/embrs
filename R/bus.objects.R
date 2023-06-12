@@ -50,7 +50,8 @@
 #make default embrs1 speed model? means all current routes would work
 
 #add bus_hybrid and bus_bifuel
-
+#    added but not exporting bus_hybrid
+#       next to check in with sergio... looks odd
 
 
 #think about following

@@ -188,6 +188,8 @@ embrs_ice <-
       funs = list(
         ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
@@ -204,6 +206,8 @@ embrs_ice <-
       .veh$funs <- list(
         ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
@@ -220,6 +224,8 @@ embrs_ice <-
       .veh$funs <- list(
         ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
@@ -292,7 +298,10 @@ embrs_hybrid <-
       ),
       #embrs1 method
       funs = list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs1_tyre_pm2.5,
@@ -307,7 +316,10 @@ embrs_hybrid <-
     )
     if(tolower(method)=="beddows"){
       .veh$funs <- list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
         ef.tyre.pm2.5 = ef_beddows_tyre_pm2.5,
@@ -322,7 +334,10 @@ embrs_hybrid <-
     }
     if(tolower(method)=="embrs2"){
       .veh$funs <- list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
+        ef.exh.ch4 = ef_vein_eea_exhaust_ch4,
+        ef.exh.nmhc = ef_vein_eea_exhaust_nmhc,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
         ef.tyre.pm2.5 = ef_embrs2_tyre_pm2.5,
