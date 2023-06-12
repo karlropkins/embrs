@@ -3,7 +3,7 @@
 ############################################
 
 #' @name ef_vein_eea_exhaust
-#' @aliases ef_vein_eea_exhaust ef_vein_eea_exhaust_nox
+#' @aliases ef_vein_eea_exhaust ef_vein_eea_exhaust_co ef_vein_eea_exhaust_nox
 #' ef_vein_eea_exhaust_pm2.5 ef_vein_eea_exhaust_pm10
 #' @description Functions to calculate vehicle speed-based hot exhaust
 #' emission factors using on EMEP/EEA guidelines 2019 methods.
@@ -13,7 +13,7 @@
 #' @param veh.segment EEA vehicle sub-classification, specific to vehicle type.
 #' For buses, embrs assigns this using veh.type and veh.wt, so it can often be
 #' ignored.
-#' @param em.type type of emission, currently NOx, PM (PM2.5 or PM10; see Note).
+#' @param em.type type of emission, currently CO, NOx, PM (PM2.5 or PM10; see Note).
 #' @param route.def route description, optional for ef_vein_eea() functions.
 #' @param eng.type engine type: ice, etc.
 #' @param eng.fuel fuel used by the vehicle: diesel, biodiesel, cng, etc.
@@ -548,8 +548,16 @@ ef_vein_eea_exhaust <-
 
 
 ###################################
-#ef_vein_eea_exhaust warppers
+#ef_vein_eea_exhaust wrappers
 ###################################
+
+# eea hot exhaust nox
+#' @rdname ef_vein_eea_exhaust
+#' @export
+ef_vein_eea_exhaust_co <- function(em.type = "co", ...){
+  #testing this
+  ef_vein_eea_exhaust(em.type = "co", ...)
+}
 
 
 # eea hot exhaust nox

@@ -1,6 +1,7 @@
 # Version 0.0 - Release Notes
 
 * [0.0.8]
+    * added ef_vein_eea_exhaust wrappers for co [2023-06-12]
     * add plot.type to plot(embrs); NB embrs paper plot no longer 
     default plot output [2023-06-12]
     * added route_veh_spd [2023-06-12]

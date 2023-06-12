@@ -186,6 +186,7 @@ embrs_ice <-
       ),
       #embrs1 method
       funs = list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs1_brake_pm2.5,
@@ -201,6 +202,7 @@ embrs_ice <-
     )
     if(tolower(method)=="beddows"){
       .veh$funs <- list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_beddows_brake_pm2.5,
@@ -216,6 +218,7 @@ embrs_ice <-
     }
     if(tolower(method)=="embrs2"){
       .veh$funs <- list(
+        ef.exh.co = ef_vein_eea_exhaust_co,
         ef.exh.nox = ef_vein_eea_exhaust_nox,
         ef.exh.pm2.5 = ef_vein_eea_exhaust_pm2.5,
         ef.brake.pm2.5 = ef_embrs2_brake_pm2.5,
