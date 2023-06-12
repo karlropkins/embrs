@@ -7,13 +7,25 @@
 #' @description Functions to build vehicle, fleet and route objects for use in
 #' embrs emission models.
 #' @param x,y function arguments
-#' @param em.type (for plot only, character) the emissions types to calculate
-#' emission factors for, special cases: 'just.pm' just PM emissions types;
+#' @param em.type (for plot only, character) the emissions to generate plot
+#' for, options: 'all' for all emissions types, or 'just.pm' for just
+#' particulates. See Note.
+#' @param plot.type (for plot only, character) the type of plot to generate,
+#' options: 'by.em' standard plot; 'by.vehicle'.
+#' See Note.
 #' \code{NULL} to disable/show all emissions types calculated.
 #' @returns These functions make vehicle and fleet class __embrs__ objects.
 #' @note These functions are in development, so please be aware that options
 #' outputs may change significantly.
-#' @references add embrs and Beddows references...
+#' plot.type = 'by.vehicle' and em.type = 'just.pm' produces plots like those
+#' used in Tivey el al (2023) to compare particulate emissions from different
+#' buses types.
+#' @references
+#' Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+#' Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+#' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+#' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
+
 
 #######################################
 #copy stop() style from +.embrs and apply to others
@@ -25,13 +37,13 @@
 `+.embrs` <-
   function(x, y, ...){
     if(class(y)[1] != "embrs"){
-      stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+      stop("[embrs] can't add a ", paste(class(y), collapse="_"),
            " to a [embrs] object!",
            call. = FALSE)
     }
     if("fleet" %in% class(x)){
       if(!"fleet" %in% class(y)){
-        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
              " to a [embrs_fleet] object!",
              call. = FALSE)
       }
@@ -138,12 +150,18 @@ print.embrs <-
 #could add options to set x and y labels, etc.
 #
 
-
 plot.embrs <-
-  function(x, em.type = "just.pm", ...){
+  function(x, plot.type = "by.em", em.type = "all", ...){
     #quick test
     if(class(x)[2]!="model"){
       stop("partially built model? check docs")
+    }
+#this about this...
+#will be a better way...
+    .ylab <- if(em.type=="just.pm"){
+      "Total Particulate Emissions [mg/km]"
+    } else {
+      "Total Emissions [mg/km]"
     }
     .da <- build_inventory(x, em.type = em.type, ...)
     #############################
@@ -157,35 +175,47 @@ plot.embrs <-
     .da$em.source <- factor(.da$em.source, levels = rev(unique(.da$em.source)))
     #rev() last because first a bottom of stack seems more sensible...
 
-    .ylab <- "Total Emissions [mg/km]"
-    if(em.type == "just.pm"){
-      .ylab <- "Total Particulate Emissions [mg/km]"
-    }
-    if(length(levels(.da$route)) <= 1){
-      ##############################
-      #including this in case only one or no routes
-      #might drop or remove strip
-      #############################
-      ggplot(data=.da) +
-        geom_col(aes(x=vehicle, y=ans,
-                     fill=em.source)) +
-        labs(y = .ylab, x="") +
-        facet_grid(route~em.type, scales="free_y") +
-        #scales not needed???
-        theme_bw()
+    if(plot.type=="by.vehicle"){
+      #embrs paper plot
+      if(length(levels(.da$route)) <= 1){
+        ##############################
+        #including this in case only one or no routes
+        #might drop or remove strip
+        #############################
+        ggplot(data=.da) +
+          geom_col(aes(x=vehicle, y=ans,
+                       fill=em.source)) +
+          labs(y = .ylab, x="") +
+          facet_grid(route~em.type, scales="free_y") +
+          #scales not needed???
+          theme_bw()
 
+      } else {
+        ggplot(data=.da) +
+          geom_col(aes(x=vehicle, y=ans, fill=em.source)) +
+          labs(y = .ylab, x="") +
+          ###############################
+        #ylab will need better handling if distance enabled
+        #maybe use plot.type argument and have different
+        #types of plot
+        #################################
+        facet_grid(em.type~route, scales="free_y") +
+          #scales not needed???
+          theme_bw()
+      }
     } else {
-    ggplot(data=.da) +
-      geom_col(aes(x=vehicle, y=ans, fill=em.source)) +
-      labs(y = .ylab, x="") +
-      ###############################
+      #default plot
+      ggplot(data=.da) +
+        geom_col(aes(x=em.type, y=ans, fill=em.source)) +
+        labs(y = .ylab, x="") +
+        ###############################
       #ylab will need better handling if distance enabled
       #maybe use plot.type argument and have different
       #types of plot
       #################################
-      facet_grid(em.type~route, scales="free_y") +
-      #scales not needed???
-      theme_bw()
+      facet_grid(vehicle~route, scales="free_y") +
+        #scales not needed???
+        theme_bw()
     }
   }
 

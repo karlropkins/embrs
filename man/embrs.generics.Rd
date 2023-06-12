@@ -18,7 +18,7 @@
 
 \method{print}{embrs}(x, ...)
 
-\method{plot}{embrs}(x, em.type = "just.pm", ...)
+\method{plot}{embrs}(x, plot.type = "by.em", em.type = "all", ...)
 
 \method{print}{embrs_vehicle}(x, ...)
 
@@ -29,9 +29,14 @@
 \arguments{
 \item{x, y}{function arguments}
 
-\item{em.type}{(for plot only, character) the emissions types to calculate
-emission factors for, special cases: 'just.pm' just PM emissions types;
+\item{plot.type}{(for plot only, character) the type of plot to generate,
+options: 'by.em' standard plot; 'by.vehicle'.
+See Note.
 \code{NULL} to disable/show all emissions types calculated.}
+
+\item{em.type}{(for plot only, character) the emissions to generate plot
+for, options: 'all' for all emissions types, or 'just.pm' for just
+particulates. See Note.}
 }
 \value{
 These functions make vehicle and fleet class \strong{embrs} objects.
@@ -43,7 +48,13 @@ embrs emission models.
 \note{
 These functions are in development, so please be aware that options
 outputs may change significantly.
+plot.type = 'by.vehicle' and em.type = 'just.pm' produces plots like those
+used in Tivey el al (2023) to compare particulate emissions from different
+buses types.
 }
 \references{
-add embrs and Beddows references...
+Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 }

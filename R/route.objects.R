@@ -42,7 +42,7 @@ route_veh_spd <- function(veh.spd=NULL, name=NULL, route.def=NULL,
     name <- paste("veh.spd:", veh.spd, "km/hr", sep="")
   }
   if(is.null(route.def)){
-    route.def <- paste("spd", veh.spd, "km/hr", sep="")
+    route.def <- paste("spd.", veh.spd, sep="")
   }
   if(is.null(route.source)){
     route.source <- "[user]"

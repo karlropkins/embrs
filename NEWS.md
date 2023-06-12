@@ -1,6 +1,8 @@
 # Version 0.0 - Release Notes
 
 * [0.0.8]
+    * add plot.type to plot(embrs); NB embrs paper plot no longer 
+    default plot output [2023-06-12]
     * added route_veh_spd [2023-06-12]
     * added ef_vein_eea_exhaust_nox; added em.type option to build_inventory 
     and plot; plot defaults to just showing pm emissions rather than all 
