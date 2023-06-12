@@ -3,15 +3,15 @@
 ############################################
 
 #' @name route.objects
-#' @aliases route_naei_rural route_naei_urban route_naei_motorway
-#' route_naei_urm
+#' @aliases route_veh_spd route_naei_rural route_naei_urban
+#' route_naei_motorway route_naei_urm
 #' @description Route objects for use in embrs models.
+#' @param veh.spd (numeric or function) the vehicle speed in km/hr.
 #' @param name (character) optional object name, by default the route source and type.
 #' @param route.def (character) required route description.
 #' @param route.source (character) required source of route model.
 #' @param route.dist (numeric) route or journey distance in km, default 1.
 #' @param route.slope (numeric) route or journey slope, default 0.
-#' @param veh.spd (numeric or function) the vehicle speed in km/hr.
 #' @param ... other arguments, currently ignored.
 ## #' @returns These functions make route class embrs objects.
 #' @note trying to streamline these, so likely to be subject to change
@@ -21,13 +21,35 @@
 ########################
 #to think about
 ########################
+
 #think about naming
 #if declared in call not handled nicely when summing...
 #   local fix or
 #   make a names function for embrs objects???
 
-#think about a route_veh_spd() function???
-#   could be basic route object
+# simple example to do???
+
+#splatted function
+#' @rdname route.objects
+#' @export
+route_veh_spd <- function(veh.spd=NULL, name=NULL, route.def=NULL,
+                          route.source=NULL, ...){
+  if(is.null(veh.spd)){
+    stop("[embrs] route_veh_spd() needs vehicle speed (veh.spd), see help?",
+         call.=FALSE)
+  }
+  if(is.null(name)){
+    name <- paste("veh.spd:", veh.spd, "km/hr", sep="")
+  }
+  if(is.null(route.def)){
+    route.def <- paste("spd", veh.spd, "km/hr", sep="")
+  }
+  if(is.null(route.source)){
+    route.source <- "[user]"
+  }
+  embrs_route(name=name, route.def=route.def, route.source = route.source,
+              veh.spd=veh.spd, ...)
+}
 
 
 #splatted function

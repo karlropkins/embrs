@@ -8,6 +8,8 @@
 #' ef_embrs1_resusp_pm2.5
 #' ef_embrs1_brake_pm10 ef_embrs1_tyre_pm10 ef_embrs_road1_pm10
 #' ef_embrs1_resusp_pm10
+#' ef_embrs2_brake_pm2.5 ef_embrs2_tyre_pm2.5 ef_embrs2_brake_pm10
+#' ef_embrs1_tyre_pm10
 #' @description Functions to estimated vehicle weight, speed and brake-work-based
 #' non-exhaust PM2.5 and PM10 emission factors based the extension of Beddows
 #' proposed in embrs paper.

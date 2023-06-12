@@ -2,6 +2,7 @@
 % Please edit documentation in R/route.objects.R
 \name{route.objects}
 \alias{route.objects}
+\alias{route_veh_spd}
 \alias{route_naei_rural}
 \alias{route_naei_urban}
 \alias{route_naei_motorway}
@@ -12,6 +13,14 @@
 \alias{route_ukbc_oir}
 \title{route.objects}
 \usage{
+route_veh_spd(
+  veh.spd = NULL,
+  name = NULL,
+  route.def = NULL,
+  route.source = NULL,
+  ...
+)
+
 route_naei_rural(
   name = NULL,
   route.def = "rural",
@@ -71,13 +80,13 @@ route_ukbc_rural(
 route_ukbc_oir(...)
 }
 \arguments{
+\item{veh.spd}{(numeric or function) the vehicle speed in km/hr.}
+
 \item{name}{(character) optional object name, by default the route source and type.}
 
 \item{route.def}{(character) required route description.}
 
 \item{route.source}{(character) required source of route model.}
-
-\item{veh.spd}{(numeric or function) the vehicle speed in km/hr.}
 
 \item{...}{other arguments, currently ignored.}
 

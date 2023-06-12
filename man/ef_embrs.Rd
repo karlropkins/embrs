@@ -11,12 +11,12 @@
 \alias{ef_embrs1_tyre_pm10}
 \alias{ef_embrs_road1_pm10}
 \alias{ef_embrs1_resusp_pm10}
+\alias{ef_embrs2_brake_pm2.5}
+\alias{ef_embrs2_tyre_pm2.5}
+\alias{ef_embrs2_brake_pm10}
 \alias{ef_embrs1_road_pm10}
 \alias{ef_embrs2_brake_pm}
-\alias{ef_embrs2_brake_pm2.5}
-\alias{ef_embrs2_brake_pm10}
 \alias{ef_embrs2_tyre_pm}
-\alias{ef_embrs2_tyre_pm2.5}
 \alias{ef_embrs2_tyre_pm10}
 \title{embrs Non-Exhaust Emissions Factors}
 \usage{
