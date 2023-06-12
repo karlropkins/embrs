@@ -74,6 +74,12 @@ emission factors using on EMEP/EEA guidelines 2019 methods.</p>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">ef_vein_eea_exhaust_ch4</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"ch4"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ef_vein_eea_exhaust_nmhc</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"nmhc"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">ef_vein_eea_exhaust_co</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"co"</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">ef_vein_eea_exhaust_nox</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"nox"</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ef_vein_eea_exhaust_pm2.5</span><span class="op">(</span>em.type <span class="op">=</span> <span class="st">"pm2.5"</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -120,7 +126,8 @@ ignored.</p></dd>
 
 
 <dt>em.type</dt>
-<dd><p>type of emission, currently NOx, PM (PM2.5 or PM10; see Note).</p></dd>
+<dd><p>type of emission, currently CO, NOx, CH4, NMHC and
+PM (PM2.5 or PM10; see Note).</p></dd>
 
 
 <dt>route.def</dt>

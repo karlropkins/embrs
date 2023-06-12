@@ -64,7 +64,7 @@ embrs emission models.</p>
 print(x, ...)
 
 # S3 method for embrs
-plot(x, em.type = "just.pm", ...)
+plot(x, plot.type = "by.em", em.type = "all", ...)
 
 # S3 method for embrs_vehicle
 print(x, ...)
@@ -82,10 +82,17 @@ print(x, ...)</code></pre></div>
 <dd><p>function arguments</p></dd>
 
 
-<dt>em.type</dt>
-<dd><p>(for plot only, character) the emissions types to calculate
-emission factors for, special cases: 'just.pm' just PM emissions types;
+<dt>plot.type</dt>
+<dd><p>(for plot only, character) the type of plot to generate,
+options: 'by.em' standard plot; 'by.vehicle'.
+See Note.
 <code>NULL</code> to disable/show all emissions types calculated.</p></dd>
+
+
+<dt>em.type</dt>
+<dd><p>(for plot only, character) the emissions to generate plot
+for, options: 'all' for all emissions types, or 'just.pm' for just
+particulates. See Note.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -97,11 +104,17 @@ emission factors for, special cases: 'just.pm' just PM emissions types;
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>These functions are in development, so please be aware that options
-outputs may change significantly.</p>
+outputs may change significantly.
+plot.type = 'by.vehicle' and em.type = 'just.pm' produces plots like those
+used in Tivey el al (2023) to compare particulate emissions from different
+buses types.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>add embrs and Beddows references...</p>
+    <p>Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+Transitions. Sustainability 15, 1522. <a href="https://doi.org/10.3390/su15021522" class="external-link">https://doi.org/10.3390/su15021522</a></p>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
