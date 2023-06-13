@@ -37,7 +37,7 @@ classic form:
 For example:
 
 ``` r
-library(embrs)
+library(embrs) 
 # a EURO VI ICE diesel bus weighing 15925 kg
 bus.1 <- embrs_ice(name="E6DV", veh.wt=15925, veh.type="bus", euro.class="vi", eng.fuel="diesel") 
 # an 30 km/hr route
