@@ -6,7 +6,10 @@
 #' @aliases as.embrs_fleet.embrs_vehicle
 #' @description Functions to build vehicle, fleet and route objects for use in
 #' embrs emission models.
-#' @param x,y function arguments
+#' @param e1,e2 The objects to add or multiple when building an emission
+#' inventory
+#' @param x The object to print, plot, etc.
+#' @param ... Additional arguments, sometimes ignored.
 #' @param em.type (for plot only, character) the emissions to generate plot
 #' for, options: 'all' for all emissions types, or 'just.pm' for just
 #' particulates. See Note.
@@ -40,51 +43,51 @@
 #' @method + embrs
 #' @export
 `+.embrs` <-
-  function(x, y, ...){
-    if(class(y)[1] != "embrs"){
-      stop("[embrs] can't add a ", paste(class(y), collapse="_"),
+  function(e1, e2, ...){
+    if(class(e2)[1] != "embrs"){
+      stop("[embrs] can't add a ", paste(class(e2), collapse="_"),
            " to a [embrs] object!",
            call. = FALSE)
     }
-    if("fleet" %in% class(x)){
-      if(!"fleet" %in% class(y)){
-        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
+    if("fleet" %in% class(e1)){
+      if(!"fleet" %in% class(e2)){
+        stop("[embrs] can't add a ", paste(class(e2), collapse="_"),
              " to a [embrs_fleet] object!",
              call. = FALSE)
       }
       #print(class(x))
       #print(class(y))
       #return("here")
-      temp <- make.unique(c(names(x$fleet), names(y$fleet)))
-      x$fleet[(length(x$fleet)+1):(length(x$fleet)+length(y$fleet))] <- y$fleet
-      names(x$fleet) <- temp
-      return(x)
+      temp <- make.unique(c(names(e1$fleet), names(e2$fleet)))
+      e1$fleet[(length(e1$fleet)+1):(length(e1$fleet)+length(e2$fleet))] <- e2$fleet
+      names(e1$fleet) <- temp
+      return(e1)
       #names(x$fleet) <- make.unique(names(x$fleet))
       #this trusts user
     }
-    if("routes" %in% class(x)){
-      if(!"routes" %in% class(y)){
-        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
+    if("routes" %in% class(e1)){
+      if(!"routes" %in% class(e2)){
+        stop("[embrs] can't add a ", paste(class(e2), collapse="_"),
              " to a [embrs_routes] object!",
              call. = FALSE)
       }
       #like
-      temp <- make.unique(c(names(x$routes), names(y$routes)))
-      x$routes[(length(x$routes)+1):(length(x$routes)+length(y$routes))] <- y$routes
-      names(x$routes) <- temp
-      return(x)
+      temp <- make.unique(c(names(e1$routes), names(e2$routes)))
+      e1$routes[(length(e1$routes)+1):(length(e1$routes)+length(e2$routes))] <- e2$routes
+      names(e1$routes) <- temp
+      return(e1)
     }
-    if("model" %in% class(x)){
-      if(!"model" %in% class(y)){
-        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
+    if("model" %in% class(e1)){
+      if(!"model" %in% class(e2)){
+        stop("[embrs] can't add a ", paste(class(e2), collapse="_"),
              " to a [embrs_model] object!",
              call. = FALSE)
       }
       #like
-      temp <- make.unique(c(names(x$model), names(y$model)))
-      x$model[(length(x$model)+1):(length(x$model)+length(y$model))] <- y$model
-      names(x$model) <- temp
-      return(x)
+      temp <- make.unique(c(names(e1$model), names(e2$model)))
+      e1$model[(length(e1$model)+1):(length(e1$model)+length(e2$model))] <- e2$model
+      names(e1$model) <- temp
+      return(e1)
     }
 
     stop("[embrs] sorry, unexpected [embrs] combination! maybe bad object?",
@@ -96,20 +99,20 @@
 #' @method * embrs
 #' @export
 `*.embrs` <-
-  function(x, y, ...){
-    if(class(y)[1] != "embrs"){
+  function(e1, e2, ...){
+    if(class(e2)[1] != "embrs"){
 
     }
-    temp <- c(class(x)[2], class(y)[2])
+    temp <- c(class(e1)[2], class(e2)[2])
     if("fleet" %in% temp & "routes" %in% temp){
       #we can multiple
       #must end with a return
-      if(class(x)[2]=="fleet") {
-        fleet <- x
-        routes <- y
+      if(class(e1)[2]=="fleet") {
+        fleet <- e1
+        routes <- e2
       } else {
-        fleet <- y
-        routes <- x
+        fleet <- e2
+        routes <- e1
       }
       for(i in 1:length(fleet$fleet)){
         fleet$fleet[[i]]$routes <- routes$routes

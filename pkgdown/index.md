@@ -29,13 +29,37 @@ devtools::install_github("karlropkins/embrs")
 
 ## Example
 
-**embrs** uses vehicle and route objects to build small-scale emission
-inventories:
+**embrs** uses vehicle and route objects to build emission models in the
+classic form:
+
+> \[emissions\] \* \[activity\]
+
+For example:
 
 ``` r
 library(embrs)
-# some buses
-# a EURO VI (ICE) diesel bus weighing 15925 kg
+# a EURO VI ICE diesel bus weighing 15925 kg
+bus.1 <- embrs_ice(name="E6DV", veh.wt=15925, veh.type="bus", euro.class="vi", eng.fuel="diesel") 
+# an 30 km/hr route
+route.30 <- route_veh_spd(30)
+# multiple them 
+mod <- bus.1 * route.30
+# plot that
+plot(mod)
+```
+
+<img src="man/figures/README-example1-1.png" width="100%" />
+
+But vehicles can also be added together to make fleets and routes can be
+added to build small-scale emission inventories, or compare emissions on
+different routes.
+
+For example:
+
+``` r
+# EURO VI diesel versus Battery Electric BUS comparison from Tivey et al (2023)
+
+# a EURO VI ICE diesel bus weighing 15925 kg
 bus.1 <- bus_ice(name="E6DV", veh.wt=15925, euro.class="VI", eng.fuel="diesel") 
 # a battery electric bus weighing 17725 kg (and conventional brakes) 
 bus.2 <- bus_bev(name="BEV", veh.wt=17725) 
@@ -49,10 +73,11 @@ fleet <- bus.1 + bus.2 + bus.3 + bus.4
 routes <- route_naei_urban() + route_naei_rural() + route_naei_motorway()
 # an inventory
 inventory <- fleet * routes
-plot(inventory)
+# just plotting PM contributions by vehicle (bus.1 to 4)
+plot(inventory, plot.type="by.vehicle", em.type="just.pm")
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example2-1.png" width="100%" />
 
 ## Contributing
 

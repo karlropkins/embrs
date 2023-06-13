@@ -10,12 +10,12 @@ naei_route2spd(veh.type = NULL, route.def = NULL, route.source = NULL, ...)
 \arguments{
 \item{veh.type}{(character) vehicle type e.g. bus}
 
+\item{route.def}{(character) route definition, for NAEI urban, rural or
+motorway}
+
 \item{route.source}{(character) route source, for NAEI}
 
 \item{...}{other arguments, often passed on.}
-
-\item{veh.def}{(character) route definition, for NAEI urban, rural or
-motorway}
 }
 \value{
 These estimated veh speed for the supplied route.

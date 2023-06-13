@@ -12,9 +12,9 @@
 \alias{print.embrs_model}
 \title{embrs generics}
 \usage{
-\method{+}{embrs}(x, y, ...)
+\method{+}{embrs}(e1, e2, ...)
 
-\method{*}{embrs}(x, y, ...)
+\method{*}{embrs}(e1, e2, ...)
 
 \method{print}{embrs}(x, ...)
 
@@ -27,7 +27,12 @@
 \method{print}{embrs_model}(x, ...)
 }
 \arguments{
-\item{x, y}{function arguments}
+\item{e1, e2}{The objects to add or multiple when building an emission
+inventory}
+
+\item{...}{Additional arguments, sometimes ignored.}
+
+\item{x}{The object to print, plot, etc.}
 
 \item{plot.type}{(for plot only, character) the type of plot to generate,
 options: 'by.em' standard plot; 'by.vehicle'.

@@ -155,6 +155,7 @@
 
 #splatted function
 #' @rdname embrs.vehicles
+#' @importFrom utils modifyList
 #' @export
 
 embrs_ice <-

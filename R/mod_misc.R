@@ -6,7 +6,7 @@
 #' @aliases naei_route2spd
 #' @description functions that currently don't have better homes...
 #' @param veh.type (character) vehicle type e.g. bus
-#' @param veh.def (character) route definition, for NAEI urban, rural or
+#' @param route.def (character) route definition, for NAEI urban, rural or
 #' motorway
 #' @param route.source (character) route source, for NAEI
 #' @param ... other arguments, often passed on.

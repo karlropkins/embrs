@@ -15,6 +15,7 @@
 #' proposed in embrs paper.
 #' @param veh.wt (numeric, required) vehicle weight (in kg).
 #' @param veh.spd (numeric, required) vehicle speed (in km/hr).
+#' @param veh.type (character) type of vehicle, e.g bus.
 #' @param em.type (character) type of emissions to predict, by default PM2.5
 #' and PM10.
 #' @param em.source (character) emission source, by default brake, tyre, road
@@ -68,9 +69,12 @@
 #     call.=FALSE)
 
 
+#do I want to import from dplyr??
 
 #splatted function
 #' @rdname ef_embrs
+#' @importFrom stats lm predict
+#' @importFrom utils write.table
 #' @export
 ef_embrs1_nee_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
                               em.type = c("pm2.5", "pm10"),
@@ -537,18 +541,18 @@ brake.embr.avgspd <- function(wt, output="df"){
   ans <- brake.beddows(wt)
   ans$avg.spd <- c(32, 62, 82)
   mod1 <- lm(ans~poly(avg.spd, 1),
-             data=filter(ans, ref=="pm2.5"))
+             data=dplyr::filter(ans, ref=="pm2.5"))
   mod1.low <- lm(ans.low~poly(avg.spd, 1),
-                 data=filter(ans, ref=="pm2.5"))
+                 data=dplyr::filter(ans, ref=="pm2.5"))
   mod1.hi <- lm(ans.hi~poly(avg.spd, 1),
-                data=filter(ans, ref=="pm2.5"))
+                data=dplyr::filter(ans, ref=="pm2.5"))
 
   mod2 <- lm(ans~poly(avg.spd, 1),
-             data=filter(ans, ref=="pm10"))
+             data=dplyr::filter(ans, ref=="pm10"))
   mod2.low <- lm(ans.low~poly(avg.spd, 1),
-                 data=filter(ans, ref=="pm10"))
+                 data=dplyr::filter(ans, ref=="pm10"))
   mod2.hi <- lm(ans.hi~poly(avg.spd, 1),
-                data=filter(ans, ref=="pm10"))
+                data=dplyr::filter(ans, ref=="pm10"))
 
   ref <- c(rep("pm2.5", 3), rep("pm10", 3))
   route <- c("Outer London", "inner London",
@@ -616,19 +620,19 @@ brake.embr.brkwrk <- function(wt, output="df"){
   #return(ans)
 
   mod1 <- lm(ans~poly(brk, 1),
-             data=filter(ans, ref=="pm2.5"))
+             data=dplyr::filter(ans, ref=="pm2.5"))
 
   mod1.low <- lm(ans.low~poly(brk, 1),
-                 data=filter(ans, ref=="pm2.5"))
+                 data=dplyr::filter(ans, ref=="pm2.5"))
   mod1.hi <- lm(ans.hi~poly(brk, 1),
-                data=filter(ans, ref=="pm2.5"))
+                data=dplyr::filter(ans, ref=="pm2.5"))
 
   mod2 <- lm(ans~poly(brk, 1),
-             data=filter(ans, ref=="pm10"))
+             data=dplyr::filter(ans, ref=="pm10"))
   mod2.low <- lm(ans.low~poly(brk, 1),
-                 data=filter(ans, ref=="pm10"))
+                 data=dplyr::filter(ans, ref=="pm10"))
   mod2.hi <- lm(ans.hi~poly(brk, 1),
-                data=filter(ans, ref=="pm10"))
+                data=dplyr::filter(ans, ref=="pm10"))
 
   ref <- c(rep("pm2.5", 3), rep("pm10", 3))
   route <- c("Outer London", "inner London",
@@ -708,19 +712,19 @@ tyre.embr.brkwrk <- function(wt, output="df"){
   #return(ans)
 
   mod1 <- lm(ans~poly(tyr, 1),
-             data=filter(ans, ref=="pm2.5"))
+             data=dplyr::filter(ans, ref=="pm2.5"))
 
   mod1.low <- lm(ans.low~poly(tyr, 1),
-                 data=filter(ans, ref=="pm2.5"))
+                 data=dplyr::filter(ans, ref=="pm2.5"))
   mod1.hi <- lm(ans.hi~poly(tyr, 1),
-                data=filter(ans, ref=="pm2.5"))
+                data=dplyr::filter(ans, ref=="pm2.5"))
 
   mod2 <- lm(ans~poly(tyr, 1),
-             data=filter(ans, ref=="pm10"))
+             data=dplyr::filter(ans, ref=="pm10"))
   mod2.low <- lm(ans.low~poly(tyr, 1),
-                 data=filter(ans, ref=="pm10"))
+                 data=dplyr::filter(ans, ref=="pm10"))
   mod2.hi <- lm(ans.hi~poly(tyr, 1),
-                data=filter(ans, ref=="pm10"))
+                data=dplyr::filter(ans, ref=="pm10"))
 
   ref <- c(rep("pm2.5", 3), rep("pm10", 3))
   route <- c("Outer London", "inner London",

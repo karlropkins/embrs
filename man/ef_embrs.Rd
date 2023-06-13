@@ -90,6 +90,8 @@ ef_embrs2_tyre_pm10(em.type, em.source, ...)
 
 \item{veh.spd}{(numeric, required) vehicle speed (in km/hr).}
 
+\item{veh.type}{(character) type of vehicle, e.g bus.}
+
 \item{em.type}{(character) type of emissions to predict, by default PM2.5
 and PM10.}
 
