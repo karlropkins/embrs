@@ -29,6 +29,14 @@
 
 # simple example to do???
 
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
+
 #splatted function
 #' @rdname route.objects
 #' @export

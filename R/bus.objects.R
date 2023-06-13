@@ -39,6 +39,14 @@
 # now using
 # method = "beddows", "embrs1", etc?
 
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
+
 
 ############################
 #to think about

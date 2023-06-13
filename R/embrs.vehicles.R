@@ -47,6 +47,12 @@
 #      moving coding/option into parent function as ...(model = "beddows")
 #      [this reduces the number of vehicle objects four-fold]
 
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
 
 ##############################################
 #doing
@@ -166,7 +172,7 @@ embrs_ice <-
            call.=FALSE)
     }
     if(is.null(eng.fuel) || is.null(euro.class)){
-      stop("[embrs] all ice vehicles...() need both eng.fuel and euro.class, see help?",
+      stop("[embrs] all ice vehicles need both eng.fuel and euro.class, see help?",
            call.=FALSE)
     }
     if(!tolower(method) %in% c("beddows", "embrs1", "embrs2")){
@@ -271,7 +277,7 @@ embrs_hybrid <-
            call.=FALSE)
     }
     if(is.null(eng.fuel) || is.null(euro.class)){
-      stop("[embrs] all ice vehicles...() need both eng.fuel and euro.class, see help?",
+      stop("[embrs] all ice vehicles need both eng.fuel and euro.class, see help?",
            call.=FALSE)
     }
     ###############################
@@ -528,15 +534,5 @@ embrs_vehicle <-
   }
 
 
-#############################
-#route_route
-#############################
 
-#used to build route_objects
-
-####################
-#to do
-####################
-
-#doc args
 

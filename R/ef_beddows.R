@@ -43,6 +43,14 @@
 #could make one ef_beddows_nepm function
 #with extra args em.type and source
 
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
+
 
 #need to rename these....
 

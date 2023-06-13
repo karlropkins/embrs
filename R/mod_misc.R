@@ -32,6 +32,14 @@
 
 #currently only works on one combination at a time
 
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
+
 #splatted function
 #' @rdname misc.mod
 #' @export

@@ -27,8 +27,13 @@
 #' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
 
-#######################################
-#copy stop() style from +.embrs and apply to others
+
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
 
 
 #' @rdname embrs.generics
@@ -59,7 +64,7 @@
     }
     if("routes" %in% class(x)){
       if(!"routes" %in% class(y)){
-        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
              " to a [embrs_routes] object!",
              call. = FALSE)
       }
@@ -71,7 +76,7 @@
     }
     if("model" %in% class(x)){
       if(!"model" %in% class(y)){
-        stop("[embrs]> can't add a ", paste(class(y), collapse="_"),
+        stop("[embrs] can't add a ", paste(class(y), collapse="_"),
              " to a [embrs_model] object!",
              call. = FALSE)
       }
@@ -82,7 +87,7 @@
       return(x)
     }
 
-    stop("[embrs]> sorry, unexpected [embrs] combination! maybe bad object?",
+    stop("[embrs] sorry, unexpected [embrs] combination! maybe bad object?",
          call. = FALSE)
   }
 
@@ -114,7 +119,7 @@
       class(fleet) <- c("embrs", "model")
       return(fleet)
     } else {
-      stop("[embrs]> sorry can't multiply these",
+      stop("[embrs] sorry can't multiply these",
            call. = FALSE)
     }
   }
@@ -146,15 +151,19 @@ print.embrs <-
 #' @import ggplot2
 #' @export
 
-#could add ggtext to imports for the formatting
+#could also add ggtext to imports for the formatting
 #could add options to set x and y labels, etc.
-#
+# ... but + xlab("whatever") works nicely
+
+#plot.type and em.type feels messy
+#    might want to rethink this
 
 plot.embrs <-
   function(x, plot.type = "by.em", em.type = "all", ...){
     #quick test
     if(class(x)[2]!="model"){
-      stop("partially built model? check docs")
+      stop("[embrs] partially built model? check help?",
+           call.=FALSE)
     }
 #this about this...
 #will be a better way...
@@ -273,7 +282,7 @@ as.embrs_fleet <-
 
 as.embrs_fleet.default <-
   function(x, ...){
-    stop("[embrs] sorry. no embrs method defined",
+    stop("[embrs] sorry, no embrs method defined",
          call. = FALSE)
   }
 

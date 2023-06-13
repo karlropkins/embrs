@@ -60,6 +60,15 @@
 #avg.spd model for nee (embrs model)
 
 
+#notes
+###########################
+#error formatting
+
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
+
+
+
 #splatted function
 #' @rdname ef_embrs
 #' @export
@@ -370,7 +379,7 @@ ef_embrs2_tyre_pm <- function(veh.wt, veh.spd=NULL, veh.type = NULL,
          call.=FALSE)
   }
   if(is.null(tyr_t)){
-    stop("[embrs]: ef_embrs2_tyre...() needs tyr_t, tyre constant",
+    stop("[embrs] ef_embrs2_tyre...() needs tyr_t, tyre constant",
          call.=FALSE)
   }
 

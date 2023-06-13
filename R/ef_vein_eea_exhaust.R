@@ -98,7 +98,12 @@
 #fuel
 #exh.tech
 
+#notes
+###########################
+#error formatting
 
+#stop("[embrs] bus...() needs veh.wt, see help?",
+#     call.=FALSE)
 
 
 
@@ -146,7 +151,7 @@ ef_vein_eea_exhaust <-
 
     #only exhaust emissions
     if(is.null(em.source) || tolower(em.source) != "exhaust"){
-      stop("[embrs>] ef_vein_eea_exhaust(): ONLY for exhaust emissions",
+      stop("[embrs] ef_vein_eea_exhaust(): ONLY for exhaust emissions",
            call. = FALSE
       )
     }
