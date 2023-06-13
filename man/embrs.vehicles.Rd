@@ -16,6 +16,15 @@ embrs_ice(
   name = NULL,
   ...
 )
+
+embrs_bev(
+  veh.wt = NULL,
+  veh.type = NULL,
+  n = 1,
+  method = "embrs1",
+  name = NULL,
+  ...
+)
 }
 \arguments{
 \item{veh.wt}{(required numeric) weight of vehicle in kg.}

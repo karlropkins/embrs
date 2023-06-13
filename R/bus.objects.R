@@ -141,7 +141,8 @@ bus_hybrid <-
 #' @export
 
 bus_bev <-
-  function(veh.wt = NULL, ..., veh.type = "bus"){
+  function(veh.wt = NULL, ...,
+           veh.type = "bus"){
     if(is.null(veh.wt)){
       stop("[embrs] bus...() needs veh.wt, see help?",
            call.=FALSE)

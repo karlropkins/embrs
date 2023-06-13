@@ -363,7 +363,7 @@ embrs_hybrid <-
 
 
 #splatted function
-#' @rdname embrs.local
+#' @rdname embrs.vehicles
 #' @export
 
 embrs_bev <-
