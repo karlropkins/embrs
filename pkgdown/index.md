@@ -40,7 +40,7 @@ For example:
 library(embrs)
 # a EURO VI ICE diesel bus weighing 15925 kg
 bus.1 <- bus_ice(name="E6DV", veh.wt=15925, euro.class="vi", eng.fuel="diesel") 
-# an 30 km/hr route
+# a 30 km/hr route
 route.30 <- route_veh_spd(30)
 # multiple them 
 mod <- bus.1 * route.30
