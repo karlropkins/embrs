@@ -74,6 +74,8 @@
 #notes
 ###########################
 
+#global functions declared after main function
+
 #this NEEDS R:vein
 #now added as imports
 
@@ -551,6 +553,17 @@ ef_vein_eea_exhaust <-
     }
 
   }
+
+
+###################
+#globals
+###################
+
+
+#undefined globals
+utils::globalVariables(c("Category", "Pollutant", "Fuel", "EuroStandard",
+                         "Segment"))
+
 
 
 

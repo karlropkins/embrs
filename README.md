@@ -39,7 +39,7 @@ For example:
 ``` r
 library(embrs) 
 # a EURO VI ICE diesel bus weighing 15925 kg
-bus.1 <- embrs_ice(name="E6DV", veh.wt=15925, veh.type="bus", euro.class="vi", eng.fuel="diesel") 
+bus.1 <- bus_ice(name="E6DV", veh.wt=15925, euro.class="vi", eng.fuel="diesel") 
 # an 30 km/hr route
 route.30 <- route_veh_spd(30)
 # multiple them 
@@ -50,9 +50,9 @@ plot(mod)
 
 <img src="man/figures/README-example1-1.png" width="100%" />
 
-But vehicles can also be added together to make fleets and routes can be
-added to build small-scale emission inventories, or compare emissions on
-different routes.
+Vehicles can also be added together to make fleets and these and routes
+can be multiplied to produce small-scale emission inventories or compare
+emissions on different routes.
 
 For example:
 

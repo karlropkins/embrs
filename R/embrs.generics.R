@@ -231,6 +231,13 @@ plot.embrs <-
     }
   }
 
+#############################
+#globals
+#############################
+
+utils::globalVariables(c("vehicle", "ans", "em.source"))
+
+
 
 ##from paper
 ##ggplot(aes(ordered(veh), ans, fill=type)) +

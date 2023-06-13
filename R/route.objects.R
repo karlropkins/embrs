@@ -10,12 +10,18 @@
 #' @param name (character) optional object name, by default the route source and type.
 #' @param route.def (character) required route description.
 #' @param route.source (character) required source of route model.
-#' @param route.dist (numeric) route or journey distance in km, default 1.
-#' @param route.slope (numeric) route or journey slope, default 0.
+## #' @param route.dist (numeric) route or journey distance in km, default 1.
+## #' @param route.slope (numeric) route or journey slope, default 0.
 #' @param ... other arguments, currently ignored.
+#' @param brk_b,tyr_t (numeric) brake and tyre work estimates (See Tivey et
+#' al 2023 for calculation method).
 ## #' @returns These functions make route class embrs objects.
 #' @note trying to streamline these, so likely to be subject to change
-## #' @references [to do] add embrs and naei references...
+#' @references
+#' Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+#' Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+#' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+#' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
 
 ########################
@@ -159,6 +165,9 @@ route_ukbc_oir <-
 
 #embrs_route
 #workhorse for route objects
+
+#if I export this route.dist and slope need to
+#   be added to the docs...
 
 embrs_route <-
   function(name = NULL, route.def = NULL, route.source = NULL,

@@ -90,13 +90,18 @@ route_ukbc_oir(...)
 
 \item{...}{other arguments, currently ignored.}
 
-\item{route.dist}{(numeric) route or journey distance in km, default 1.}
-
-\item{route.slope}{(numeric) route or journey slope, default 0.}
+\item{brk_b, tyr_t}{(numeric) brake and tyre work estimates (See Tivey et
+al 2023 for calculation method).}
 }
 \description{
 Route objects for use in embrs models.
 }
 \note{
 trying to streamline these, so likely to be subject to change
+}
+\references{
+Tivey, J., Davies, H.C., Levine, J.G., Zietsman, J., Bartington, S.,
+Ibarra-Espinosa, S. and Ropkins, K, 2023. Meta-Analysis as Early Evidence on
+the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
+Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 }

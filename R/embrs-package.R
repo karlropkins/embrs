@@ -7,7 +7,8 @@
 #' This package was splat packed using grey.area.
 #'
 #' @section package functions:
-#' [to be added]
+#'
+#' #Details to add...
 #'
 #' @docType package
 #' @name embrs

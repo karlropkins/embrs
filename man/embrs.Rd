@@ -12,6 +12,7 @@ This package was splat packed using grey.area.
 }
 \section{package functions}{
 
-\link{to be added}
+
+#Details to add...
 }
 

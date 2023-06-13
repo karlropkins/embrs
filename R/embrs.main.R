@@ -21,9 +21,35 @@
 #' the Particulate Emissions Impact of EURO VI on Battery Electric Bus Fleet
 #' Transitions. Sustainability 15, 1522. \url{https://doi.org/10.3390/su15021522}
 
-#############################
-#could see us associating variables with inventories
-#e.g. veh.wt or modifying variable
+
+#######################
+#general
+#######################
+
+#check
+################################
+
+#last time I checked one warning on devtools::check()
+
+#this is because I used a vein::: fix in code
+
+#   need to drop that when vein goes to cran
+
+#check fixing getting a little messy
+############################
+
+#we have a global variable declarations in several places
+#could also have several overlapping @importFrom arguments
+
+#   we move these all to a common embrs.misc.r or zzz.r script
+
+#that could also be a better place for these general notes
+
+#BUT that would need some quiet time...
+
+
+
+
 
 ##############################
 #issues
@@ -35,14 +61,22 @@
 #temp fix at end of build_inventory
 #BUT rather have this fixed properly
 
-#need to standardise error messaging
+
+###########################
+#notes
+###########################
+
+#error messaging
 #currently aiming for....
 
 #stop("[embrs] bus...() needs veh.wt, see help?",
 #     call.=FALSE)
 
+
 #need to think about veh.spd
 #if supplied to the vehicle, version in route supersedes
+#and version in route is often there as default...
+
 #    does this need a warning or handling??
 
 #' @rdname embrs.main

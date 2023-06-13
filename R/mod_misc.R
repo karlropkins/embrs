@@ -214,6 +214,15 @@ embrs_ukbc_lookup <- function(...){
 
 ## should be able to rationalise these functions
 
+## should also probably export them??
+
+#related globals
+#could drop if I export and?
+
+#should also check if these are still being used
+
+utils::globalVariables(c("yyy", "tyre.beddows", "brake.beddows"))
+
 
 ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
                            route.source = NULL, ...){
