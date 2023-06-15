@@ -34,7 +34,7 @@ help for further details.}
 \value{
 These functions make coach models for \strong{embrs} emissions
 models. The main models coach_ice and coach_bev are internal compression engine
-and battery electric buses, respectively. These functions extend bus method
+and battery electric coaches, respectively. These functions extend bus method
 used in Tivey et al (2023) to coaches.
 }
 \description{
