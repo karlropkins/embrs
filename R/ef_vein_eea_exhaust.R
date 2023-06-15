@@ -289,7 +289,7 @@ ef_vein_eea_exhaust <-
               .segment <- "Coaches Standard <=18 t"
             }
             if(veh.wt >18000){
-              .segment <- "Urban Buses Articulated >18 t"
+              .segment <- "Coaches Articulated >18 t"
             }
           }
         }
@@ -329,8 +329,8 @@ ef_vein_eea_exhaust <-
     #so far only allowing main euro classes
     #see unique(test_vein_eea()$EuroStandard) for full list
 
-    d1 <- c("pre", "i", "ii", "iii", "iv", "v", "vi")
-    d2 <- c("PRE", "I", "II", "III", "IV", "V", "VI")
+    d1 <- c("pre", "i", "ii", "iii", "iv", "v", "vi", "eev")
+    d2 <- c("PRE", "I", "II", "III", "IV", "V", "VI", "EEV")
 
     .eurostandard <- if(tolower(euro.class) %in% d1){
       d2[d1 %in% tolower(euro.class)]
@@ -488,8 +488,10 @@ ef_vein_eea_exhaust <-
     #new functions???
     #######################
 
+    #currently assuming euro.class eev fuel.corr are all 1
+
     if(fuel.corr){
-      if(tolower(veh.type)=="bus"){
+      if(tolower(veh.type) %in% c("bus", "coach")){
         if(.pollutant=="PM"){
           sc <- 1
           if(tolower(euro.class) %in% c("pre", "i", "ii")) {
@@ -517,6 +519,8 @@ ef_vein_eea_exhaust <-
           }
           out <- out * sc
         }
+        #next section does not do anything because:
+        #  .pollutant options are ch4 and nmhc
         if(.pollutant=="HC"){
           sc <- 1
           if(tolower(euro.class) %in% c("pre", "i", "ii")) {

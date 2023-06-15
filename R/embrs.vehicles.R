@@ -69,14 +69,15 @@
 #veh types
 ##############################
 #done: bus
-#doing: coach
+#doing/testing: coach
 #      added option to veh.type handling in ef_vein_eea_exhaust
-#            check remarks there about testing subseting
-#            (not all options/combinations allowed)
-#      THIS NEEDS handling for
-#             look-ups for naei spd and ukbc parameters (maybe as bus?)
-#             fuel correction (maybe as bus?)
-#                  handling of both keeps documenting
+#                needed to do this in several places, so don't rush these
+#                NB: fuel correction handling
+#                      if(veh.type == "coach") veh.type <- "bus"
+#      added similar coach to bus reset to
+#                naei spd and all three ukbc parameter lookups
+#                      THESE need tidying or at least thinking about
+#                            CURRENT not exporting ukbc functions
 #
 #proposing: truck (hgv), van (n1 to n3), car (various sizes),
 #       motorcycle (various types),
@@ -390,7 +391,7 @@ embrs_bev <-
     .veh <- list(
       args = list(
         n = n,
-        veh.type = "bus",
+        veh.type = veh.type,
         veh.wt = veh.wt,
         eng.type = "electric",
         eng.fuel = "electric",

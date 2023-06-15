@@ -1,6 +1,7 @@
 # Version 0.0 - Release Notes
 
 * [0.0.8]
+    * added coaches [2023-06-15] 
     * tidied error messaging [2023-06-13]
     * added ef_vein_eea_exhaust wrappers for co, ch4 and nmhc [2023-06-12]
     * add plot.type to plot(embrs); NB embrs paper plot no longer 

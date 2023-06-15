@@ -56,6 +56,11 @@ naei_route2spd <- function(veh.type = NULL, route.def = NULL,
   #this needs a lot of tidying
   ############################
   ref <- embrs_spd_ref()
+
+  #assuming coaches are buses
+  if(veh.type=="coach"){
+    veh.type <- "bus"
+  }
   ref$route.type <- tolower(gsub(" ", "", ref$route.type))
   ref$route.type.2 <- tolower(gsub(" ", "", ref$route.type.2))
   ref$veh.type <- tolower(gsub(" ", "", ref$veh.type))
@@ -232,10 +237,16 @@ ukbc_route2spd <- function(veh.type = NULL, route.def = NULL,
     stop("[embrs] ukbc_route2spd() needs veh.type, route.def and route.source!",
          call. = FALSE)
   }
+  #here a coach is a bus
+  if(tolower(veh.type)=="coach"){
+    veh.type <- "bus"
+  }
+
   ############################
   #this needs a lot of tidying
   ############################
   ref <- embrs_ukbc_lookup()
+
   #return(ref)
   ref$route.def <- tolower(gsub(" ", "", ref$route.def))
   ref$route.source <- tolower(gsub(" ", "", ref$route.source))
@@ -268,6 +279,11 @@ ukbc_route2brk_b <- function(veh.type = NULL, route.def = NULL,
     stop("[embrs] ukbc_route2brk_b() needs veh.type, route.def and route.source!",
          call. = FALSE)
   }
+  #here a coach is a bus
+  if(tolower(veh.type)=="coach"){
+    veh.type <- "bus"
+  }
+
   ############################
   #this needs a lot of tidying
   ############################
@@ -304,6 +320,11 @@ ukbc_route2tyr_t <- function(veh.type = NULL, route.def = NULL,
     stop("[embrs] ukbc_route2tyr_t() needs veh.type, route.def and route.source!",
          call. = FALSE)
   }
+  #here a coach is a bus
+  if(tolower(veh.type)=="coach"){
+    veh.type <- "bus"
+  }
+
   ############################
   #this needs a lot of tidying
   ############################
