@@ -231,11 +231,7 @@ plot.embrs <-
     }
   }
 
-#############################
-#globals
-#############################
 
-utils::globalVariables(c("vehicle", "ans", "em.source"))
 
 
 
